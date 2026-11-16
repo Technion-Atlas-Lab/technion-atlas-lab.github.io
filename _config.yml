@@ -1,0 +1,6 @@
+# Repo docs for maintainers and coding agents; not part of the public site.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - GLOSSARY.md
+  - docs/
