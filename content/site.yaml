@@ -1,0 +1,6 @@
+# Site settings. Fields are described in content/SCHEMA.md.
+name: ATLAS Lab
+full_name: ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security
+# Design phase: a factual placeholder until the PI writes the mission.
+mission: Research on the cybersecurity of AI agents, at the Technion's Faculty of Computer Science.
+mailbox: atlaslab.at.technion@gmail.com

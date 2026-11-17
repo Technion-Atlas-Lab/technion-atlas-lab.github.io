@@ -1,2 +1,16 @@
 # Personal Claude Code settings; shared settings live in .claude/settings.json
 .claude/settings.local.json
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+
+# Dependencies
+node_modules/
+
+# Build output: the site, and the sites the tests build
+_site/
+.test-site/
+.test-site-broken/
+
+# Playwright Test output
+test-results/
+playwright-report/

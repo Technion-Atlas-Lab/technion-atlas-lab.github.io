@@ -1,0 +1,6 @@
+# Test content set: fixed content the slice tests build the site from.
+# Kept apart from content/, so real content can change without breaking tests.
+name: ATLAS Lab
+full_name: ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security
+mission: Test mission line for the slice tests.
+mailbox: test-mailbox@example.org
