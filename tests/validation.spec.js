@@ -6,7 +6,8 @@ import { test, expect } from '@playwright/test';
 // One build in one worker serves every test below.
 test.describe.configure({ mode: 'default' });
 
-const FILE = 'tests/content-broken/site\\.yaml';
+// A message naming `field` in the broken file, on one line.
+const namesField = (field) => new RegExp(`tests/content-broken/site\\.yaml\\b.*\\b${field}\\b`);
 
 let build;
 test.beforeAll(() => {
@@ -23,9 +24,13 @@ test('the build fails on a broken content set', () => {
 });
 
 test('the failure names the file and a missing required field', () => {
-  expect(build.output).toMatch(new RegExp(`${FILE}\\b.*\\bmission\\b`));
+  expect(build.output).toMatch(namesField('mission'));
 });
 
 test('the failure names the file and an unknown field', () => {
-  expect(build.output).toMatch(new RegExp(`${FILE}\\b.*\\bmotto\\b`));
+  expect(build.output).toMatch(namesField('motto'));
+});
+
+test('the failure names an unknown field that shares its name with a built-in property', () => {
+  expect(build.output).toMatch(namesField('constructor'));
 });

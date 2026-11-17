@@ -14,8 +14,8 @@ permissions:
 
 concurrency:
   group: site-${{ github.ref }}
-  # A newer push to a pull request supersedes the older run; a deploy to main
-  # always finishes.
+  # A newer push to a pull request supersedes the older run; publishing from
+  # main always finishes.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -42,8 +42,6 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 14
-      - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        uses: actions/configure-pages@v6
       - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:

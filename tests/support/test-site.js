@@ -5,9 +5,9 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { ROOT } from '../../lib/content.js';
 import { serve } from './serve.js';
 
-const ROOT = path.resolve(import.meta.dirname, '..', '..');
 const OUT = path.join(ROOT, '.test-site');
 const port = process.argv[2];
 

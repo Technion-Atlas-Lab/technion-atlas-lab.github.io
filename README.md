@@ -42,8 +42,9 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 - `docs/agents/`: how agents use the issue tracker, triage labels and domain docs.
 - `docs/research/`: the research behind the site: Israeli accessibility and privacy law,
   Technion rules, the reference lab sites, and other labs' agent setups.
-- `.claude/skills/`: the site's own skills, added as the site is built. `playwright-cli` lets the
-  agent open the site in a browser (`npx playwright-cli`) to see what a visitor sees.
+- `.claude/skills/`: the skills the agent uses here. The site's own skills are added as the site
+  is built. `playwright-cli` comes from Playwright (installed by `npx playwright-cli install
+  --skills`) and lets the agent open the site in a browser to see what a visitor sees.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install
   it the first time you trust this folder.
 
