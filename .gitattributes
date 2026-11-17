@@ -1,0 +1,12 @@
+# Store text with LF and check it out with LF on every machine, Windows included.
+* text=auto eol=lf
+
+# Images are binary: never convert them.
+*.avif binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.pdf binary
