@@ -17,8 +17,9 @@
 <meta name="description" content="{{ pageDescription }}">
 {#- Pages left out of the sitemap (the page-not-found page) have no address of their own. #}
 {%- if not eleventyExcludeFromCollections %}
-<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+{%- set canonicalUrl = site.url + page.url %}
+<link rel="canonical" href="{{ canonicalUrl }}">
+<meta property="og:url" content="{{ canonicalUrl }}">
 {%- endif %}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ site.name }}">

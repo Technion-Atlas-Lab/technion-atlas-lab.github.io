@@ -10,7 +10,8 @@ const SITE = 'https://test-site.example.org';
 const PAGES = ['/', '/about/', '/people/', '/research/', '/news/', '/projects/', '/positions/',
   '/funding/', '/contact/', '/accessibility/', '/privacy/'];
 
-const meta = (page, selector) => page.locator(selector).first().getAttribute('content');
+// The content of the one tag matching `selector`; a duplicated tag fails the test.
+const metaContent = (page, selector) => page.locator(selector).getAttribute('content');
 
 test('every page has a title and a description of its own', async ({ page }) => {
   const titles = new Set();
@@ -18,7 +19,7 @@ test('every page has a title and a description of its own', async ({ page }) => 
   for (const path of PAGES) {
     await page.goto(path);
     const title = await page.title();
-    const description = await meta(page, 'meta[name="description"]');
+    const description = await metaContent(page, 'meta[name="description"]');
     expect(title, path).toMatch(/\S/);
     expect(description, path).toMatch(/\S/);
     titles.add(title);
@@ -33,11 +34,11 @@ for (const path of PAGES) {
     await page.goto(path);
     const canonical = `${SITE}${path}`;
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
-    expect(await meta(page, 'meta[property="og:url"]')).toBe(canonical);
-    expect(await meta(page, 'meta[property="og:title"]')).toMatch(/\S/);
-    expect(await meta(page, 'meta[property="og:description"]')).toBe(await meta(page, 'meta[name="description"]'));
-    expect(await meta(page, 'meta[property="og:type"]')).toBe('website');
-    expect(await meta(page, 'meta[property="og:site_name"]')).toBe('ATLAS Lab');
+    expect(await metaContent(page, 'meta[property="og:url"]')).toBe(canonical);
+    expect(await metaContent(page, 'meta[property="og:title"]')).toMatch(/\S/);
+    expect(await metaContent(page, 'meta[property="og:description"]')).toBe(await metaContent(page, 'meta[name="description"]'));
+    expect(await metaContent(page, 'meta[property="og:type"]')).toBe('website');
+    expect(await metaContent(page, 'meta[property="og:site_name"]')).toBe('ATLAS Lab');
   });
 
   test(`${path} is open to search engines`, async ({ page }) => {

@@ -14,7 +14,7 @@ fails, nothing is published. Every pull request runs the same checks without pub
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |
-| The menu | `src/_data/menu.js` |
+| The menu | `src/_data/menu.js` (each `url` must match its page's `permalink` in `src/pages/`) |
 | The header or the footer | `src/_includes/partials/header.njk`, `src/_includes/partials/footer.njk` |
 
 Each content file's fields are described in `content/SCHEMA.md`. After editing, run
