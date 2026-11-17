@@ -11,7 +11,7 @@ fails, nothing is published. Every pull request runs the same checks without pub
 
 | To change | Edit |
 |---|---|
-| The Lab's name, full name, one-line mission or Lab mailbox | `content/site.yaml` |
+| The Lab's name, full name, mission or Lab mailbox | `content/site.yaml` |
 
 Each content file's fields are described in `content/SCHEMA.md`. After editing, run
 `npm run validate`.

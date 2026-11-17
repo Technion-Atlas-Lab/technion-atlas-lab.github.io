@@ -35,12 +35,15 @@ Plain YAML, one `field: value` per line.
 |---|---|---|
 | `name` | yes | The Lab's short name, shown as the Home heading: `ATLAS Lab`. |
 | `full_name` | yes | The Lab's full name: `ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security`. |
-| `mission` | yes | One line saying what the Lab does. Also the default page description for search engines and link previews. |
+| `mission` | yes | The Lab's mission, as written: a YAML `|-` block keeps its line breaks. Also the default page description for search engines and link previews. |
 | `mailbox` | yes | The Lab mailbox, an email address. |
 
 ```yaml
 name: ATLAS Lab
 full_name: ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security
-mission: Research on the cybersecurity of AI agents, at the Technion's Faculty of Computer Science.
+mission: |-
+  Atlas
+  Research Laboratory
+  AI Trust, Learning, Architecture, and Security
 mailbox: atlaslab.at.technion@gmail.com
 ```
