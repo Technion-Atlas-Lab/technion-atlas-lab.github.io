@@ -1,0 +1,7 @@
+# Deliberately broken content set: the build must refuse it.
+# `mission` is missing; `motto` and `constructor` are not site settings fields.
+name: ATLAS Lab
+full_name: ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security
+mailbox: test-mailbox@example.org
+motto: Not a field the schema knows.
+constructor: An unknown field that shares its name with a built-in property.

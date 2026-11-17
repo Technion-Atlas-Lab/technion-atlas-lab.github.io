@@ -1,0 +1,21 @@
+{
+  "name": "atlas-lab-website",
+  "private": true,
+  "description": "Static website for ATLAS Lab, Technion",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "node tools/validate.js",
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "@playwright/cli": "^0.1.24",
+    "@playwright/test": "^1.65.1",
+    "js-yaml": "^4.3.2"
+  }
+}

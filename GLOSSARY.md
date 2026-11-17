@@ -58,6 +58,14 @@ _Avoid_: approval, permission
 The Member responsible for the website.
 _Avoid_: admin, webmaster, lab manager
 
+**Site settings**:
+The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox), kept in one file.
+_Avoid_: config, site config
+
+**Test content set**:
+Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.
+_Avoid_: fixtures, test data
+
 ### Lifecycle
 
 **Design phase**:

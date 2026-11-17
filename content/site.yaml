@@ -1,0 +1,9 @@
+# Site settings. Fields are described in content/SCHEMA.md.
+name: ATLAS Lab
+full_name: ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security
+# `|-` keeps the line breaks as written.
+mission: |-
+  Atlas
+  Research Laboratory
+  AI Trust, Learning, Architecture, and Security
+mailbox: atlaslab.at.technion@gmail.com
