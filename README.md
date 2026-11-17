@@ -12,6 +12,8 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 - `GLOSSARY.md`: the Lab's vocabulary (Member, Publication, Research Area, ...).
 - `docs/adr/`: why the big decisions were made.
 - `docs/agents/`: how agents use the issue tracker, triage labels and domain docs.
+- `docs/research/`: the research behind the site: Israeli accessibility and privacy law,
+  Technion rules, the reference lab sites, and other labs' agent setups.
 - `.claude/skills/`: the site's own skills, added as the site is built.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install
   it the first time you trust this folder.
