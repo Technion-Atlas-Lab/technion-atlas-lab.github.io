@@ -1,0 +1,267 @@
+/* ATLAS Lab site styles: one plain CSS file. No framework, no web fonts.
+ *
+ * Every colour is defined once, in :root below; change the palette there.
+ * Ratios are WCAG contrast ratios: text needs at least 4.5:1, and the focus
+ * indicator at least 3:1 against what it sits on.
+ */
+
+:root {
+  /* Palette */
+  --navy: #0b1533;          /* deep navy base: footer and dark bands; white on it 18:1 */
+  --ink: #141b2e;           /* body text: 17.1:1 on white */
+  --muted: #4f5a6b;         /* secondary text: 7.0:1 on white, 6.5:1 on --paper-alt */
+  --paper: #ffffff;
+  --paper-alt: #f5f6fb;     /* alternate section background */
+  --accent: #5257d1;        /* the logo's violet-blue (#8487f0) darkened: 5.8:1 on white, 5.3:1 on --paper-alt */
+  --teal: #7ad3c5;          /* the logo's teal: decoration or on dark only (1.8:1 on white, 10.2:1 on --navy) */
+  --on-dark: #ffffff;       /* text on --navy: 18:1 */
+  --on-dark-muted: #c9d0e6; /* secondary text on --navy: 11.7:1 */
+  --line: #dde1ee;          /* hairlines (decorative) */
+  --line-on-dark: rgb(255 255 255 / 0.16);
+
+  /* The focus indicator: --accent on light backgrounds; dark areas switch it to --teal. */
+  --focus: var(--accent);
+
+  /* Type: the visitor's system fonts, nothing downloaded */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Layout. The tablet breakpoint is 48rem (768px); media queries cannot use variables. */
+  --wrap: 72rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+}
+
+/* Base */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere; /* long names and addresses wrap instead of scrolling sideways */
+  /* The footer sits at the bottom of the window even on a short page. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+
+h1, h2, h3 {
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); margin: 0 0 1rem; }
+
+a { color: var(--accent); text-underline-offset: 0.15em; }
+
+img { max-width: 100%; height: auto; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Elements focused only by script, like <main> after the skip link. */
+[tabindex="-1"]:focus { outline: none; }
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.page { padding-block: clamp(2rem, 6vw, 4rem); }
+
+/* Skip link: off-screen until focused */
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--navy);
+  color: var(--on-dark);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: none; }
+
+/* Header */
+
+.site-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.5rem;
+}
+
+.site-header__home {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--navy);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-header__home img { width: 3.5rem; }
+
+.site-menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-menu a {
+  display: block;
+  padding-block: 0.5rem;
+  border-bottom: 2px solid transparent;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.site-menu a:hover { color: var(--accent); border-bottom-color: currentColor; }
+
+.site-menu a[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+/* The Menu button exists only for phones with JavaScript (assets/menu.js). */
+.menu-button { display: none; }
+
+@media (max-width: 47.99rem) {
+  .site-header__home img { width: 3rem; }
+
+  .js .menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--paper);
+    color: var(--navy);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Three bars, drawn in CSS */
+  .menu-button__icon,
+  .menu-button__icon::before,
+  .menu-button__icon::after {
+    display: block;
+    width: 1.125rem;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .menu-button__icon { position: relative; }
+
+  .menu-button__icon::before,
+  .menu-button__icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-button__icon::before { top: -6px; }
+  .menu-button__icon::after { top: 6px; }
+
+  .site-menu { flex-basis: 100%; }
+
+  .js .menu-button[aria-expanded="false"] + .site-menu { display: none; }
+
+  .site-menu ul { flex-direction: column; }
+
+  .site-menu li + li { border-top: 1px solid var(--line); }
+
+  .site-menu a { padding-block: 0.75rem; }
+
+  .site-menu a[aria-current="page"] { border-bottom-color: transparent; }
+}
+
+/* Footer */
+
+.site-footer {
+  --focus: var(--teal);
+  background: var(--navy);
+  color: var(--on-dark-muted);
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.site-footer a { color: var(--on-dark); }
+
+.site-footer__columns p { margin: 0 0 0.5rem; }
+
+.site-footer ul { margin: 0; padding: 0; list-style: none; }
+
+.site-footer li { margin-bottom: 0.5rem; }
+
+.site-footer__columns {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  /* The contact and link columns take the width they need, so the mailbox stays on one line. */
+  .site-footer__columns { grid-template-columns: 1fr auto auto; column-gap: 3rem; }
+}
+
+.site-footer__name {
+  color: var(--on-dark);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.site-footer__heading {
+  margin: 0 0 0.75rem;
+  color: var(--teal);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-footer__legal {
+  margin-top: 2.5rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--line-on-dark);
+  font-size: 0.875rem;
+}
+
+/* Motion: none at all when the visitor's system asks for reduced motion. */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

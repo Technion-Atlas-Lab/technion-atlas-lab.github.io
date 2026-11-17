@@ -59,7 +59,7 @@ The Member responsible for the website.
 _Avoid_: admin, webmaster, lab manager
 
 **Site settings**:
-The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox), kept in one file.
+The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address), kept in one file.
 _Avoid_: config, site config
 
 **Test content set**:

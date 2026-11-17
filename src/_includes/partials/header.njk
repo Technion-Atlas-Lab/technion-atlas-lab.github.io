@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="site-header__bar wrap">
+    <a class="site-header__home" href="/" aria-label="{{ site.name }} home"{% if page.url == "/" %} aria-current="page"{% endif %}>
+      <img src="/assets/logo.avif" alt="{{ site.name }} logo" width="136" height="136">
+      <span class="site-header__name">{{ site.name }}</span>
+    </a>
+    {#- Shown below tablet width only, and only with JavaScript (assets/menu.js). #}
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu">
+      <span class="menu-button__icon" aria-hidden="true"></span>Menu
+    </button>
+    <nav class="site-menu" id="site-menu" aria-label="Main">
+      <ul>
+        {%- for item in menu %}
+        <li><a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

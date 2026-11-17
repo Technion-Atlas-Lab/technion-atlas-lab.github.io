@@ -34,3 +34,8 @@ test('the failure names the file and an unknown field', () => {
 test('the failure names an unknown field that shares its name with a built-in property', () => {
   expect(build.output).toMatch(namesField('constructor'));
 });
+
+test('the failure names a site address that is not an https address, and says why', () => {
+  // Naming it as an unknown field would not do: the message must explain the rule.
+  expect(build.output).toMatch(new RegExp(`${namesField('url').source}.*\\bhttps\\b`));
+});

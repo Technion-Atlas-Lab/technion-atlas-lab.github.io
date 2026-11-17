@@ -1,14 +1,39 @@
+{#- The shell every page shares. Each page sets `title` and `description` in
+    its front matter; Home uses the Lab's name and mission instead. -#}
+{%- set pageTitle -%}
+  {%- if title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} · Technion{% endif -%}
+{%- endset -%}
+{%- set pageDescription = (description or site.mission) | replace(r/\s+/g, " ") | trim -%}
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+{#- Only this site's own files may load: no third-party scripts, styles, fonts
+    or images, even if some were injected. GitHub Pages cannot send this as a
+    header (docs/adr/0001), so it is a meta tag, before anything that loads. #}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} · Technion{% endif %}</title>
-<meta name="description" content="{{ description or site.mission }}">
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDescription }}">
+{#- Pages left out of the sitemap (the page-not-found page) have no address of their own. #}
+{%- if not eleventyExcludeFromCollections %}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+{%- endif %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDescription }}">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js"></script>
 </head>
 <body>
-<main id="main">
+<a class="skip-link" href="#main">Skip to main content</a>
+{% include "partials/header.njk" %}
+{#- tabindex lets the skip link move keyboard focus here, not just scroll. #}
+<main id="main" tabindex="-1">
 {{ content | safe }}
 </main>
+{% include "partials/footer.njk" %}
 </body>
 </html>

@@ -7,3 +7,5 @@ mission: |-
   Research Laboratory
   AI Trust, Learning, Architecture, and Security
 mailbox: atlaslab.at.technion@gmail.com
+# The site's address. At Go-live, change it to the Technion address.
+url: https://technion-atlas-lab.github.io

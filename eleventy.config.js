@@ -7,6 +7,9 @@ import { contentDir, describeErrors, validateContent } from './lib/content.js';
 export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget(contentDir());
 
+  // The logo, styles and script, published as-is under /assets/.
+  eleventyConfig.addPassthroughCopy('src/assets');
+
   // Every build validates first; invalid content never reaches _site/.
   eleventyConfig.on('eleventy.before', () => {
     const errors = validateContent();

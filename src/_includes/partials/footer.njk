@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="site-footer__columns wrap">
+    <div>
+      <p class="site-footer__name">{{ site.name }}</p>
+      <p>{{ site.full_name }}</p>
+    </div>
+    <div>
+      <h2 class="site-footer__heading">Contact</h2>
+      <p><a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <h2 class="site-footer__heading">This site</h2>
+      <ul>
+        <li><a href="/accessibility/">Accessibility</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="site-footer__legal wrap">© {{ site.name }}, Technion</p>
+</footer>
