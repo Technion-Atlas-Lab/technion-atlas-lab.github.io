@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+---
+{#- An inner page: a navy banner with the page's `title` as its heading, then
+    the page's own content. Home has its own banner and does not use this. #}
+<div class="page-banner">
+  <div class="wrap">
+    <h1>{{ title }}</h1>
+  </div>
+</div>
+{{ content | safe }}

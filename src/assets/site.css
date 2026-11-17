@@ -81,6 +81,20 @@ img { max-width: 100%; height: auto; }
 
 .page { padding-block: clamp(2rem, 6vw, 4rem); }
 
+/* Inner-page banner: the page heading on the footer's navy */
+
+.page-banner {
+  --focus: var(--teal);
+  background: var(--navy);
+  color: var(--on-dark);
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+.page-banner h1 {
+  margin: 0;
+  color: var(--on-dark);
+}
+
 /* Skip link: off-screen until focused */
 
 .skip-link {

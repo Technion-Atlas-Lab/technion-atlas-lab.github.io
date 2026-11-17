@@ -6,6 +6,24 @@ const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'F
 
 const menu = (page) => page.getByRole('navigation', { name: 'Main' });
 
+// The colour a visitor sees behind an element: its own background, or the
+// nearest ancestor's that is not transparent.
+const backgroundBehind = (locator) => locator.evaluate((element) => {
+  for (let el = element; el; el = el.parentElement) {
+    const colour = getComputedStyle(el).backgroundColor;
+    if (colour !== 'rgba(0, 0, 0, 0)' && colour !== 'transparent') return colour;
+  }
+  return null;
+});
+
+for (const path of ['/about/', '/no-such-page/']) {
+  test(`${path} opens with its heading on a banner in the footer's colour`, async ({ page }) => {
+    await page.goto(path);
+    const heading = page.getByRole('main').getByRole('heading', { level: 1 });
+    expect(await backgroundBehind(heading)).toBe(await backgroundBehind(page.getByRole('contentinfo')));
+  });
+}
+
 test('the logo leads Home from any page', async ({ page }) => {
   await page.goto('/about/');
   await page.getByRole('banner').getByRole('link', { name: 'ATLAS Lab home', exact: true }).click();
