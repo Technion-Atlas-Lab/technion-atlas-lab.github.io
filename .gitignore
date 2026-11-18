@@ -6,11 +6,18 @@
 # Dependencies
 node_modules/
 
-# Build output: the site, and the sites the tests build
+# Build output: the site, and the sites the tests and screenshots build
 _site/
 .test-site/
 .test-site-broken/
+.site-check/
+.site-shots/
+
+# Screenshots for review (npm run shots)
+.shots/
 
 # Playwright Test output
 test-results/
 playwright-report/
+test-results-site/
+playwright-report-site/

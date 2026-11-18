@@ -1,6 +1,11 @@
-# Every pull request: validate, build and test.
+# Every pull request: validate, build, check links, run the slice tests and
+# the site-wide checks, and save screenshots of every page for review.
 # Every push to main: the same, then publish _site/ to GitHub Pages.
-# If any step fails, nothing is published.
+# If any check fails, nothing is published.
+#
+# main only accepts pull requests whose two jobs below pass ("Validate, build,
+# check links and test" and "Site-wide checks"). Renaming a job means updating
+# the branch protection rule on main to match.
 name: Site
 
 on:
@@ -20,7 +25,7 @@ concurrency:
 
 jobs:
   build:
-    name: Validate, build and test
+    name: Validate, build, check links and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -31,6 +36,7 @@ jobs:
       - run: npm ci
       - run: npm run validate
       - run: npm run build
+      - run: npm run linkcheck
       - run: npx playwright install --with-deps chromium
       - run: npm test
       - name: Keep the test report when tests fail
@@ -47,10 +53,41 @@ jobs:
         with:
           path: _site
 
+  site-checks:
+    name: Site-wide checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:site
+      - name: Keep the test report when checks fail
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-checks-report
+          path: |
+            playwright-report-site/
+            test-results-site/
+          retention-days: 14
+      - name: Save screenshots of every page for review
+        if: success() || failure()
+        run: npm run shots
+      - if: success() || failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: .shots/
+          retention-days: 14
+
   deploy:
     name: Publish to GitHub Pages
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: build
+    needs: [build, site-checks]
     runs-on: ubuntu-latest
     permissions:
       pages: write

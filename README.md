@@ -3,9 +3,10 @@
 Source for the ATLAS Lab (Technion) website, published with GitHub Pages at
 https://technion-atlas-lab.github.io
 
-The site is built with [Eleventy 3](https://www.11ty.dev/) from the content in `content/`. Every
-push to `main` validates the content, builds the site, runs the tests and publishes; if any step
-fails, nothing is published. Every pull request runs the same checks without publishing.
+The site is built with [Eleventy 3](https://www.11ty.dev/) from the content in `content/`.
+Changes reach `main` only through a pull request whose checks pass: validation, the build, the link
+check, the slice tests and the site-wide checks. No reviewer is required. Every push to `main` runs
+the same checks and publishes; if any check fails, nothing is published.
 
 ## To change X, edit file Y
 
@@ -22,18 +23,31 @@ Each content file's fields are described in `content/SCHEMA.md`. After editing, 
 
 ## Commands
 
-Install [Node.js](https://nodejs.org/) 22 or newer, then run `npm install` once.
+Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` once.
 
 | Command | What it does |
 |---|---|
 | `npm run serve` | Builds the site and serves it at http://localhost:8080, rebuilding on every change. |
 | `npm run build` | Validates the content and builds the site into `_site/`. |
 | `npm run validate` | Checks `content/` against `content/SCHEMA.md` without building. |
+| `npm run linkcheck` | Checks that every internal link and file reference in `_site/` leads somewhere. Run `npm run build` first. |
 | `npm test` | Runs the slice tests in a real browser. Run `npx playwright install chromium` once first. |
+| `npm run test:site` | Runs the site-wide checks on every page of the real site. Run `npx playwright install chromium webkit` once first. |
+| `npm run shots` | Saves screenshots of every page at 390, 768 and 1280 px to `.shots/`, for review. `npm run shots -- /about/` takes just the pages named. |
 
 The slice tests never read `content/`. They build the site from the **test content set** in
 `tests/content/`, so real content can change without breaking them. `tests/content-broken/` is
 deliberately invalid: a test checks that the build refuses it.
+
+The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
+`content/` and visit every page in its sitemap at 390, 768 and 1280 px in Chromium, and at 390 px
+in WebKit (Safari's engine). Every page must have no accessibility violations at WCAG 2.2 AA
+(axe), no sideways scrolling, no request to any other site, no broken internal links, exactly one
+main heading, a skip link that moves focus to the main content, and `lang="en"`. They assert
+nothing about what a page says, so any content must pass them.
+
+Pull requests also save the screenshots from `npm run shots` as a `screenshots` artifact on the
+workflow run. Nothing compares them; they are for looking at.
 
 ## Working on this site with Claude Code
 

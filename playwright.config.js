@@ -7,6 +7,8 @@ const PORT = 8181;
 
 export default defineConfig({
   testDir: 'tests',
+  // The site-wide checks have their own config (playwright.site.config.js).
+  testIgnore: 'site-wide/**',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
@@ -16,7 +18,7 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: `node tests/support/test-site.js ${PORT}`,
+    command: `node tests/support/build-and-serve.js ${PORT} tests/content .test-site`,
     url: `http://localhost:${PORT}/`,
     // Always build fresh: a server left running would serve a stale site.
     reuseExistingServer: false,
