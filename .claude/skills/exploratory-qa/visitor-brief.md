@@ -1,7 +1,7 @@
 ## Ground rules
 
 - **Local only.** Open only URLs under `http://localhost:8383`. Check an external, `mailto:` or `tel:` link by reading its `href`; leave it unclicked. Load each page a handful of times, at human pace.
-- Drive the browser with the `playwright-cli` skill, always in your own named session, so the other visitor's browser stays untouched. Open it with `npx --no-install playwright-cli -s=<your session> open --browser=chromium http://localhost:8383/`; the bundled Chromium is the browser installed here.
+- Drive the browser with the `playwright-cli` skill, always in your own named session, so the other visitor's browser stays untouched. Open it with `npx --no-install playwright-cli -s=<your session> open http://localhost:8383/`.
 - Read-only: you report, the main agent fixes. Leave the repository's files as they are.
 - Judge as a visitor would: what is on screen, what the accessibility snapshot says, where a link leads. `GLOSSARY.md` defines the site's terms.
 - A journey whose pages do not exist yet is itself reported, once, as `blocked: <what is missing>`; it is a note, not a finding.

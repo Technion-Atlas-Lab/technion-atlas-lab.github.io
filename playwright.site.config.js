@@ -7,7 +7,7 @@ import { defineConfig, devices } from '@playwright/test';
 const PORT = 8282;
 
 // Where the build goes; tests/site-wide/ reads the sitemap from here.
-export const CHECKED_BUILD_DIR = '.site-check';
+export const CHECKED_BUILD_DIR = '.builds/site-check';
 
 const chromiumAt = (width) => ({
   name: `chromium-${width}`,

@@ -11,7 +11,7 @@ const namesField = (field) => new RegExp(`tests/content-broken/site\\.yaml\\b.*\
 
 let build;
 test.beforeAll(() => {
-  build = spawnSync('npm run build -- --output=.test-site-broken', {
+  build = spawnSync('npm run build -- --output=.builds/test-broken', {
     shell: true,
     encoding: 'utf8',
     env: { ...process.env, SITE_CONTENT_DIR: 'tests/content-broken' },

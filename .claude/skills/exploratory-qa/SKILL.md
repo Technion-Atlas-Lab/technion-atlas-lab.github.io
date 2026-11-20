@@ -12,12 +12,12 @@ The ground rules in [`visitor-brief.md`](visitor-brief.md) bind you as well as t
 Start the server in the background:
 
 ```bash
-node tests/support/build-and-serve.js 8383 tests/content .qa-site
+node tests/support/build-and-serve.js 8383 tests/content .builds/qa
 ```
 
 It builds the test content set, the content the slice tests assert against, so a finding converts straight into a slice test.
 
-Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command in `visitor-brief.md` opens the page in a session named `check` (then close it). If the browser is reported missing, run the install command the error names, once.
+Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command in `visitor-brief.md` opens the page in a session named `check` (then close it). If the browser is reported missing, run the one-time install in the README's Commands section.
 
 ## 2. Send both visitors
 
@@ -40,6 +40,6 @@ Done when: every confirmed finding has a test that now passes or an issue number
 
 ## 5. Close down
 
-Stop the server, close every session, and tell the Maintainer which findings were confirmed, fixed, filed (with issue numbers) and dropped.
+Stop the server by its port (`fuser -k 8383/tcp`), close every session, and tell the Maintainer which findings were confirmed, fixed, filed (with issue numbers) and dropped.
 
 Done when: `curl -sI http://localhost:8383/` fails to connect, `npx --no-install playwright-cli list` shows no open browser, and the Maintainer has the summary.

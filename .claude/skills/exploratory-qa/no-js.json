@@ -1,5 +1,6 @@
 {
   "browser": {
+    "browserName": "chromium",
     "contextOptions": {
       "javaScriptEnabled": false
     }
