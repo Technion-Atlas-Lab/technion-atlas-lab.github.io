@@ -15,6 +15,10 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: 'retain-on-failure',
+    // An action on an element that is not there (a click, a measurement) gives
+    // up after 5 s, as an assertion does, instead of the test's full 30 s: the
+    // pages are static, so waiting longer only slows a failing run.
+    actionTimeout: 5000,
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
