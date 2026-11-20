@@ -27,6 +27,7 @@ test('the photo in the test content set does carry camera and location metadata'
 test('a Member with a photo shows it on their card, in place of the initials avatar', async ({ page }) => {
   await page.goto('/people/');
   const card = cardOf(page, 'Full Member');
+  // The card's photo is decoration beside the written name, so it has no role or name to find it by.
   await expect(card.locator('img')).toBeVisible();
   expect(await card.locator('img').evaluate((img) => img.decode().then(() => img.naturalWidth))).toBeGreaterThan(0);
   await expect(card.getByText('FM', { exact: true })).toHaveCount(0);
@@ -62,4 +63,23 @@ test('the photo as it was committed is not published', async ({ request }) => {
   for (const address of ['/members/full-member.jpg', '/people/full-member.jpg', '/photos/full-member.jpg', '/full-member.jpg']) {
     expect((await request.get(address)).status(), address).toBe(404);
   }
+});
+
+test.describe('on a narrow, dense phone screen', () => {
+  // One card across at this width, so the photo is drawn at its widest.
+  test.use({ viewport: { width: 320, height: 640 }, deviceScaleFactor: 2 });
+
+  test('the card loads a photo with enough pixels for the size it is drawn at', async ({ page }) => {
+    await page.goto('/people/');
+    const photo = cardOf(page, 'Full Member').locator('img');
+    await expect(photo).toBeVisible();
+    const { drawn, loaded } = await photo.evaluate(async (img) => {
+      await img.decode();
+      const file = new Image();
+      file.src = img.currentSrc;
+      await file.decode();
+      return { drawn: img.getBoundingClientRect().width * devicePixelRatio, loaded: file.naturalWidth };
+    });
+    expect(loaded).toBeGreaterThanOrEqual(drawn);
+  });
 });

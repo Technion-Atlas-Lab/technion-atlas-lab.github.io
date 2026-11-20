@@ -1,6 +1,6 @@
 ---
 # An Alumnus with a current position.
-name: Former Member
+name: Alumnus Example
 role: Alumnus
 order: 1
 former_role: MSc Student

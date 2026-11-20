@@ -5,6 +5,9 @@ permalink: /people/
 layout: layouts/page.njk
 ---
 {%- from "partials/person.njk" import avatar -%}
+{#- How wide a card's photo is drawn: the whole screen where one card fits
+    across (below 22.5rem), and never more than 15rem in the grid. -#}
+{%- set cardPhotoSizes = "(max-width: 22.5rem) 100vw, 15rem" -%}
 {#- One section per role group, in the roles' fixed order: a wide card for the
     Lab Director, a grid of cards for every other group. Then the Alumni. #}
 <div class="page wrap">
@@ -14,7 +17,7 @@ layout: layouts/page.njk
     <ul class="people-grid{% if group.lead %} people-grid--lead{% endif %}">
       {%- for member in group.members %}
       <li class="person-card">
-        {{ avatar(member, "12rem") }}
+        {{ avatar(member, cardPhotoSizes) }}
         <div class="person-card__text">
           {#- The link's ::after covers the whole card, so all of it opens the Profile. #}
           <h3 class="person-card__name"><a href="/people/{{ member.slug }}/">{{ member.name }}</a></h3>

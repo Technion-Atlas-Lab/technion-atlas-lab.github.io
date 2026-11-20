@@ -1,8 +1,8 @@
 {#- The shell every page shares. Each page sets `title` and `description` in
     its front matter; Home uses the Lab's name and mission instead. -#}
-{%- set pageTitle -%}
-  {%- if title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }} · Technion{% endif -%}
-{%- endset -%}
+{#- Built as a value, not as captured output: captured output is already
+    escaped, and writing it below would escape it again (`&amp;amp;`). -#}
+{%- set pageTitle = (title + " · " + site.name) if title else (site.name + " · Technion") -%}
 {%- set pageDescription = (description or site.mission) | replace(r/\s+/g, " ") | trim -%}
 <!doctype html>
 <html lang="en">

@@ -25,7 +25,7 @@ test('a Profile shows the role, bio and research interests', async ({ page }) =>
 
 test('a Profile shows every contact field present, each a working link', async ({ page }) => {
   await page.goto('/people/full-member/');
-  const contact = page.getByRole('region', { name: 'Contact' });
+  const contact = page.getByRole('region', { name: 'Contact details' });
   await expect(contact.getByRole('link', { name: 'full.member@example.org' }))
     .toHaveAttribute('href', 'mailto:full.member@example.org');
   await expect(contact.getByRole('link', { name: '+972 4 000 0000' })).toHaveAttribute('href', 'tel:+97240000000');
@@ -76,8 +76,8 @@ test('a Profile has a title and description of its own, and is in the sitemap', 
 });
 
 test('an Alumnus has no Profile page', async ({ request }) => {
-  expect((await request.get('/people/former-member/')).status()).toBe(404);
-  expect(await (await request.get('/sitemap.xml')).text()).not.toContain('former-member');
+  expect((await request.get('/people/alumnus-example/')).status()).toBe(404);
+  expect(await (await request.get('/sitemap.xml')).text()).not.toContain('alumnus-example');
 });
 
 test.describe('at phone width', () => {
@@ -87,5 +87,53 @@ test.describe('at phone width', () => {
     await page.goto('/people/maximiliana/');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(LONG_NAME);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  });
+});
+
+test('on a Profile the menu marks People as the section the visitor is in', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  const menu = page.getByRole('navigation', { name: 'Main' });
+  // Not "the current page": that is the Profile itself, which the menu does not list.
+  await expect(menu.locator('[aria-current]')).toHaveText(['People']);
+  await expect(menu.getByRole('link', { name: 'People', exact: true })).toHaveAttribute('aria-current', 'true');
+  // It looks the same as the current page's item does on People.
+  const look = (link) => link.evaluate((a) => {
+    const { color, fontWeight, borderBottomColor } = getComputedStyle(a);
+    return { color, fontWeight, borderBottomColor };
+  });
+  const onProfile = await look(menu.getByRole('link', { name: 'People', exact: true }));
+  await page.goto('/people/');
+  expect(onProfile).toEqual(await look(menu.getByRole('link', { name: 'People', exact: true })));
+});
+
+test('a name with an apostrophe and an ampersand reaches the Profile as written', async ({ page }) => {
+  await page.goto('/people/zoe-oneil/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("Dr. Zoë O'Neil & Co");
+  await expect(page).toHaveTitle("Dr. Zoë O'Neil & Co · ATLAS Lab");
+  await expect(page.locator('meta[name="description"]'))
+    .toHaveAttribute('content', "Dr. Zoë O'Neil & Co, Research Staff at ATLAS Lab.");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', "Dr. Zoë O'Neil & Co · ATLAS Lab");
+});
+
+test('no two headings on a Profile read the same', async ({ page }) => {
+  // A screen reader's list of headings must tell the Member's contact details from the Lab's in the footer.
+  await page.goto('/people/full-member/');
+  const headings = await page.getByRole('heading').allTextContents();
+  expect(new Set(headings).size).toBe(headings.length);
+});
+
+test.describe('on a narrow phone', () => {
+  test.use({ viewport: { width: 320, height: 640 } });
+
+  test('the contact fields are all laid out alike, each value under its label', async ({ page }) => {
+    await page.goto('/people/full-member/');
+    const contact = page.getByRole('region', { name: 'Contact details' });
+    const labels = await contact.getByRole('term').evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()));
+    const values = await contact.getByRole('definition').evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()));
+    expect(values).toHaveLength(3);
+    for (const [i, value] of values.entries()) {
+      expect(value.top, `value ${i + 1} sits under its label`).toBeGreaterThanOrEqual(labels[i].bottom);
+      expect(value.left).toBe(labels[i].left);
+    }
   });
 });

@@ -9,9 +9,9 @@ const group = (page, name) => page.getByRole('region', { name, exact: true });
 
 test('People shows the role groups in their fixed order, leaving out roles nobody holds', async ({ page }) => {
   await page.goto('/people/');
-  // The test content set has no Postdoctoral Researcher and no Research Staff.
+  // The test content set has no Postdoctoral Researcher.
   await expect(page.getByRole('main').getByRole('heading', { level: 2 }))
-    .toHaveText(['Lab Director', 'PhD Students', 'MSc Students', 'Alumni']);
+    .toHaveText(['Lab Director', 'PhD Students', 'MSc Students', 'Research Staff', 'Alumni']);
 });
 
 test('a group lists its Members by display order', async ({ page }) => {
@@ -32,6 +32,12 @@ test('a Member without a photo gets an avatar of their initials, skipping a titl
   await page.goto('/people/');
   await expect(group(page, 'Lab Director').getByRole('listitem').getByText('TD', { exact: true })).toBeVisible();
   await expect(group(page, 'MSc Students').getByRole('listitem').getByText('BM', { exact: true })).toBeVisible();
+  await expect(group(page, 'Research Staff').getByRole('listitem').getByText('ZC', { exact: true })).toBeVisible();
+});
+
+test('a name reaches its card as written, apostrophe and ampersand included', async ({ page }) => {
+  await page.goto('/people/');
+  await expect(group(page, 'Research Staff').getByRole('link')).toHaveText(["Dr. Zoë O'Neil & Co"]);
 });
 
 test('each card shows the Member\'s role', async ({ page }) => {
@@ -56,12 +62,12 @@ test.describe('at desktop width', () => {
 
   test('an Alumni row is compact: shorter than a Member card, its avatar beside the name', async ({ page }) => {
     await page.goto('/people/');
-    const row = group(page, 'Alumni').getByRole('listitem').filter({ hasText: 'Former Member' });
+    const row = group(page, 'Alumni').getByRole('listitem').filter({ hasText: 'Alumnus Example' });
     const rowBox = await row.boundingBox();
     const card = await group(page, 'MSc Students').getByRole('listitem').boundingBox();
     expect(rowBox.height).toBeLessThan(card.height / 2);
-    const avatar = await row.getByText('FM', { exact: true }).boundingBox();
-    const name = await row.getByText('Former Member').boundingBox();
+    const avatar = await row.getByText('AE', { exact: true }).boundingBox();
+    const name = await row.getByText('Alumnus Example').boundingBox();
     expect(name.x).toBeGreaterThanOrEqual(avatar.x + avatar.width);
   });
 });
@@ -84,20 +90,21 @@ test('Alumni appear as rows with their avatar, name, former role and year, and c
   await page.goto('/people/');
   const rows = group(page, 'Alumni').getByRole('listitem');
   await expect(rows).toHaveCount(2);
-  const former = rows.filter({ hasText: 'Former Member' });
-  await expect(former.getByText('FM', { exact: true })).toBeVisible();
+  const former = rows.filter({ hasText: 'Alumnus Example' });
+  await expect(former.getByText('AE', { exact: true })).toBeVisible();
   await expect(former.getByText('MSc Student, 2024', { exact: true })).toBeVisible();
   await expect(former.getByText('Research Engineer at Example Corp', { exact: true })).toBeVisible();
 });
 
 test('an Alumnus with no current position shows only the former role and year', async ({ page }) => {
   await page.goto('/people/');
-  const past = group(page, 'Alumni').getByRole('listitem').filter({ hasText: 'Past Member' });
-  await expect(past).toHaveText(/^\s*PM\s*Past Member\s*PhD Student, 2021\s*$/);
+  // A last initial counts as a name: only a leading title is left out of the avatar.
+  const ada = group(page, 'Alumni').getByRole('listitem').filter({ hasText: 'Ada B.' });
+  await expect(ada).toHaveText(/^\s*AB\s*Ada B\.\s*PhD Student, 2021\s*$/);
 });
 
 test('Alumni rows open no Profile', async ({ page }) => {
   await page.goto('/people/');
-  await expect(group(page, 'Alumni').getByText('Former Member')).toBeVisible();
+  await expect(group(page, 'Alumni').getByText('Alumnus Example')).toBeVisible();
   await expect(group(page, 'Alumni').getByRole('link')).toHaveCount(0);
 });

@@ -8,19 +8,20 @@ pagination:
 permalink: "/people/{{ member.slug }}/"
 layout: layouts/page.njk
 eleventyComputed:
-  title: "{{ member.name }}"
-  description: "{{ member.name }}, {{ member.role }} at {{ site.name }}."
+  # `safe`: the layout escapes these when it writes them; escaping here too would show `&amp;` to visitors.
+  title: "{{ member.name | safe }}"
+  description: "{{ member.name | safe }}, {{ member.role | safe }} at {{ site.name | safe }}."
 ---
 {%- from "partials/person.njk" import avatar -%}
 {#- One Profile page per current Member (Alumni have none). A field the Member
     did not share leaves nothing behind: no heading, no label. #}
 {%- set links = [
-  ["Google Scholar", member.google_scholar],
-  ["DBLP", member.dblp],
-  ["GitHub", member.github],
-  ["LinkedIn", member.linkedin],
-  ["Personal site", member.website]
-] | selectattr("1") | list -%}
+  { label: "Google Scholar", url: member.google_scholar },
+  { label: "DBLP", url: member.dblp },
+  { label: "GitHub", url: member.github },
+  { label: "LinkedIn", url: member.linkedin },
+  { label: "Personal site", url: member.website }
+] | selectattr("url") | list -%}
 <div class="page wrap">
   <p class="back-link"><a href="/people/">All people</a></p>
   <div class="profile">
@@ -41,8 +42,9 @@ eleventyComputed:
       </section>
       {%- endif %}
       {%- if member.email or member.phone or member.orcid %}
+      {#- "Contact details", as the footer of every page has a "Contact" heading for the Lab. #}
       <section aria-labelledby="contact">
-        <h2 id="contact">Contact</h2>
+        <h2 id="contact">Contact details</h2>
         <dl class="field-list">
           {%- if member.email %}
           <div><dt>Email</dt><dd><a href="mailto:{{ member.email }}">{{ member.email }}</a></dd></div>
@@ -61,7 +63,7 @@ eleventyComputed:
         <h2 id="links">Links</h2>
         <ul class="link-list">
           {%- for link in links %}
-          <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
+          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
           {%- endfor %}
         </ul>
       </section>
