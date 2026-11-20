@@ -18,7 +18,7 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: `node tests/support/build-and-serve.js ${PORT} tests/content .test-site`,
+    command: `node tests/support/build-and-serve.js ${PORT} tests/content .builds/test`,
     url: `http://localhost:${PORT}/`,
     // Always build fresh: a server left running would serve a stale site.
     reuseExistingServer: false,

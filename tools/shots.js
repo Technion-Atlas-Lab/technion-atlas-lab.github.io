@@ -13,7 +13,7 @@ import { serve } from '../lib/serve.js';
 
 const WIDTHS = [390, 768, 1280];
 // The build these screenshots are taken of, kept apart from the site-wide checks' build.
-const SHOTS_BUILD_DIR = '.site-shots';
+const SHOTS_BUILD_DIR = '.builds/shots';
 const SHOTS_DIR = path.join(ROOT, '.shots');
 
 if (!buildSite('content', SHOTS_BUILD_DIR)) process.exit(1);

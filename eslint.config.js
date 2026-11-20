@@ -9,7 +9,7 @@ import globals from 'globals';
 
 export default defineConfig([
   // Built sites and test output hold copies of src/, not code of their own.
-  globalIgnores(['_site/', '.test-site/', '.test-site-broken/', '.site-check/', '.site-shots/', '.qa-site/', '.shots/',
+  globalIgnores(['_site/', '.builds/', '.shots/',
     'test-results/', 'test-results-site/', 'playwright-report/', 'playwright-report-site/']),
   {
     files: ['**/*.js'],

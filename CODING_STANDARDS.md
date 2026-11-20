@@ -23,11 +23,13 @@ The rules a reviewer applies to every change. They are judgement calls: CI alrea
 - **Each file opens with a plain-English comment** saying what it is for and who uses it. Comments explain why (`Eleventy never deletes from its output folder, so ...`), not what the next line does.
 - **Names, messages, docs and page text use the GLOSSARY terms** (Member, Profile, Publication, Research Area, Maintainer, test content set, ...). A new domain term goes into `GLOSSARY.md` in the same change.
 - **A lint rule is turned off only with a comment giving the reason**, in `eslint.config.js` or beside the `eslint-disable` line, so the next person can tell a deliberate exception from a silenced bug.
+- **A generated build goes under `.builds/`** (`.builds/test`, `.builds/qa`, ...), which git and the lint ignore as a whole; only the published site is built into `_site/`.
 - **Shared behaviour has one home; reuse it**: content loading and validation in `lib/content.js`, building in `lib/build.js`, GitHub-Pages-style serving and path resolution in `lib/serve.js`.
 - **The validation rules live in two places that change together**: `SCHEMA` in `lib/content.js` and `content/SCHEMA.md`.
 - **Error messages name the file and the problem in plain English**, so the Maintainer can fix content without reading code (`content/site.yaml: missing required field "name"`).
 
 ## Docs
 
+- **Agent-facing files are reviewed against the `writing-for-agents` skill** (`CLAUDE.md`, `.claude/skills/`, `docs/agents/`): one home for each meaning, a completion criterion on every step, no instruction the agent already follows by default.
 - **The README tracks the change**: a new or renamed command updates its Commands table; a new place to edit something updates "To change X, edit file Y".
 - **CI job names are part of the merge rule.** Renaming a job in `.github/workflows/site.yml` needs the branch protection rule on `main` updated to match, or every pull request waits forever on the old name.
