@@ -1,0 +1,14 @@
+# GitHub's "New issue" chooser: the two forms in this folder, no blank issue,
+# and one link for requests that must stay private. GitHub reads this file from
+# main only.
+#
+# The Lab mailbox and the site's address are repeated here and in the two forms
+# because GitHub cannot read content/site.yaml: change them in all four files.
+blank_issues_enabled: false
+contact_links:
+  - name: Change or remove your personal information
+    # GitHub leaves a contact link out of the chooser, without saying so, when
+    # its url is a mailto: address. So the link opens the Privacy page, and the
+    # line below it names the Lab mailbox for anyone who does not follow it.
+    url: https://technion-atlas-lab.github.io/privacy/
+    about: Issues are public. Email the Lab mailbox instead, at atlaslab.at.technion@gmail.com.

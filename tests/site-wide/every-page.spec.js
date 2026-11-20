@@ -14,6 +14,9 @@ const WCAG_22_AA = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag
 // A web address on a site other than `own` (an origin such as http://localhost:8282).
 const isForeign = (url, own) => (url.protocol === 'http:' || url.protocol === 'https:') && url.origin !== own;
 
+// Any issue page of a repository in the Lab's GitHub organization.
+const ISSUE_TRACKER = /^https?:\/\/(www\.)?github\.com\/Technion-Atlas-Lab\/[^/]+\/issues\b/i;
+
 for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
   test.describe(path, () => {
     test('has no accessibility violations at WCAG 2.2 AA', async ({ page }) => {
@@ -103,6 +106,15 @@ for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
 
     test('shows no character escaped twice', async ({ request }) => {
       expect(doubleEscaped(await (await request.get(path)).text())).toEqual([]);
+    });
+
+    test('has no link to the Lab\'s issue tracker', async ({ page }) => {
+      // The new-issue link is given to the Lab directly. On the public site it
+      // would invite anyone to file issues, and a Member to post a
+      // personal-information request in public.
+      await page.goto(path);
+      const links = await page.locator('a[href]').evaluateAll((as) => as.map((a) => a.href));
+      expect(links.filter((href) => ISSUE_TRACKER.test(href))).toEqual([]);
     });
 
     test('declares its language as English', async ({ page }) => {

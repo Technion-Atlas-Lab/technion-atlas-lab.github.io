@@ -13,6 +13,8 @@ the same checks and publishes; if any check fails, nothing is published.
 | To change | Edit |
 |---|---|
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
+| The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The three files in `.github/ISSUE_TEMPLATE/`, which repeat both: GitHub cannot read `content/site.yaml` |
+| What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
@@ -48,11 +50,30 @@ The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the si
 `content/` and visit every page in its sitemap at 390, 768 and 1280 px in Chromium, and at 390 px
 in WebKit (Safari's engine). Every page must have no accessibility violations at WCAG 2.2 AA
 (axe), no sideways scrolling, no request to any other site, no broken internal links, exactly one
-main heading, a skip link that moves focus to the main content, and `lang="en"`. They assert
+main heading, a skip link that moves focus to the main content, no link to the Lab's issue
+tracker, and `lang="en"`. They assert
 nothing about what a page says, so any content must pass them.
 
 Pull requests also save the screenshots from `npm run shots` as a `screenshots` artifact on the
 workflow run. Nothing compares them; they are for looking at.
+
+## Feedback from the Lab
+
+Colleagues report problems and suggest ideas on GitHub's "New issue" page:
+
+https://github.com/Technion-Atlas-Lab/technion-atlas-lab.github.io/issues/new/choose
+
+Share this link with the Lab directly, by email or chat. The public site never links to it (a
+site-wide check enforces this), so that issues come from the Lab only.
+
+The page offers two forms, "Report a problem" and "Suggest an idea". Each new issue is labelled
+`needs-triage`, plus `bug` or `enhancement`. A blank issue cannot be opened. A colleague without
+a GitHub account writes to the Lab mailbox instead.
+
+A request to change or remove someone's personal information never belongs in an issue, because
+issues are public. The page's third entry, "Change or remove your personal information", sends
+such a request to the Lab mailbox. It opens the Privacy page instead of an email, because GitHub
+hides a contact link whose address is `mailto:`.
 
 ## Working on this site with Claude Code
 
