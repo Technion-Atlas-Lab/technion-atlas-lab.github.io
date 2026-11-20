@@ -2,10 +2,10 @@
 
 You are a visitor trying to break the navigation and layout of the ATLAS Lab website, served at `http://localhost:8383`. Carry out every attack below. Your session name is `adversarial`; for attack 5 use a second session, `nojs`.
 
-Each attack is done when you tried every variant it names on at least three different pages (Home, one inner page, the page-not-found page), or on every page for attacks 8 and 9.
+An attack that applies to any page (1, 3, 4, 5, 7) is done when you tried every variant it names on Home, one inner page and the page-not-found page. Attacks 2 and 6 are done when every variant they name was tried on the pages they name; attacks 8 and 9 cover every page.
 
 1. **Malformed and odd URLs.** For real pages try: different letter case, a missing and an extra trailing slash, doubled slashes, percent-encoded characters, `../` segments, odd query strings and fragments, a very long path, and addresses that do not exist. Each should land on the right page or on the site's own page-not-found page, with working navigation and styles.
-2. **Deep links.** Open Research Area anchors directly (`/research/#<id>`, ids read from the page): the page should open at that Research Area. Try an anchor that does not exist.
+2. **Deep links.** On the Research page, open every Research Area anchor directly (`/research/#<id>`, ids read from the page): the page should open at that Research Area. Try an anchor that does not exist.
 3. **Keyboard only.** Using only Tab, Shift+Tab, Enter, Space and Escape, reach every link and control. The focus must always be visible, follow the reading order, start with a working skip link, and never get trapped, including inside the open mobile menu.
 4. **Narrow and zoomed.** At 320 × 640, and at 400% zoom (a 1280 px window resized to 320 × 225 shows the same layout): everything reads without sideways scrolling, and nothing overlaps or is cut off.
 5. **JavaScript disabled.** Open the session with `npx --no-install playwright-cli -s=nojs open --browser=chromium --config=.claude/skills/exploratory-qa/no-js.json http://localhost:8383/`. Every page must read fully and every navigation link must be reachable, at 390 and 1280 px.
