@@ -1,0 +1,7 @@
+{#- Pieces the People page and the Profile pages share. #}
+
+{#- A person's picture: an avatar of their initials. It is decoration: the
+    name is always written beside it. #}
+{%- macro avatar(person) -%}
+<span class="avatar" aria-hidden="true">{{ person.initials }}</span>
+{%- endmacro -%}

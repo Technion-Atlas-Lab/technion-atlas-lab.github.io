@@ -1,0 +1,71 @@
+---
+pagination:
+  data: people.members
+  size: 1
+  alias: member
+  # Every Profile, not just the first, goes in the sitemap.
+  addAllPagesToCollections: true
+permalink: "/people/{{ member.slug }}/"
+layout: layouts/page.njk
+eleventyComputed:
+  title: "{{ member.name }}"
+  description: "{{ member.name }}, {{ member.role }} at {{ site.name }}."
+---
+{%- from "partials/person.njk" import avatar -%}
+{#- One Profile page per current Member (Alumni have none). A field the Member
+    did not share leaves nothing behind: no heading, no label. #}
+{%- set links = [
+  ["Google Scholar", member.google_scholar],
+  ["DBLP", member.dblp],
+  ["GitHub", member.github],
+  ["LinkedIn", member.linkedin],
+  ["Personal site", member.website]
+] | selectattr("1") | list -%}
+<div class="page wrap">
+  <p class="back-link"><a href="/people/">All people</a></p>
+  <div class="profile">
+    <div class="profile__picture">{{ avatar(member) }}</div>
+    <div class="profile__body">
+      <p class="profile__role">{{ member.role }}</p>
+      {%- for paragraph in member.bio %}
+      <p>{{ paragraph }}</p>
+      {%- endfor %}
+      {%- if member.research_interests %}
+      <section aria-labelledby="research-interests">
+        <h2 id="research-interests">Research interests</h2>
+        <ul class="tag-list">
+          {%- for interest in member.research_interests %}
+          <li>{{ interest }}</li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+      {%- if member.email or member.phone or member.orcid %}
+      <section aria-labelledby="contact">
+        <h2 id="contact">Contact</h2>
+        <dl class="field-list">
+          {%- if member.email %}
+          <div><dt>Email</dt><dd><a href="mailto:{{ member.email }}">{{ member.email }}</a></dd></div>
+          {%- endif %}
+          {%- if member.phone %}
+          <div><dt>Phone</dt><dd><a href="tel:{{ member.phone | replace(r/[^+\d]/g, '') }}">{{ member.phone }}</a></dd></div>
+          {%- endif %}
+          {%- if member.orcid %}
+          <div><dt>ORCID iD</dt><dd><a href="https://orcid.org/{{ member.orcid }}">{{ member.orcid }}</a></dd></div>
+          {%- endif %}
+        </dl>
+      </section>
+      {%- endif %}
+      {%- if links.length %}
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="link-list">
+          {%- for link in links %}
+          <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+    </div>
+  </div>
+</div>

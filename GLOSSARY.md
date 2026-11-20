@@ -37,7 +37,7 @@ _Avoid_: contact email, the Gmail
 ### People
 
 **Member**:
-A person currently in the Lab: the PI, research staff, or a current graduate student.
+A person currently in the Lab: the PI, research staff, or a current graduate student. Each holds one role: Lab Director (the PI), Postdoctoral Researcher, PhD Student, MSc Student or Research Staff.
 _Avoid_: staff, team member, researcher
 
 **Alumnus** (plural **Alumni**):

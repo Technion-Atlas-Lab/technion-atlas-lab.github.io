@@ -18,12 +18,16 @@ npm run validate
    change this file and `lib/content.js` together.
 2. **Required fields must be present** and non-empty.
 3. **Fields hold plain text, not HTML.**
+4. **One item, one file.** A type kept in a folder has one Markdown file per item, named in
+   lowercase letters, digits and hyphens (`member-name.md`). The file opens with its fields as
+   YAML between two `---` lines; a type may use the plain text under them.
 
 ## Types
 
 | Type | File |
 |---|---|
 | Site settings | `site.yaml` |
+| Member or Alumnus | `members/<name>.md` |
 
 ---
 
@@ -48,4 +52,60 @@ mission: |-
   AI Trust, Learning, Architecture, and Security
 mailbox: atlaslab.at.technion@gmail.com
 url: https://technion-atlas-lab.github.io
+```
+
+---
+
+## `members/<name>.md`: a Member or an Alumnus
+
+One file per person. The file name becomes the address of the Member's Profile page:
+`members/member-name.md` is shown at `/people/member-name/`. An Alumnus has no Profile page.
+
+Add a field only when the Maintainer states that the person gave Consent for it
+(`CODING_STANDARDS.md`). A field that is absent leaves nothing on the page.
+
+| Field | Required | What it is |
+|---|---|---|
+| `name` | yes | The person's name as shown. A title such as `Prof.` is left out of the initials avatar. |
+| `role` | yes | One of `Lab Director`, `Postdoctoral Researcher`, `PhD Student`, `MSc Student`, `Research Staff`, `Alumnus`. The People page groups Members by role, in this order. |
+| `order` | yes | A whole number: the person's place within their role group, lowest first. Equal numbers fall back to name order. |
+| `email` | no | An email address. |
+| `phone` | no | A phone number in international form: `+972 4 000 0000`. Personal or office, as the Member chose. |
+| `orcid` | no | The ORCID iD alone: `0000-0002-1825-0097`. |
+| `research_interests` | no | A YAML list of short phrases. |
+| `google_scholar`, `dblp`, `github`, `linkedin`, `website` | no | Links, each a web address starting with `https://`. `website` is the person's own site. |
+| `former_role` | Alumnus only, yes | The role held in the Lab: any role above except `Alumnus`. |
+| `year` | Alumnus only, yes | The year the person left the Lab: `2024`. |
+| `current_position` | Alumnus only, no | Where the person is now: `Research Engineer at Example Corp`. |
+
+The text under the front matter is the **bio**: plain text, with a blank line between paragraphs.
+
+An Alumnus may keep the fields they had as a Member; the Alumni row shows only the name, former
+role, year and current position.
+
+```markdown
+---
+name: Member Name
+role: PhD Student
+order: 2
+email: member.name@example.org
+research_interests:
+  - Agent sandboxing
+  - Prompt injection
+github: https://github.com/member-name
+---
+Member Name studies how AI agents fail under attack.
+
+Before joining the Lab, Member built compilers.
+```
+
+```markdown
+---
+name: Alumnus Name
+role: Alumnus
+order: 1
+former_role: MSc Student
+year: 2024
+current_position: Research Engineer at Example Corp
+---
 ```

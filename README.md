@@ -13,6 +13,8 @@ the same checks and publishes; if any check fails, nothing is published.
 | To change | Edit |
 |---|---|
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
+| A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it) |
+| The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |
 | The menu | `src/_data/menu.js` (each `url` must match its page's `permalink` in `src/pages/`) |
