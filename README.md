@@ -65,6 +65,8 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 - `.claude/skills/`: the skills the agent uses here. The site's own skills are added as the site
   is built. `playwright-cli` comes from Playwright (installed by `npx playwright-cli install
   --skills`) and lets the agent open the site in a browser to see what a visitor sees.
+  `exploratory-qa` sends two QA agents, a happy-path visitor and an adversarial visitor, through
+  the locally served site after each ticket that changes templates, styles or behaviour.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install
   it the first time you trust this folder.
 

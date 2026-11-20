@@ -12,6 +12,7 @@ _site/
 .test-site-broken/
 .site-check/
 .site-shots/
+.qa-site/
 
 # Screenshots for review (npm run shots)
 .shots/
