@@ -2,6 +2,7 @@
 // titles, descriptions, canonical addresses, Open Graph tags, the sitemap, the
 // robots file, and the content security policy.
 import { test, expect } from '@playwright/test';
+import { doubleEscaped } from './support/double-escaped.js';
 
 // The site address in the test content set (tests/content/site.yaml).
 const SITE = 'https://test-site.example.org';
@@ -78,4 +79,15 @@ test('the robots file lets search engines in and points them to the sitemap', as
   expect(robots).toMatch(/^User-agent: \*$/m);
   expect(robots).not.toMatch(/^Disallow: *\/\S*$/m);
   expect(robots).toMatch(new RegExp(`^Sitemap: ${SITE}/sitemap\\.xml$`, 'm'));
+});
+
+// The test content set has a name with an apostrophe and an ampersand
+// (members/zoe-oneil.md), so a value escaped twice anywhere on a page shows here.
+test('no page in the sitemap shows a character escaped twice', async ({ request }) => {
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  const paths = [...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+  expect(paths.length).toBeGreaterThan(PAGES.length);
+  for (const path of paths) {
+    expect(doubleEscaped(await (await request.get(path)).text()), path).toEqual([]);
+  }
 });

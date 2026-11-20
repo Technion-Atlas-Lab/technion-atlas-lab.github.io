@@ -6,6 +6,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { sitemapPaths } from '../../lib/build.js';
 import { CHECKED_BUILD_DIR } from '../../playwright.site.config.js';
+import { doubleEscaped } from '../support/double-escaped.js';
 
 // axe's tags for the WCAG 2.0, 2.1 and 2.2 success criteria at levels A and AA.
 const WCAG_22_AA = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag22aa'];
@@ -98,6 +99,10 @@ for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
       await expect(first).toHaveAttribute('href', /^#./);
       await page.keyboard.press('Enter');
       await expect(page.getByRole('main')).toBeFocused();
+    });
+
+    test('shows no character escaped twice', async ({ request }) => {
+      expect(doubleEscaped(await (await request.get(path)).text())).toEqual([]);
     });
 
     test('declares its language as English', async ({ page }) => {
