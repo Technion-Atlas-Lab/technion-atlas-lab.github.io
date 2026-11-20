@@ -27,6 +27,14 @@ jobs:
   build:
     name: Validate, build, check links and test
     runs-on: ubuntu-latest
+    # Playwright's own image, with the test browsers and their system packages
+    # already installed; downloading them on every run took up to 24 minutes.
+    # Its version must equal @playwright/test's in package-lock.json: after a
+    # Playwright upgrade change it here too, or the tests stop with "Executable
+    # doesn't exist". `--user 1001` is the user GitHub's own steps run as.
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
+      options: --user 1001
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -38,7 +46,6 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run linkcheck
-      - run: npx playwright install --with-deps chromium
       - run: npm test
       - name: Keep the test report when tests fail
         if: failure()
@@ -57,6 +64,10 @@ jobs:
   site-checks:
     name: Site-wide checks
     runs-on: ubuntu-latest
+    # The same image as the job above, for the same reason.
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
+      options: --user 1001
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -64,7 +75,6 @@ jobs:
           node-version: 26
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:site
       - name: Keep the test report when checks fail
         if: failure()
