@@ -2,5 +2,53 @@
 title: People
 description: "The Members of ATLAS Lab, grouped by role, and its Alumni."
 permalink: /people/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{%- from "partials/person.njk" import avatar -%}
+{#- How wide a card's photo is drawn: the whole screen where one card fits
+    across (below 22.5rem), and never more than 15rem in the grid. -#}
+{%- set cardPhotoSizes = "(max-width: 22.5rem) 100vw, 15rem" -%}
+{#- One section per role group, in the roles' fixed order: a wide card for the
+    Lab Director, a grid of cards for every other group. Then the Alumni. #}
+<div class="page wrap">
+  {%- for group in people.groups %}
+  <section class="people-group" aria-labelledby="{{ group.id }}">
+    <h2 id="{{ group.id }}">{{ group.title }}</h2>
+    <ul class="people-grid{% if group.lead %} people-grid--lead{% endif %}">
+      {%- for member in group.members %}
+      <li class="person-card">
+        {{ avatar(member, cardPhotoSizes) }}
+        <div class="person-card__text">
+          {#- The link's ::after covers the whole card, so all of it opens the Profile. #}
+          <h3 class="person-card__name"><a href="/people/{{ member.slug }}/">{{ member.name }}</a></h3>
+          <p class="person-card__role">{{ member.role }}</p>
+          {%- if group.lead and member.bio.length %}
+          <p class="person-card__bio">{{ member.bio[0] }}</p>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+  {%- if people.alumni.length %}
+  <section class="people-group" aria-labelledby="alumni">
+    <h2 id="alumni">Alumni</h2>
+    {#- Compact rows, and no Profile page: an Alumnus is not a current Member. #}
+    <ul class="alumni-list">
+      {%- for alumnus in people.alumni %}
+      <li class="alumnus">
+        {{ avatar(alumnus, "3.25rem") }}
+        <div>
+          <p class="alumnus__name">{{ alumnus.name }}</p>
+          <p class="alumnus__was">{{ alumnus.former_role }}, {{ alumnus.year }}</p>
+          {%- if alumnus.current_position %}
+          <p class="alumnus__now">{{ alumnus.current_position }}</p>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+</div>

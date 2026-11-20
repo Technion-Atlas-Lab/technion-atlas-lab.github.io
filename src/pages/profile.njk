@@ -1,0 +1,73 @@
+---
+pagination:
+  data: people.members
+  size: 1
+  alias: member
+  # Every Profile, not just the first, goes in the sitemap.
+  addAllPagesToCollections: true
+permalink: "/people/{{ member.slug }}/"
+layout: layouts/page.njk
+eleventyComputed:
+  # `safe`: the layout escapes these when it writes them; escaping here too would show `&amp;` to visitors.
+  title: "{{ member.name | safe }}"
+  description: "{{ member.name | safe }}, {{ member.role | safe }} at {{ site.name | safe }}."
+---
+{%- from "partials/person.njk" import avatar -%}
+{#- One Profile page per current Member (Alumni have none). A field the Member
+    did not share leaves nothing behind: no heading, no label. #}
+{%- set links = [
+  { label: "Google Scholar", url: member.google_scholar },
+  { label: "DBLP", url: member.dblp },
+  { label: "GitHub", url: member.github },
+  { label: "LinkedIn", url: member.linkedin },
+  { label: "Personal site", url: member.website }
+] | selectattr("url") | list -%}
+<div class="page wrap">
+  <p class="back-link"><a href="/people/">All people</a></p>
+  <div class="profile">
+    <div class="profile__picture">{{ avatar(member, "14rem", "Portrait of " + member.name) }}</div>
+    <div class="profile__body">
+      <p class="profile__role">{{ member.role }}</p>
+      {%- for paragraph in member.bio %}
+      <p>{{ paragraph }}</p>
+      {%- endfor %}
+      {%- if member.research_interests %}
+      <section aria-labelledby="research-interests">
+        <h2 id="research-interests">Research interests</h2>
+        <ul class="tag-list">
+          {%- for interest in member.research_interests %}
+          <li>{{ interest }}</li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+      {%- if member.email or member.phone or member.orcid %}
+      {#- "Contact details", as the footer of every page has a "Contact" heading for the Lab. #}
+      <section aria-labelledby="contact">
+        <h2 id="contact">Contact details</h2>
+        <dl class="field-list">
+          {%- if member.email %}
+          <div><dt>Email</dt><dd><a href="mailto:{{ member.email }}">{{ member.email }}</a></dd></div>
+          {%- endif %}
+          {%- if member.phone %}
+          <div><dt>Phone</dt><dd><a href="tel:{{ member.phone | replace(r/[^+\d]/g, '') }}">{{ member.phone }}</a></dd></div>
+          {%- endif %}
+          {%- if member.orcid %}
+          <div><dt>ORCID iD</dt><dd><a href="https://orcid.org/{{ member.orcid }}">{{ member.orcid }}</a></dd></div>
+          {%- endif %}
+        </dl>
+      </section>
+      {%- endif %}
+      {%- if links.length %}
+      <section aria-labelledby="links">
+        <h2 id="links">Links</h2>
+        <ul class="link-list">
+          {%- for link in links %}
+          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+{#- Pieces the People page and the Profile pages share. #}
+
+{#- A person's picture: their photo, or an avatar of their initials.
+    `sizes` is how wide the picture is shown, so the browser fetches the right
+    file. `alt` names a photo where no name is written beside it; elsewhere
+    the picture is decoration, and so is the initials avatar always. #}
+{%- macro avatar(person, sizes, alt="") -%}
+{%- if person.picture -%}
+<img class="avatar" src="{{ person.picture.src }}" srcset="{{ person.picture.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" width="{{ person.picture.size }}" height="{{ person.picture.size }}" loading="lazy">
+{%- else -%}
+<span class="avatar" aria-hidden="true">{{ person.initials }}</span>
+{%- endif -%}
+{%- endmacro -%}

@@ -18,6 +18,7 @@
   --on-dark-muted: #c9d0e6; /* secondary text on --navy: 11.7:1 */
   --line: #dde1ee;          /* hairlines (decorative) */
   --line-on-dark: rgb(255 255 255 / 0.16);
+  --shadow: rgb(11 21 51 / 0.12);  /* card shadow: --navy, faint */
 
   /* The focus indicator: --accent on light backgrounds; dark areas switch it to --teal. */
   --focus: var(--accent);
@@ -159,7 +160,7 @@ img { max-width: 100%; height: auto; }
 
 .site-menu a:hover { color: var(--accent); border-bottom-color: currentColor; }
 
-.site-menu a[aria-current="page"] {
+.site-menu a[aria-current] {
   color: var(--accent);
   font-weight: 600;
   border-bottom-color: var(--accent);
@@ -218,7 +219,7 @@ img { max-width: 100%; height: auto; }
 
   .site-menu a { padding-block: 0.75rem; }
 
-  .site-menu a[aria-current="page"] { border-bottom-color: transparent; }
+  .site-menu a[aria-current] { border-bottom-color: transparent; }
 }
 
 /* Footer */
@@ -267,6 +268,203 @@ img { max-width: 100%; height: auto; }
   padding-block: 1.25rem;
   border-top: 1px solid var(--line-on-dark);
   font-size: 0.875rem;
+}
+
+/* People: role groups of cards, then the Alumni rows */
+
+.people-group + .people-group { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+.people-group h2 {
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--teal);
+  font-size: 1.5rem;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); /* two cards across on a phone */
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A person's picture: their initials on the navy, in a square that fills its place. */
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: var(--navy);
+  color: var(--teal);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* A photo fills the same square, cropped to it. */
+img.avatar { display: block; width: 100%; object-fit: cover; }
+
+.person-card {
+  position: relative; /* the name's link covers the whole card */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.person-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1.25rem var(--shadow);
+}
+
+.person-card__text { padding: 0.875rem 1rem 1rem; }
+
+.person-card__name {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.person-card__name a { color: var(--navy); text-decoration: none; }
+
+.person-card:hover .person-card__name a { color: var(--accent); text-decoration: underline; }
+
+.person-card__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* The focus indicator goes around the whole card, as the link covers it. */
+.person-card__name a:focus-visible { outline: none; }
+
+.person-card__name a:focus-visible::after {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+.person-card__role {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.person-card__bio { margin: 0.75rem 0 0; }
+
+/* The Lab Director: one wide card, the picture beside the text. */
+.people-grid--lead { grid-template-columns: 1fr; }
+
+.people-grid--lead .person-card { flex-direction: row; align-items: stretch; }
+
+.people-grid--lead .avatar { flex: none; width: clamp(6.5rem, 26vw, 12rem); align-self: flex-start; }
+
+.people-grid--lead .person-card__text { align-self: center; padding: 1rem 1.25rem; }
+
+.people-grid--lead .person-card__name { font-size: 1.375rem; }
+
+/* Alumni: compact rows, a small round avatar beside the text */
+
+.alumni-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alumnus {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+
+.alumnus .avatar {
+  flex: none;
+  width: 3.25rem;
+  border-radius: 50%;
+  font-size: 1.0625rem;
+}
+
+.alumnus p { margin: 0; line-height: 1.4; }
+
+.alumnus__name { color: var(--navy); font-weight: 600; }
+
+.alumnus__was { color: var(--muted); font-size: 0.9375rem; }
+
+.alumnus__now { font-size: 0.9375rem; }
+
+/* Profile page: the picture beside the Member's details */
+
+.back-link { margin: 0 0 1.5rem; }
+
+.back-link a::before { content: "\2190\00a0"; } /* a left arrow */
+
+.profile { display: grid; gap: 1.5rem 2.5rem; }
+
+.profile__picture {
+  width: min(100%, 14rem);
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .profile { grid-template-columns: 14rem 1fr; align-items: start; }
+}
+
+.profile__body > :first-child { margin-top: 0; }
+
+.profile__body { max-width: 44rem; }
+
+.profile__role {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.profile__body h2 { margin: 2rem 0 0.75rem; font-size: 1.25rem; }
+
+.tag-list,
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  background: var(--paper-alt);
+  font-size: 0.9375rem;
+}
+
+.link-list { gap: 0.5rem 1.5rem; }
+
+.field-list { margin: 0; }
+
+.field-list div { display: flex; flex-wrap: wrap; gap: 0 0.75rem; padding-block: 0.25rem; }
+
+.field-list dt { min-width: 5.5rem; color: var(--muted); }
+
+.field-list dd { margin: 0; }
+
+/* On a phone a long address would wrap under its label while short values
+   stayed beside theirs; every value goes under its label instead. */
+@media (max-width: 29.99rem) {
+  .field-list div { display: block; padding-block: 0.375rem; }
 }
 
 /* Motion: none at all when the visitor's system asks for reduced motion. */

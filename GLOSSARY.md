@@ -37,8 +37,16 @@ _Avoid_: contact email, the Gmail
 ### People
 
 **Member**:
-A person currently in the Lab: the PI, research staff, or a current graduate student.
+A person currently in the Lab: the PI, research staff, or a current graduate student. Each holds one role: Lab Director (the PI), Postdoctoral Researcher, PhD Student, MSc Student or Research Staff.
 _Avoid_: staff, team member, researcher
+
+**Role**:
+A Member's position in the Lab. The People page shows one **role group** per role, in a fixed order; an Alumnus keeps the role they held as their **former role**.
+_Avoid_: position, title, rank
+
+**Initials avatar**:
+The picture shown for a Member or Alumnus with no photo: the first letters of their first and last names.
+_Avoid_: monogram, placeholder photo
 
 **Alumnus** (plural **Alumni**):
 A former Member.

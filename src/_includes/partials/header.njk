@@ -11,7 +11,12 @@
     <nav class="site-menu" id="site-menu" aria-label="Main">
       <ul>
         {%- for item in menu %}
-        <li><a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {#- A page under a menu item's own (a Profile, under People) marks that
+            item as the section the visitor is in, not as the current page. #}
+        <li><a href="{{ item.url }}"
+          {%- if item.url == page.url %} aria-current="page"
+          {%- elif page.url and page.url.startsWith(item.url) %} aria-current="true"
+          {%- endif %}>{{ item.label }}</a></li>
         {%- endfor %}
       </ul>
     </nav>
