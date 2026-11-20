@@ -17,7 +17,7 @@ Start the server in the background and wait until `http://localhost:8383/` answe
 node tests/support/build-and-serve.js 8383 tests/content .qa-site
 ```
 
-It builds the **test content set**, which holds the edge-case content and is the content the slice tests assert against, so a finding converts straight into a slice test.
+It builds the **test content set**, which gains the edge-case content as each slice lands and is the content the slice tests assert against, so a finding converts straight into a slice test.
 
 Done when: `curl -sI http://localhost:8383/` returns `200`, and `npx --no-install playwright-cli -s=check open --browser=chromium http://localhost:8383/` opens the page (then close it). If the browser is reported missing, run the install command the error names, once.
 
@@ -25,7 +25,7 @@ Done when: `curl -sI http://localhost:8383/` returns `200`, and `npx --no-instal
 
 Read [`happy-path.md`](happy-path.md), [`adversarial.md`](adversarial.md) and [`REPORT.md`](REPORT.md). Spawn two general-purpose subagents in one message, so they run in parallel. Each prompt is that visitor's file followed by `REPORT.md`, both verbatim, plus one line naming the pages and behaviour this ticket changed, to explore first.
 
-Done when: both visitors have returned a report that lists every journey or attack in their file as walked, with its findings or "no findings".
+Done when: both visitors have returned a report that lists every journey or attack in their file as walked, with its findings or "no findings", or as blocked with what is missing.
 
 ## 3. Reproduce every finding
 

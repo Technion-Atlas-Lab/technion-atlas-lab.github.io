@@ -13,7 +13,7 @@ Commit on a branch and open a pull request, even when a skill says to commit to 
 ## Skill protocol
 
 1. Use the skill that matches the task (`.claude/skills/`, or one from the plugin).
-2. With no matching skill, ask the Maintainer only the judgment calls, in one round, then do the work.
+2. With no matching skill, ask the Maintainer only the judgement calls, in one round, then do the work.
 3. Afterwards, offer in one line to save the workflow as a skill in `.claude/skills/`; write it only when the Maintainer agrees.
 
 ## Before you finish any change
