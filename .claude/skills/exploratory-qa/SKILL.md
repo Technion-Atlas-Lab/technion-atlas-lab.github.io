@@ -24,7 +24,6 @@ Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command
 Spawn two general-purpose subagents in one message, so they run in parallel: the happy-path visitor ([`happy-path.md`](happy-path.md)) and the adversarial visitor ([`adversarial.md`](adversarial.md)). Each visitor reads its own instructions, so its prompt holds three things:
 
 - "Read `.claude/skills/exploratory-qa/<that visitor's file>` and then `.claude/skills/exploratory-qa/visitor-brief.md`, in full, and do what they say. Your reply is the report the brief describes.";
-
 - one line naming the pages and behaviour this ticket changed, to explore first;
 - the open issues, as `gh issue list --state open --json number,title --jq '.[] | "#\(.number) \(.title)"'` prints them, under the words "Already known: when you see one of these, name its number in one line and move on."
 
