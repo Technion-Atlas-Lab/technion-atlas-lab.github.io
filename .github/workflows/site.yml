@@ -1,11 +1,11 @@
-# Every pull request: validate, build, check links, run the slice tests and
+# Every pull request: validate, lint, build, check links, run the slice tests and
 # the site-wide checks, and save screenshots of every page for review.
 # Every push to main: the same, then publish _site/ to GitHub Pages.
 # If any check fails, nothing is published.
 #
-# main only accepts pull requests whose two jobs below pass ("Validate, build,
-# check links and test" and "Site-wide checks"). Renaming a job means updating
-# the branch protection rule on main to match.
+# main only accepts pull requests whose two jobs below pass: "Validate, build,
+# check links and test" (which also lints) and "Site-wide checks". Renaming a
+# job means updating the branch protection rule on main to match.
 name: Site
 
 on:
@@ -35,6 +35,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate
+      - run: npm run lint
       - run: npm run build
       - run: npm run linkcheck
       - run: npx playwright install --with-deps chromium

@@ -6,6 +6,7 @@ const PRIVATE_FILES = [
   'CLAUDE.md',
   'README.md',
   'GLOSSARY.md',
+  'CODING_STANDARDS.md',
   'docs/adr/0001-static-site-on-github-pages.md',
   '.claude/settings.json',
   'package.json',
