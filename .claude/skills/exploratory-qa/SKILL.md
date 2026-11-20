@@ -5,41 +5,41 @@ description: Two visitor subagents, happy-path and adversarial, explore the loca
 
 # Exploratory QA
 
-Two **visitors** explore the site in parallel: a happy-path visitor walks real journeys, an adversarial visitor tries to break navigation and layout. You confirm what they find and turn it into tests or issues.
-
-**Local only.** The one host any browser in this skill opens is `http://localhost:8383`. External links are checked by reading their `href`. Each page is loaded a handful of times, at human pace.
+The ground rules in [`REPORT.md`](REPORT.md) bind you as well as the visitors.
 
 ## 1. Serve the build
 
-Start the server in the background and wait until `http://localhost:8383/` answers:
+Start the server in the background:
 
 ```bash
 node tests/support/build-and-serve.js 8383 tests/content .qa-site
 ```
 
-It builds the **test content set**, which gains the edge-case content as each slice lands and is the content the slice tests assert against, so a finding converts straight into a slice test.
+It builds the test content set, the content the slice tests assert against, so a finding converts straight into a slice test.
 
-Done when: `curl -sI http://localhost:8383/` returns `200`, and `npx --no-install playwright-cli -s=check open --browser=chromium http://localhost:8383/` opens the page (then close it). If the browser is reported missing, run the install command the error names, once.
+Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command in `REPORT.md` opens the page in a session named `check` (then close it). If the browser is reported missing, run the install command the error names, once.
 
 ## 2. Send both visitors
 
-Read [`happy-path.md`](happy-path.md), [`adversarial.md`](adversarial.md) and [`REPORT.md`](REPORT.md). Spawn two general-purpose subagents in one message, so they run in parallel. Each prompt is that visitor's file followed by `REPORT.md`, both verbatim, plus one line naming the pages and behaviour this ticket changed, to explore first.
+Read [`happy-path.md`](happy-path.md), [`adversarial.md`](adversarial.md) and `REPORT.md`. Spawn two general-purpose subagents in one message, so they run in parallel. Each prompt is that visitor's file followed by `REPORT.md`, both verbatim, plus one line naming the pages and behaviour this ticket changed, to explore first.
 
 Done when: both visitors have returned a report that lists every journey or attack in their file as walked, with its findings or "no findings", or as blocked with what is missing.
 
 ## 3. Reproduce every finding
 
-Repeat each finding's steps yourself with the `playwright-cli` skill (`open --browser=chromium`) against the same server, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise drop it, and say so in your summary.
+Repeat each finding's steps yourself against the same server, in a session named `main`, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise drop it, and say so in your summary.
 
 Done when: every finding is marked confirmed or dropped.
 
 ## 4. Handle every confirmed finding
 
-- **In the ticket's scope** (caused by, or in the pages and behaviour of, the change under review): write a failing slice test for it, see it fail, then fix it. `CODING_STANDARDS.md` says what a good test asserts.
+- **In the ticket's scope** (caused by, or in the pages and behaviour of, the change under review): write a failing slice test for it, see it fail, then fix it.
 - **Everything else**: file an issue labelled `needs-triage` holding the finding's severity, URL, viewport and steps, with the screenshot described in words (`docs/agents/issue-tracker.md`). Search the open issues first, and comment on an existing one instead of filing a duplicate.
 
 Done when: every confirmed finding has a test that now passes or an issue number.
 
 ## 5. Close down
 
-Stop the server, close the sessions (`playwright-cli -s=happy close`, `-s=adversarial`, `-s=nojs`), and tell the Maintainer: findings confirmed, fixed, filed (with issue numbers) and dropped.
+Stop the server, close every session, and tell the Maintainer which findings were confirmed, fixed, filed (with issue numbers) and dropped.
+
+Done when: `curl -sI http://localhost:8383/` fails to connect, `npx --no-install playwright-cli list` shows no open browser, and the Maintainer has the summary.

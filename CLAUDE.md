@@ -12,31 +12,23 @@ Commit on a branch and open a pull request, even when a skill says to commit to 
 
 ## Skill protocol
 
-1. Use the skill that matches the task (`.claude/skills/`, or one from the plugin).
+1. Look for a matching skill first (`.claude/skills/`, then the plugin's). A skill is the Maintainer's settled way to do that task: follow it.
 2. With no matching skill, ask the Maintainer only the judgement calls, in one round, then do the work.
 3. Afterwards, offer in one line to save the workflow as a skill in `.claude/skills/`; write it only when the Maintainer agrees.
 
 ## Before you finish any change
 
-Every change that adds or alters a page slice goes red → green → refactor: a failing test first, the slice built until it passes, then cleanup with all tests green. A change is finished when each of these has passed, in order:
+A change is finished when each of these has passed, in order:
 
-1. `npm run validate`
-2. `npm run lint`
-3. `npm run build`
-4. `npm run linkcheck`
-5. `npm test`
-6. `npm run test:site`
-7. Each changed page inspected with the `playwright-cli` skill at 390, 768 and 1280 px.
-8. For a ticket that changes templates, styles or behaviour: the `exploratory-qa` skill run, and every finding handled as it says.
+1. The `package.json` scripts `validate`, `lint`, `build`, `linkcheck`, `test`, `test:site`.
+2. Each changed page inspected with the `playwright-cli` skill at 390, 768 and 1280 px.
+3. For a ticket that changes templates, styles or behaviour: the `exploratory-qa` skill run, and every finding handled as it says.
+
+A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
 
 ## Rules
 
-- **No third-party requests.** Every file a page loads (fonts, scripts, images, styles) is served from the site itself; videos and maps are plain links.
-- **Consent.** Add a Profile field only when the Maintainer states that the person gave Consent for it. The repository is public and its history is permanent.
-- **Photos** are committed stripped of all embedded metadata, including location.
-- **GLOSSARY terms.** Names, messages, docs and page text use the terms in `GLOSSARY.md`; a new domain term goes into it in the same change.
-
-`CODING_STANDARDS.md` holds the rules a reviewer applies, with their reasons.
+`CODING_STANDARDS.md` is the one home of the rules, with their reasons; read it before the first edit of a session. Four of them decide what may enter the repository at all: no third-party requests, Consent, photo metadata, GLOSSARY terms.
 
 ## Research
 

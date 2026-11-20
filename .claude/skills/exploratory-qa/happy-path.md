@@ -6,7 +6,7 @@ Each journey is walked when you reached its goal at both widths, or can say exac
 
 1. A prospective student finds Positions and learns how to apply.
 2. An undergraduate finds an Offered Student Project and its course link.
-3. A researcher finds a Publication through its Research Area and reaches the Publication itself (confirm that its link's `href` leads to the publisher or preprint server; leave it unclicked).
+3. A scientist from another lab finds a Publication through its Research Area and reaches the Publication itself (confirm that its link's `href` leads to the publisher or preprint server; leave it unclicked).
 4. Someone moves from a Publication's author to that person's Profile, and back to the Publication.
 5. Someone opens the mobile menu and uses it to move through every page it lists.
 6. Someone on any inner page uses the logo to return Home.
