@@ -26,6 +26,10 @@ _Avoid_: paper, research item, research
 A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**.
 _Avoid_: project (alone), course project
 
+**News item**:
+A dated announcement on the News page, such as a talk, a visit or an accepted Publication.
+_Avoid_: post, article, update
+
 **Lab mailbox**:
 The Lab's shared email account, held by the PI and the Maintainer and passed on to each successor.
 _Avoid_: contact email, the Gmail
@@ -65,6 +69,14 @@ _Avoid_: config, site config
 **Test content set**:
 Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.
 _Avoid_: fixtures, test data
+
+**Slice**:
+One page or feature of the site built end to end in a single ticket: its content, templates, styles and tests.
+_Avoid_: feature, module, component
+
+**Visitor**:
+A person browsing the site. In exploratory QA, also each of the two agents that plays one: the happy-path visitor and the adversarial visitor.
+_Avoid_: user, QA agent
 
 ### Lifecycle
 

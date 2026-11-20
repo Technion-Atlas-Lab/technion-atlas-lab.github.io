@@ -10,6 +10,26 @@ The next Maintainer inherits this repo's agent workflow through git, so the work
 
 Commit on a branch and open a pull request, even when a skill says to commit to the current branch. `main` accepts only pull requests whose two checks pass, "Validate, build, check links and test" and "Site-wide checks", with no reviewer; the rule binds admins too.
 
+## Skill protocol
+
+1. Look for a matching skill first (`.claude/skills/`, then the plugin's). A skill is the Maintainer's settled way to do that task: follow it.
+2. With no matching skill, ask the Maintainer only the judgement calls, in one round, then do the work.
+3. Afterwards, offer in one line to save the workflow as a skill in `.claude/skills/`; write it only when the Maintainer agrees.
+
+## Before you finish any change
+
+A change is finished when each of these has passed, in order:
+
+1. The `package.json` scripts `validate`, `lint`, `build`, `linkcheck`, `test`, `test:site`.
+2. Each changed page inspected with the `playwright-cli` skill at 390, 768 and 1280 px.
+3. For a ticket that changes templates, styles or behaviour: the `exploratory-qa` skill run, and every finding handled as it says.
+
+A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
+
+## Rules
+
+`CODING_STANDARDS.md` is the one home of the rules, with their reasons; read it before the first edit of a session. Four of them decide what may enter the repository at all: no third-party requests, Consent, photo metadata, GLOSSARY terms.
+
 ## Research
 
 Before work on accessibility, privacy, security or Technion requirements, or when porting a feature from another lab's site, read the matching note in `docs/research/`: `compliance-research.md` (Israeli law and Technion rules, with sources), `tdk-inventory.md` and `adesnik-inventory.md` (the two reference sites), `agent-tooling-survey.md` (other labs' agent setups and publication APIs), `lab-website-report.md` (the wider list of reference lab sites).
