@@ -21,7 +21,7 @@ Commit on a branch and open a pull request, even when a skill says to commit to 
 A change is finished when each of these has passed, in order:
 
 1. The `package.json` scripts `validate`, `lint`, `build`, `linkcheck`, `test`, `test:site`.
-2. Each changed page inspected with the `playwright-cli` skill at 390, 768 and 1280 px.
+2. Each changed page's screenshots read at 390, 768 and 1280 px (`npm run shots -- /people/` saves them to `.shots/`). A change in behaviour (menu, focus, keyboard) is also walked in a browser with the `playwright-cli` skill.
 3. For a ticket that changes templates, styles or behaviour: the `exploratory-qa` skill run, and every finding handled as it says.
 
 A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
