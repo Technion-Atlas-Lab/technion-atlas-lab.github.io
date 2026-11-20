@@ -76,9 +76,9 @@ test.describe('the chooser', () => {
     expect(link.about).toContain('atlaslab.at.technion@gmail.com');
   });
 
-  test('links to a web page, because GitHub drops a contact link that is not one', () => {
+  test('opens the site\'s Privacy page, because GitHub drops a contact link that is not a web page', () => {
     // A mailto: address makes GitHub leave the link out of the chooser without
     // saying so, and the request would then have nowhere to go but a public issue.
-    expect(chooser.contact_links[0].url).toMatch(/^https:\/\//);
+    expect(chooser.contact_links[0].url).toBe('https://technion-atlas-lab.github.io/privacy/');
   });
 });

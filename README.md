@@ -13,7 +13,7 @@ the same checks and publishes; if any check fails, nothing is published.
 | To change | Edit |
 |---|---|
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
-| The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The three files in `.github/ISSUE_TEMPLATE/`, which repeat both: GitHub cannot read `content/site.yaml` |
+| The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
