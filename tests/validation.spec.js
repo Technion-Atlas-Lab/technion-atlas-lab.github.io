@@ -74,3 +74,79 @@ test('the failure names an Alumnus file and a year that is not a year', () => {
 test('the failure names a Member file and a photo that is not there', () => {
   expect(build.output).toMatch(new RegExp(`${namesMemberField('photo').source}.*no-such-photo\\.jpg`));
 });
+
+const namesAreaField = namesFieldIn('research-areas/bad-area.md');
+const namesPublicationField = namesFieldIn('publications/bad-publication.md');
+const namesAuthorsField = namesFieldIn('publications/bad-authors.md');
+
+test('the failure names a Research Area file and its missing order', () => {
+  expect(build.output).toMatch(namesAreaField('order'));
+});
+
+test('the failure names a Research Area file and an unknown field', () => {
+  expect(build.output).toMatch(namesAreaField('colour'));
+});
+
+test('the failure names a Research Area file with no description', () => {
+  expect(build.output).toMatch(namesAreaField('description'));
+});
+
+test('the failure names a Research Area file whose name is an anchor every page already uses', () => {
+  expect(build.output).toMatch(/tests\/content-broken\/research-areas\/main\.md\b.*\bfile name\b/);
+});
+
+test('the failure names a Publication file and its missing venue', () => {
+  expect(build.output).toMatch(namesPublicationField('venue'));
+});
+
+test('the failure names a Publication file and a Research Area that does not exist', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('research_area').source}.*\\bno-such-area\\b`));
+});
+
+test('the failure names a Publication file and an author who is not a Member or an Alumnus', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('authors').source}.*\\bno-such-member\\b`));
+});
+
+test('the failure names a Publication file and an author who is neither a name nor a reference', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('authors').source}.*\\bauthor 3\\b`));
+});
+
+test('the failure names a Publication file and a status that is not one, and lists the statuses', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('status').source}.*\\bpreprint\\b`));
+});
+
+test('the failure names a Publication file and a year that is not a year', () => {
+  expect(build.output).toMatch(namesPublicationField('year'));
+});
+
+test('the failure names a Publication file and a DOI that is a web address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('doi').source}.*\\b10\\.`));
+});
+
+test('the failure names a Publication file with both a DOI and a paper link', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('paper').source}.*\\bdoi\\b`));
+});
+
+test('the failure names a Publication file and a link that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('code').source}.*\\bhttps\\b`));
+});
+
+test('the failure names a Publication file and a figure with no alt text', () => {
+  expect(build.output).toMatch(namesPublicationField('figure_alt'));
+});
+
+test('the failure names a Publication file and a featured flag that is not true or false', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPublicationField('featured').source}.*\\btrue\\b`));
+});
+
+test('the failure names a Publication file and an unknown field', () => {
+  expect(build.output).toMatch(namesPublicationField('pages'));
+});
+
+test('the failure names a Publication file whose authors are not a list', () => {
+  expect(build.output).toMatch(new RegExp(`${namesAuthorsField('authors').source}.*\\blist\\b`));
+});
+
+test('the failure names a Publication file and alt text for a figure that is not there', () => {
+  expect(build.output).toMatch(new RegExp(`${namesAuthorsField('figure_alt').source}.*\\bfigure\\b`));
+});

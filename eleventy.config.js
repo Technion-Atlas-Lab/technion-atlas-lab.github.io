@@ -12,8 +12,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/assets');
 
   // Every build validates first; invalid content never reaches _site/. Then
-  // it writes the Members' photos, resized and stripped of metadata; content/
-  // is not template input, so a photo as committed is never published.
+  // it writes the photos and figures, resized and stripped of metadata; content/
+  // is not template input, so a picture as committed is never published.
   eleventyConfig.on('eleventy.before', async ({ directories }) => {
     const errors = validateContent();
     if (errors.length) {

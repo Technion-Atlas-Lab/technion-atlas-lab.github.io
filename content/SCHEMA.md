@@ -21,6 +21,8 @@ npm run validate
 4. **One item, one file.** A type kept in a folder has one Markdown file per item, named in
    lowercase letters, digits and hyphens (`member-name.md`). The file opens with its fields as
    YAML between two `---` lines; a type may use the plain text under them.
+5. **Quote a value that contains a colon and a space**, as many titles do:
+   `title: "Agents at Work: A Survey"`. Unquoted, YAML reads the colon as the start of another field.
 
 ## Types
 
@@ -28,6 +30,8 @@ npm run validate
 |---|---|
 | Site settings | `site.yaml` |
 | Member or Alumnus | `members/<name>.md` |
+| Research Area | `research-areas/<name>.md` |
+| Publication | `publications/<name>.md` |
 
 ---
 
@@ -110,4 +114,84 @@ former_role: MSc Student
 year: 2024
 current_position: Research Engineer at Example Corp
 ---
+```
+
+---
+
+## `research-areas/<name>.md`: a Research Area
+
+One file per Research Area. The Research page shows one section per area. The file name is the
+address of that section: `research-areas/agent-security.md` is shown at
+`/research/#agent-security`. Other pages link to that address, so rename a file only when the
+area itself changes. The names `main` and `site-menu` are taken: every page already uses them.
+
+| Field | Required | What it is |
+|---|---|---|
+| `title` | yes | The area's name, shown as its heading. |
+| `order` | yes | A whole number: the area's place on the Research page, lowest first. Equal numbers fall back to title order. |
+
+The text under the front matter is the **description**, and is required: two or three sentences
+of plain text. An area with no Publications still shows its heading and description.
+
+```markdown
+---
+title: AI Agent Security
+order: 1
+---
+How AI agents are attacked, and how to contain them. The Lab studies both sides.
+```
+
+---
+
+## `publications/<name>.md`: a Publication
+
+One file per Publication. Its card appears on the Research page under its Research Area, newest
+first (Publications of one year are in title order), and on the Profile of each author who is a
+Member.
+
+| Field | Required | What it is |
+|---|---|---|
+| `title` | yes | The Publication's title. |
+| `authors` | yes | A YAML list, in the paper's order. A Member or an Alumnus is written as `member:` and their file name in `members/`, without `.md`; the card shows their name as their file has it, linked to the Profile for a Member and unlinked for an Alumnus. Anyone else (a Collaborator) is written as a name. |
+| `venue` | yes | Where it appeared: the conference, journal or preprint server. |
+| `year` | yes | The year it appeared: `2024`. |
+| `research_area` | yes | The file name of exactly one Research Area in `research-areas/`, without `.md`. |
+| `status` | yes | `published` or `preprint`. A Preprint's card carries a "Preprint" badge. |
+| `doi` | no | The DOI alone: `10.1234/example`. The card's "Paper" link leads to it. |
+| `paper` | no | A link to the paper's page, for a Publication with no DOI. Not together with `doi`. |
+| `pdf` | no | A link to the PDF. |
+| `arxiv` | no | A link to the arXiv page. |
+| `code` | no | A link to the code. |
+| `video` | no | A link to a video. A plain link: the site embeds nothing. |
+| `figure` | no | The file name of a figure kept beside this file: `publication-name.png` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, in its own shape and with all embedded metadata removed, never as committed. |
+| `figure_alt` | with `figure`, yes | What the figure shows, for a visitor who cannot see it. |
+| `featured` | no | `true` to show the Publication on Home. |
+
+Every link is a web address starting with `https://`.
+
+The text under the front matter is the optional **summary**: plain language, plain text, with a
+blank line between paragraphs.
+
+Removing a Member's or a Research Area's file while a Publication still names it stops the build,
+which names the Publication. To keep a departing Member's Publications, make them an Alumnus.
+
+```markdown
+---
+title: "Sandbox Escapes in Tool-Using Agents: A Study"
+authors:
+  - member: member-name
+  - member: alumnus-name
+  - Collaborator Name
+venue: Example Security Symposium
+year: 2024
+research_area: agent-security
+status: published
+doi: 10.1234/example
+pdf: https://example.org/paper.pdf
+code: https://example.org/code
+figure: sandbox-escapes.png
+figure_alt: Diagram of an agent leaving its sandbox through a tool call.
+featured: true
+---
+We show how an agent that may call tools can leave its sandbox, and how to stop it.
 ```

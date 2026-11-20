@@ -13,6 +13,7 @@ eleventyComputed:
   description: "{{ member.name | safe }}, {{ member.role | safe }} at {{ site.name | safe }}."
 ---
 {%- from "partials/person.njk" import avatar -%}
+{%- from "partials/publication.njk" import publicationCard -%}
 {#- One Profile page per current Member (Alumni have none). A field the Member
     did not share leaves nothing behind: no heading, no label. #}
 {%- set links = [
@@ -22,6 +23,7 @@ eleventyComputed:
   { label: "LinkedIn", url: member.linkedin },
   { label: "Personal site", url: member.website }
 ] | selectattr("url") | list -%}
+{%- set publications = research.byMember[member.slug] -%}
 <div class="page wrap">
   <p class="back-link"><a href="/people/">All people</a></p>
   <div class="profile">
@@ -70,4 +72,12 @@ eleventyComputed:
       {%- endif %}
     </div>
   </div>
+  {%- if publications.length %}
+  <section class="profile-publications" aria-labelledby="publications">
+    <h2 id="publications">Publications</h2>
+    {%- for publication in publications %}
+    {{ publicationCard(publication, member.slug) }}
+    {%- endfor %}
+  </section>
+  {%- endif %}
 </div>

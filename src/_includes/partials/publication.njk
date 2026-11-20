@@ -1,0 +1,41 @@
+{#- A Publication's card, shared by the Research page and the Profile pages. #}
+
+{#- `onProfile` is the slug of the Member whose Profile shows the card: there
+    the Member is named without a link to the page the visitor is already on,
+    and the card links to its Research Area, which Research shows as a heading. #}
+{%- macro publicationCard(publication, onProfile=null) -%}
+<article class="publication">
+  <div class="publication__text">
+    {%- if onProfile %}
+    <p class="publication__area"><a href="/research/#{{ publication.area.slug }}">{{ publication.area.title }}</a></p>
+    {%- endif %}
+    <h3 class="publication__title">{{ publication.title }}</h3>
+    <p class="publication__authors">
+      {%- for author in publication.authors -%}
+      {%- if author.profile and author.profile != onProfile -%}
+      <a href="/people/{{ author.profile }}/">{{ author.name }}</a>
+      {%- else -%}
+      {{ author.name }}
+      {%- endif -%}
+      {%- if not loop.last %}, {% endif -%}
+      {%- endfor -%}
+    </p>
+    <p class="publication__venue"><span>{{ publication.venue }}, {{ publication.year }}</span>
+      {%- if publication.preprint %} <span class="badge">Preprint</span>{% endif %}</p>
+    {%- for paragraph in publication.summary %}
+    <p class="publication__summary">{{ paragraph }}</p>
+    {%- endfor %}
+    {%- if publication.links.length %}
+    <ul class="link-list">
+      {%- for link in publication.links %}
+      {#- Named with the title, so a screen reader's list of links tells one "Paper" from the next. #}
+      <li><a href="{{ link.url }}" aria-label="{{ link.label }}: {{ publication.title }}">{{ link.label }}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+  {%- if publication.figure %}
+  <img class="publication__figure" src="{{ publication.figure.src }}" srcset="{{ publication.figure.srcset }}" sizes="(max-width: 60rem) 100vw, 18rem" alt="{{ publication.figure.alt }}" width="{{ publication.figure.width }}" height="{{ publication.figure.height }}" loading="lazy">
+  {%- endif %}
+</article>
+{%- endmacro -%}

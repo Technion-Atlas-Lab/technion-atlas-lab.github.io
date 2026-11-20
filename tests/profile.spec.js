@@ -137,3 +137,55 @@ test.describe('on a narrow phone', () => {
     }
   });
 });
+
+// The Member's Publications, from tests/content/publications/.
+const publications = (page) => page.getByRole('region', { name: 'Publications', exact: true });
+
+test('a Profile lists that Member\'s Publications, newest first', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  await expect(publications(page).getByRole('heading', { level: 3 }))
+    .toHaveText(['A Survey of Prompt Injection & Its Defences', 'Sandbox Escapes in Tool-Using Agents']);
+  // Across Research Areas: 2024, then two from 2023 by title, then 2022.
+  await page.goto('/people/test-director/');
+  await expect(publications(page).getByRole('heading', { level: 3 })).toHaveText([
+    'Sandbox Escapes in Tool-Using Agents',
+    'Auditing Side Channels',
+    'Zero-Trust Attestation for Enclaves',
+    'Early Work on Agent Isolation',
+  ]);
+});
+
+test('a Publication on a Profile shows what its card on Research shows', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  const survey = publications(page).getByRole('article').filter({ hasText: 'A Survey of Prompt Injection' });
+  await expect(survey.getByText('Example Preprint Server, 2025', { exact: true })).toBeVisible();
+  await expect(survey.getByText('Preprint', { exact: true })).toBeVisible();
+  await expect(survey.getByRole('link', { name: 'arXiv: A Survey of Prompt Injection & Its Defences' }))
+    .toHaveAttribute('href', 'https://arxiv.example.org/abs/2501.00002');
+  // The Profile's own Member is named without a link to the page the visitor is on.
+  const authors = survey.getByRole('paragraph').filter({ hasText: 'Full Member' });
+  await expect(authors).toHaveText("Dr. Zoë O'Neil & Co, Full Member");
+  await expect(authors.getByRole('link')).toHaveText(["Dr. Zoë O'Neil & Co"]);
+});
+
+test('a Publication on a Profile leads to its Research Area on Research', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 600 });
+  await page.goto('/people/test-director/');
+  const audit = publications(page).getByRole('article').filter({ hasText: 'Auditing Side Channels' });
+  await audit.getByRole('link', { name: 'Trusted Hardware' }).click();
+  await expect(page).toHaveURL('/research/#trusted-hardware');
+  await expect(page.getByRole('heading', { name: 'Trusted Hardware', level: 2 })).toBeInViewport();
+});
+
+test('a Profile of a Member with no Publications has no Publications section', async ({ page }) => {
+  await page.goto('/people/bare-member/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Bare Member');
+  await expect(page.getByRole('main').getByText('Publications')).toHaveCount(0);
+});
+
+test('at phone width a Profile with Publications does not scroll sideways', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/people/full-member/');
+  await expect(publications(page).getByRole('article')).toHaveCount(2);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
