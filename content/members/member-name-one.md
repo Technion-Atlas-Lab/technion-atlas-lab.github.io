@@ -3,6 +3,8 @@
 name: Member Name One
 role: Postdoctoral Researcher
 order: 1
+# A drawn placeholder, not a photo of anyone.
+photo: placeholder-photo.jpg
 email: member.name.one@example.org
 phone: +972 4 000 0000
 orcid: 0000-0000-0000-0000

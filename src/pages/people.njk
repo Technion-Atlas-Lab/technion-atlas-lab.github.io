@@ -14,7 +14,7 @@ layout: layouts/page.njk
     <ul class="people-grid{% if group.lead %} people-grid--lead{% endif %}">
       {%- for member in group.members %}
       <li class="person-card">
-        {{ avatar(member) }}
+        {{ avatar(member, "12rem") }}
         <div class="person-card__text">
           {#- The link's ::after covers the whole card, so all of it opens the Profile. #}
           <h3 class="person-card__name"><a href="/people/{{ member.slug }}/">{{ member.name }}</a></h3>
@@ -35,7 +35,7 @@ layout: layouts/page.njk
     <ul class="alumni-list">
       {%- for alumnus in people.alumni %}
       <li class="alumnus">
-        {{ avatar(alumnus) }}
+        {{ avatar(alumnus, "3.25rem") }}
         <div>
           <p class="alumnus__name">{{ alumnus.name }}</p>
           <p class="alumnus__was">{{ alumnus.former_role }}, {{ alumnus.year }}</p>

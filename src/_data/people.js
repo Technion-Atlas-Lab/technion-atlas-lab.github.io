@@ -1,6 +1,7 @@
 // The Lab's people, as the People page and the Profile pages show them.
 // Members and Alumni live in <content set>/members/; this loads and groups them.
 import { ALUMNUS_ROLE, MEMBER_ROLES, loadMembers } from '../../lib/content.js';
+import { photoSources } from '../../lib/photos.js';
 
 // The heading of each role group on the People page.
 const GROUP_TITLES = {
@@ -20,7 +21,12 @@ function initials(name) {
 }
 
 export default () => {
-  const everyone = loadMembers().map((member) => ({ ...member, initials: initials(member.name) }));
+  // Each person's picture is their photo as the build publishes it, or their initials.
+  const everyone = loadMembers().map(({ photoFile, ...member }) => ({
+    ...member,
+    initials: initials(member.name),
+    picture: photoFile ? photoSources(member.slug) : null,
+  }));
   const members = everyone.filter((member) => member.role !== ALUMNUS_ROLE);
   return {
     // Current Members: each gets a card and a Profile page.

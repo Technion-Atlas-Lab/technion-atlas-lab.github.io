@@ -14,6 +14,7 @@ the same checks and publishes; if any check fails, nothing is published.
 |---|---|
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it) |
+| A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |

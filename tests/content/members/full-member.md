@@ -1,10 +1,12 @@
 ---
-# A Member with every optional field.
+# A Member with every optional field. The photo carries camera, author and GPS
+# metadata on purpose: a test checks that the site serves it with none.
 name: Full Member
 role: PhD Student
 order: 2
 email: full.member@example.org
 phone: +972 4 000 0000
+photo: full-member.jpg
 orcid: 0000-0002-1825-0097
 research_interests:
   - Agent sandboxing

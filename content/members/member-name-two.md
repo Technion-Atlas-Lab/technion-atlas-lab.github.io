@@ -3,6 +3,8 @@
 name: Member Name Two
 role: PhD Student
 order: 1
+# A drawn placeholder, not a photo of anyone.
+photo: placeholder-photo.jpg
 email: member.name.two@example.org
 research_interests:
   - Placeholder interest one

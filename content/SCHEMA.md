@@ -69,6 +69,7 @@ Add a field only when the Maintainer states that the person gave Consent for it
 | `name` | yes | The person's name as shown. A title such as `Prof.` is left out of the initials avatar. |
 | `role` | yes | One of `Lab Director`, `Postdoctoral Researcher`, `PhD Student`, `MSc Student`, `Research Staff`, `Alumnus`. The People page groups Members by role, in this order. |
 | `order` | yes | A whole number: the person's place within their role group, lowest first. Equal numbers fall back to name order. |
+| `photo` | no | The file name of a photo kept beside this file: `member-name.jpg` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, cropped square and with all embedded metadata removed, never as committed. Without one, the person gets an avatar of their initials. |
 | `email` | no | An email address. |
 | `phone` | no | A phone number in international form: `+972 4 000 0000`. Personal or office, as the Member chose. |
 | `orcid` | no | The ORCID iD alone: `0000-0002-1825-0097`. |
@@ -80,14 +81,15 @@ Add a field only when the Maintainer states that the person gave Consent for it
 
 The text under the front matter is the **bio**: plain text, with a blank line between paragraphs.
 
-An Alumnus may keep the fields they had as a Member; the Alumni row shows only the name, former
-role, year and current position.
+An Alumnus may keep the fields they had as a Member; the Alumni row shows only the photo or
+initials avatar, name, former role, year and current position.
 
 ```markdown
 ---
 name: Member Name
 role: PhD Student
 order: 2
+photo: member-name.jpg
 email: member.name@example.org
 research_interests:
   - Agent sandboxing

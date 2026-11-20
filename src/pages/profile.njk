@@ -24,7 +24,7 @@ eleventyComputed:
 <div class="page wrap">
   <p class="back-link"><a href="/people/">All people</a></p>
   <div class="profile">
-    <div class="profile__picture">{{ avatar(member) }}</div>
+    <div class="profile__picture">{{ avatar(member, "14rem", "Portrait of " + member.name) }}</div>
     <div class="profile__body">
       <p class="profile__role">{{ member.role }}</p>
       {%- for paragraph in member.bio %}

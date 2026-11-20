@@ -70,3 +70,7 @@ test('the failure names an Alumnus file and its missing former role', () => {
 test('the failure names an Alumnus file and a year that is not a year', () => {
   expect(build.output).toMatch(namesAlumnusField('year'));
 });
+
+test('the failure names a Member file and a photo that is not there', () => {
+  expect(build.output).toMatch(new RegExp(`${namesMemberField('photo').source}.*no-such-photo\\.jpg`));
+});
