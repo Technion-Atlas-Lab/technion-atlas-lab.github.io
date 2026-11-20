@@ -150,3 +150,8 @@ test('the failure names a Publication file whose authors are not a list', () => 
 test('the failure names a Publication file and alt text for a figure that is not there', () => {
   expect(build.output).toMatch(new RegExp(`${namesAuthorsField('figure_alt').source}.*\\bfigure\\b`));
 });
+
+test('the failure names a file whose value holds a colon without quotes, and says to quote it', () => {
+  // YAML's own message ("bad indentation of a mapping entry") does not say what to do.
+  expect(build.output).toMatch(/tests\/content-broken\/publications\/bad-colon\.md\b.*\btitle\b.*\bquotes\b/);
+});

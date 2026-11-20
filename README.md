@@ -42,6 +42,7 @@ Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` on
 | `npm test` | Runs the slice tests in a real browser. Run `npx playwright install chromium` once first. |
 | `npm run test:site` | Runs the site-wide checks on every page of the real site. Run `npx playwright install chromium webkit` once first. |
 | `npx playwright-cli install-browser chrome-for-testing` | One-time install of the browser the agent's Playwright CLI opens (its own build, separate from the tests' browsers). `.playwright/cli.config.json` tells the CLI to use it. |
+| `npm run check` | Runs all six checks above in order (validate, lint, build, link check, slice tests, site-wide checks) and stops at the first that fails. Run it before opening a pull request. |
 | `npm run shots` | Saves screenshots of every page at 390, 768 and 1280 px to `.shots/`, for review. `npm run shots -- /about/` takes just the pages named. |
 
 The slice tests never read `content/`. They build the site from the **test content set** in

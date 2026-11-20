@@ -24,7 +24,7 @@ The rules a reviewer applies to every change. They are judgement calls: CI alrea
 - **Names, messages, docs and page text use the GLOSSARY terms** (Member, Profile, Publication, Research Area, Maintainer, test content set, ...). A new domain term goes into `GLOSSARY.md` in the same change.
 - **A lint rule is turned off only with a comment giving the reason**, in `eslint.config.js` or beside the `eslint-disable` line, so the next person can tell a deliberate exception from a silenced bug.
 - **A generated build goes under `.builds/`** (`.builds/test`, `.builds/qa`, ...), which git and the lint ignore as a whole; only the published site is built into `_site/`.
-- **Shared behaviour has one home; reuse it**: content loading and validation in `lib/content.js`, building in `lib/build.js`, resizing photos and figures and stripping their metadata in `lib/photos.js`, GitHub-Pages-style serving and path resolution in `lib/serve.js`.
+- **Shared behaviour has one home in `lib/`; reuse it**: each file there opens with a comment saying what it owns. Code that does the same job elsewhere (a template, a tool, a test helper) calls it instead.
 - **The validation rules live in two places that change together**: `SCHEMA` in `lib/content.js` and `content/SCHEMA.md`.
 - **Error messages name the file and the problem in plain English**, so the Maintainer can fix content without reading code (`content/site.yaml: missing required field "name"`).
 
