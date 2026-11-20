@@ -1,0 +1,25 @@
+# The "Suggest an idea" form on GitHub's "New issue" page, for a colleague who
+# wants something added to or changed on the Lab website. An idea gets the
+# labels below, so it lands in the Maintainer's triage. GitHub reads this file
+# from main only.
+name: Suggest an idea
+description: Something you would like added to or changed on the Lab website.
+labels: [enhancement, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the idea. Everything you write here is public.
+
+        To change or remove your personal information on the site, email the Lab mailbox (atlaslab.at.technion@gmail.com) instead of using this form.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What is your idea?
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why would it help?
+      description: Optional. Who it helps and what it makes easier.

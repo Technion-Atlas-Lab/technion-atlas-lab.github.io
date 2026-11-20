@@ -1,0 +1,40 @@
+# The "Report a problem" form on GitHub's "New issue" page, for a colleague who
+# found something broken on the Lab website. A report gets the labels below, so
+# it lands in the Maintainer's triage. GitHub reads this file from main only.
+name: Report a problem
+description: Something on the Lab website is broken, wrong or hard to use.
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting. Everything you write here is public.
+
+        To change or remove your personal information on the site, email the Lab mailbox (atlaslab.at.technion@gmail.com) instead of using this form.
+  - type: input
+    id: page
+    attributes:
+      label: Page link
+      description: The address of the page with the problem, copied from your browser.
+      placeholder: https://technion-atlas-lab.github.io/people/
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong?
+      description: What you saw, and what you expected to see.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      description: Optional. For example "iPhone 13, Safari" or "Windows laptop, Chrome".
+  - type: upload
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional. A picture of the problem often explains it fastest.
+    validations:
+      accept: ".png,.jpg,.jpeg,.gif,.webp"
