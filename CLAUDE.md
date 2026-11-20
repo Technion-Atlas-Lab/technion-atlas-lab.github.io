@@ -2,9 +2,13 @@
 
 The next Maintainer inherits this repo's agent workflow through git, so the workflow lives entirely in the repo:
 
-- Commit every agent-facing file in the same pull request as the change that needs it: `CLAUDE.md`, `GLOSSARY.md`, `docs/adr/`, `docs/agents/`, `docs/research/`, `.claude/skills/`, `.claude/settings.json`.
+- Commit every agent-facing file in the same pull request as the change that needs it: `CLAUDE.md`, `CODING_STANDARDS.md`, `GLOSSARY.md`, `docs/adr/`, `docs/agents/`, `docs/research/`, `.claude/skills/`, `.claude/settings.json`.
 - Declare every plugin the workflow relies on in `.claude/settings.json`; Claude Code offers to install it when someone trusts the folder.
 - Keep personal preferences in `.claude/settings.local.json` (git-ignored).
+
+## Branches
+
+Commit on a branch and open a pull request, even when a skill says to commit to the current branch. `main` accepts only pull requests whose two checks pass, "Validate, build, check links and test" and "Site-wide checks", with no reviewer; the rule binds admins too.
 
 ## Research
 

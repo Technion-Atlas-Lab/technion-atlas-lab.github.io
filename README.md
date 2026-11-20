@@ -56,6 +56,7 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 
 - `CLAUDE.md`: the agent's instructions for this repo.
 - `GLOSSARY.md`: the Lab's vocabulary (Member, Publication, Research Area, ...).
+- `CODING_STANDARDS.md`: the rules a reviewer (person or agent) applies to every change.
 - `docs/adr/`: why the big decisions were made.
 - `docs/agents/`: how agents use the issue tracker, triage labels and domain docs.
 - `docs/research/`: the research behind the site: Israeli accessibility and privacy law,
