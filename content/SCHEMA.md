@@ -152,20 +152,20 @@ Member.
 | Field | Required | What it is |
 |---|---|---|
 | `title` | yes | The Publication's title. |
-| `authors` | yes | A YAML list, in the paper's order. A Member or an Alumnus is written as `member:` and their file name in `members/`, without `.md`; the card shows their name as their file has it, linked to the Profile for a Member and unlinked for an Alumnus. Anyone else (a Collaborator) is written as a name. |
+| `authors` | yes | A YAML list, in the Publication's own order. A Member or an Alumnus is written as `member:` and their file name in `members/`, without `.md`; the card shows their name as their file has it, linked to the Profile for a Member and unlinked for an Alumnus. Anyone else (a Collaborator) is written as a name. |
 | `venue` | yes | Where it appeared: the conference, journal or preprint server. |
 | `year` | yes | The year it appeared: `2024`. |
 | `research_area` | yes | The file name of exactly one Research Area in `research-areas/`, without `.md`. |
 | `status` | yes | `published` or `preprint`. A Preprint's card carries a "Preprint" badge. |
 | `doi` | no | The DOI alone: `10.1234/example`. The card's "Paper" link leads to it. |
-| `paper` | no | A link to the paper's page, for a Publication with no DOI. Not together with `doi`. |
+| `paper` | no | A link to the Publication's own page, for one with no DOI. Not together with `doi`. |
 | `pdf` | no | A link to the PDF. |
 | `arxiv` | no | A link to the arXiv page. |
 | `code` | no | A link to the code. |
 | `video` | no | A link to a video. A plain link: the site embeds nothing. |
 | `figure` | no | The file name of a figure kept beside this file: `publication-name.png` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, in its own shape and with all embedded metadata removed, never as committed. |
 | `figure_alt` | with `figure`, yes | What the figure shows, for a visitor who cannot see it. |
-| `featured` | no | `true` to show the Publication on Home. |
+| `featured` | no | `true` marks a featured Publication, one of the few that Home is to highlight. Nothing shows it until Home's own slice is built. |
 
 Every link is a web address starting with `https://`.
 

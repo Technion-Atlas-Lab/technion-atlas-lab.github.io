@@ -90,7 +90,7 @@ test('a card links to the paper, PDF, arXiv, code and video it has, each named f
     await expect(links.nth(i)).toHaveAccessibleName(`${label}: Sandbox Escapes in Tool-Using Agents`);
   }
   expect(await links.evaluateAll((as) => as.map((a) => a.getAttribute('href')))).toEqual([
-    'https://doi.org/10.5555/example.2024.001',
+    'https://doi.org/10.5555/example.2024%23001%3Fa',
     'https://example.org/papers/sandbox-escapes.pdf',
     'https://arxiv.example.org/abs/2401.00001',
     'https://example.org/code/sandbox-escapes',
@@ -190,4 +190,13 @@ test('the figure as it was committed is not published', async ({ request }) => {
   for (const address of ['/publications/sandbox-escapes.jpg', '/research/sandbox-escapes.jpg', '/figures/sandbox-escapes.jpg', '/sandbox-escapes.jpg']) {
     expect((await request.get(address)).status(), address).toBe(404);
   }
+});
+
+test('a Research Area opened by its anchor has room above its heading', async ({ page }) => {
+  // Flush against the top edge of the window, the heading reads as cut off.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/research/#trusted-hardware');
+  const heading = page.getByRole('heading', { name: 'Trusted Hardware', level: 2 });
+  await expect(heading).toBeInViewport();
+  expect((await heading.boundingBox()).y).toBeGreaterThanOrEqual(16);
 });

@@ -479,6 +479,9 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   font-size: 1.5rem;
 }
 
+/* Opened by its address (/research/#area), a section keeps some room above its heading. */
+.research-area h2 { scroll-margin-top: 1.5rem; }
+
 .research-area__description { max-width: 44rem; margin: 0 0 1rem; }
 
 .profile-publications { margin-top: clamp(2.5rem, 6vw, 4rem); }

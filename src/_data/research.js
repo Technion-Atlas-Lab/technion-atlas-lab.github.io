@@ -4,10 +4,14 @@
 import { ALUMNUS_ROLE, PREPRINT_STATUS, loadMembers, loadPublications, loadResearchAreas } from '../../lib/content.js';
 import { figureSources } from '../../lib/photos.js';
 
+// A DOI as a web address. A DOI may hold characters such as # and ?, which
+// would cut the address short if left as written.
+const doiUrl = (doi) => `https://doi.org/${doi.split('/').map(encodeURIComponent).join('/')}`;
+
 // A card's links, in the order shown. A DOI and a paper link both lead to the
-// paper; validation allows only one of them.
+// Publication itself; validation allows only one of them.
 const links = (publication) => [
-  { label: 'Paper', url: publication.doi ? `https://doi.org/${encodeURI(publication.doi)}` : publication.paper },
+  { label: 'Paper', url: publication.doi ? doiUrl(publication.doi) : publication.paper },
   { label: 'PDF', url: publication.pdf },
   { label: 'arXiv', url: publication.arxiv },
   { label: 'Code', url: publication.code },

@@ -7,7 +7,7 @@ layout: layouts/page.njk
 {%- from "partials/publication.njk" import publicationCard -%}
 {#- One section per Research Area, in the areas' set order; under each, a card
     per Publication, newest first. An area's file name is its section's
-    address (/research/#file-name), which Home and the Profiles link to. #}
+    address (/research/#file-name), which the Profiles link to. #}
 <div class="page wrap">
   {%- for area in research.areas %}
   <section class="research-area" aria-labelledby="{{ area.slug }}">

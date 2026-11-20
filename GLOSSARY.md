@@ -22,6 +22,14 @@ _Avoid_: topic, track, project
 A paper by one or more Members, published in a journal or at a conference, or posted as a **Preprint** before publication.
 _Avoid_: paper, research item, research
 
+**Figure**:
+The one picture a Publication may show on its card, with alt text saying what it shows. Like a Member's photo, it is published resized and stripped of embedded metadata.
+_Avoid_: image, thumbnail, diagram
+
+**Featured Publication**:
+A Publication the Maintainer marked for Home to highlight.
+_Avoid_: highlighted, pinned, selected
+
 **Student Project**:
 A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**.
 _Avoid_: project (alone), course project
