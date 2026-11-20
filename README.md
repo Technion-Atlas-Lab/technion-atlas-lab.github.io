@@ -4,8 +4,8 @@ Source for the ATLAS Lab (Technion) website, published with GitHub Pages at
 https://technion-atlas-lab.github.io
 
 The site is built with [Eleventy 3](https://www.11ty.dev/) from the content in `content/`.
-Changes reach `main` only through a pull request whose checks pass: validation, the build, the link
-check, the slice tests and the site-wide checks. No reviewer is required. Every push to `main` runs
+Changes reach `main` only through a pull request whose checks pass: validation, the lint, the
+build, the link check, the slice tests and the site-wide checks. No reviewer is required. Every push to `main` runs
 the same checks and publishes; if any check fails, nothing is published.
 
 ## To change X, edit file Y
@@ -30,6 +30,7 @@ Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` on
 | `npm run serve` | Builds the site and serves it at http://localhost:8080, rebuilding on every change. |
 | `npm run build` | Validates the content and builds the site into `_site/`. |
 | `npm run validate` | Checks `content/` against `content/SCHEMA.md` without building. |
+| `npm run lint` | Checks the code for bugs (ESLint), such as an unused variable or a test assertion missing its `await`. Formatting is not checked. |
 | `npm run linkcheck` | Checks that every internal link and file reference in `_site/` leads somewhere. Run `npm run build` first. |
 | `npm test` | Runs the slice tests in a real browser. Run `npx playwright install chromium` once first. |
 | `npm run test:site` | Runs the site-wide checks on every page of the real site. Run `npx playwright install chromium webkit` once first. |

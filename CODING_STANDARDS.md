@@ -1,6 +1,6 @@
 # Coding standards
 
-The rules a reviewer applies to every change. They are judgement calls: CI already enforces what a machine can check (validation, build, link check, slice tests, site-wide checks). Each rule gives its reason, so a reviewer can tell when it bends. The full design is in spec #32 (`gh issue view 32`); the Lab's terms are in `GLOSSARY.md`.
+The rules a reviewer applies to every change. They are judgement calls: CI already enforces what a machine can check (validation, lint, build, link check, slice tests, site-wide checks). Each rule gives its reason, so a reviewer can tell when it bends. The full design is in spec #32 (`gh issue view 32`); the Lab's terms are in `GLOSSARY.md`.
 
 ## Tests
 
@@ -22,6 +22,7 @@ The rules a reviewer applies to every change. They are judgement calls: CI alrea
 
 - **Each file opens with a plain-English comment** saying what it is for and who uses it. Comments explain why (`Eleventy never deletes from its output folder, so ...`), not what the next line does.
 - **Names, messages and docs use the GLOSSARY terms** (Member, Profile, Publication, Research Area, Maintainer, test content set, ...). A new domain term goes into `GLOSSARY.md` in the same change.
+- **A lint rule is turned off only with a comment giving the reason**, in `eslint.config.js` or beside the `eslint-disable` line, so the next person can tell a deliberate exception from a silenced bug.
 - **Shared behaviour has one home; reuse it**: content loading and validation in `lib/content.js`, building in `lib/build.js`, GitHub-Pages-style serving and path resolution in `lib/serve.js`.
 - **The validation rules live in two places that change together**: `SCHEMA` in `lib/content.js` and `content/SCHEMA.md`.
 - **Error messages name the file and the problem in plain English**, so the Maintainer can fix content without reading code (`content/site.yaml: missing required field "name"`).

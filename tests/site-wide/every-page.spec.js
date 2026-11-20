@@ -51,6 +51,8 @@ for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
         window.__blockedByPolicy = [];
         document.addEventListener('securitypolicyviolation', (e) => window.__blockedByPolicy.push(e.blockedURI));
       });
+      // Wait until the network is quiet, so a late request is caught too.
+      // eslint-disable-next-line playwright/no-networkidle -- the quiet network is what this check needs
       await page.goto(path, { waitUntil: 'networkidle' });
       const blocked = await page.evaluate(() => window.__blockedByPolicy);
       foreign.push(...blocked.filter((uri) => URL.canParse(uri) && isForeign(new URL(uri), own)));
