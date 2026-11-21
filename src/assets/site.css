@@ -467,6 +467,77 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   .field-list div { display: block; padding-block: 0.375rem; }
 }
 
+/* Research: one section per Research Area, a card per Publication */
+
+.research-area + .research-area { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+.research-area h2,
+.profile-publications h2 {
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--teal);
+  font-size: 1.5rem;
+}
+
+/* Opened by its address (/research/#area), a section keeps some room above its heading. */
+.research-area h2 { scroll-margin-top: 1.5rem; }
+
+.research-area__description { max-width: 44rem; margin: 0 0 1rem; }
+
+.profile-publications { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+.publication {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.research-area__description + .publication,
+.profile-publications h2 + .publication { margin-top: 1.5rem; }
+
+/* The figure sits beside the text where there is room for both (60rem,
+   960px), and under it on a phone or a tablet. */
+@media (min-width: 60rem) {
+  .publication:has(.publication__figure) { grid-template-columns: 1fr 18rem; align-items: start; }
+}
+
+.publication p { margin: 0.5rem 0 0; }
+
+.publication__text > :first-child { margin-top: 0; }
+
+.publication__area { font-size: 0.9375rem; }
+
+.publication__title { margin: 0.25rem 0 0; font-size: 1.1875rem; line-height: 1.3; }
+
+.publication p.publication__venue { color: var(--muted); font-size: 0.9375rem; }
+
+.publication p.publication__summary { margin-top: 0.75rem; }
+
+.publication .link-list { margin-top: 0.875rem; font-weight: 600; }
+
+.publication__figure {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+}
+
+/* A Preprint's badge: navy on the teal, 10.2:1. */
+.badge {
+  display: inline-block;
+  margin-left: 0.25rem;
+  padding: 0 0.625rem;
+  border-radius: 1rem;
+  background: var(--teal);
+  color: var(--navy);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
 /* Motion: none at all when the visitor's system asks for reduced motion. */
 
 @media (prefers-reduced-motion: reduce) {

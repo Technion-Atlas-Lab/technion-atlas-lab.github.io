@@ -2,5 +2,22 @@
 title: Research
 description: "ATLAS Lab's Research Areas and Publications."
 permalink: /research/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{%- from "partials/publication.njk" import publicationCard -%}
+{#- One section per Research Area, in the areas' set order; under each, a card
+    per Publication, newest first. An area's file name is its section's
+    address (/research/#file-name), which the Profiles link to. #}
+<div class="page wrap">
+  {%- for area in research.areas %}
+  <section class="research-area" aria-labelledby="{{ area.slug }}">
+    <h2 id="{{ area.slug }}">{{ area.title }}</h2>
+    {%- for paragraph in area.description %}
+    <p class="research-area__description">{{ paragraph }}</p>
+    {%- endfor %}
+    {%- for publication in area.publications %}
+    {{ publicationCard(publication) }}
+    {%- endfor %}
+  </section>
+  {%- endfor %}
+</div>
