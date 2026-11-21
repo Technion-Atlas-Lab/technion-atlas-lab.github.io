@@ -28,7 +28,7 @@ A Publication the Maintainer marked for Home to highlight.
 A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**.
 
 **News item**:
-A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The people of the Lab an item involves are its **related Members**; it also appears on the Profile of each who is a Member.
+A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The Members an item involves are its **related Members**; it also appears on the Profile of each of them who is a current Member.
 
 **Lab mailbox**:
 The Lab's shared email account, held by the PI and the Maintainer and passed on to each successor.
@@ -36,7 +36,7 @@ The Lab's shared email account, held by the PI and the Maintainer and passed on 
 ### People
 
 **Member**:
-A person currently in the Lab: the PI, research staff, or a current graduate student. Each holds one role: Lab Director (the PI), Postdoctoral Researcher, PhD Student, MSc Student or Research Staff.
+A person who is in the Lab or used to be in it. A **current Member** is in the Lab now: the PI, research staff, or a current graduate student. Each current Member holds one role: Lab Director (the PI), Postdoctoral Researcher, PhD Student, MSc Student or Research Staff. A Member who has left the Lab is an Alumnus.
 
 **Role**:
 A Member's position in the Lab. The People page shows one **role group** per role, in a fixed order; an Alumnus keeps the role they held as their **former role**.
@@ -45,10 +45,10 @@ A Member's position in the Lab. The People page shows one **role group** per rol
 The picture shown for a Member or Alumnus with no photo: the first letters of their first and last names.
 
 **Alumnus** (plural **Alumni**):
-A former Member.
+A Member who has left the Lab.
 
 **Collaborator**:
-A person outside the Lab who works with it; credited on that work, never listed as a Member.
+A person outside the Lab who works with it; credited on that work, never a Member.
 
 **Profile**:
 The public information about one Member or Alumnus. Beyond name and role, each field appears only if that person gave Consent for it.

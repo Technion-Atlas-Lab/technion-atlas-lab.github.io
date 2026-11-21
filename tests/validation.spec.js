@@ -202,3 +202,7 @@ test('the failure names a News item file and an unknown field', () => {
 test('the failure names a News item file with no body', () => {
   expect(build.output).toMatch(namesTalkField('body'));
 });
+
+test('the failure names a News item file that names a related Member twice', () => {
+  expect(build.output).toMatch(new RegExp(`${namesFieldIn('news/bad-members.md')('members').source}.*\\bbad-member\\b.*\\bmore than once\\b`));
+});
