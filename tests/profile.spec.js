@@ -220,7 +220,8 @@ test('a News item on a Profile shows what it shows on News', async ({ page }) =>
 test('a Profile of a Member with no related News items has no News section', async ({ page }) => {
   await page.goto('/people/bare-member/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Bare Member');
-  await expect(page.getByRole('main').getByText('News')).toHaveCount(0);
+  await expect(news(page)).toHaveCount(0);
+  await expect(page.getByRole('main').getByRole('heading', { name: 'News' })).toHaveCount(0);
 });
 
 test('a Profile\'s News section follows its Publications', async ({ page }) => {
