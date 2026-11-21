@@ -86,7 +86,7 @@ eleventyComputed:
   <section class="profile-section" aria-labelledby="news">
     <h2 id="news">News</h2>
     {%- for item in newsItems %}
-    {{ newsItem(item, 3) }}
+    {{ newsItem(item, 3, member.slug) }}
     {%- endfor %}
   </section>
   {%- endif %}

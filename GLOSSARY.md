@@ -28,7 +28,7 @@ A Publication the Maintainer marked for Home to highlight.
 A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**.
 
 **News item**:
-A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The Members an item involves are its **related Members**; it also appears on their Profiles.
+A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The people of the Lab an item involves are its **related Members**; it also appears on the Profile of each who is a Member.
 
 **Lab mailbox**:
 The Lab's shared email account, held by the PI and the Maintainer and passed on to each successor.

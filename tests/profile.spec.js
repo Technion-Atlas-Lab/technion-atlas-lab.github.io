@@ -211,6 +211,10 @@ test('a News item on a Profile shows what it shows on News', async ({ page }) =>
   await expect(talk.getByText('Full Member spoke about containing tool-using agents.', { exact: true })).toBeVisible();
   await expect(talk.getByRole('link', { name: 'Recording: Invited Talk at the Example Symposium' }))
     .toHaveAttribute('href', 'https://example.org/video/invited-talk');
+  // The Profile's own Member is named without a link to the page the visitor is on.
+  const people = talk.getByRole('paragraph').filter({ hasText: /^People:/ });
+  await expect(people).toHaveText('People: Full Member, Prof. Test Director');
+  await expect(people.getByRole('link')).toHaveText(['Prof. Test Director']);
 });
 
 test('a Profile of a Member with no related News items has no News section', async ({ page }) => {

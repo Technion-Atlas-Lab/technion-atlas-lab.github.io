@@ -32,9 +32,8 @@ test('a talk is marked as one and links to its recording, named for the talk', a
   const talk = item(page, 'Invited Talk at the Example Symposium');
   await expect(talk.getByText('Talk', { exact: true })).toBeVisible();
   // The talk's title is in the link's name, so a screen reader's list of links tells one "Recording" from another.
-  const recording = talk.getByRole('link');
+  const recording = talk.getByRole('link', { name: 'Recording: Invited Talk at the Example Symposium', exact: true });
   await expect(recording).toHaveText('Recording');
-  await expect(recording).toHaveAccessibleName('Recording: Invited Talk at the Example Symposium');
   await expect(recording).toHaveAttribute('href', 'https://example.org/video/invited-talk');
 });
 
@@ -68,3 +67,18 @@ for (const width of [320, 390]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
+
+// The paragraph of a News item that names the people it involves.
+const people = (newsItem) => newsItem.getByRole('paragraph').filter({ hasText: /^People:/ });
+
+test('a News item names its related Members, in the order given; a Member links to their Profile, an Alumnus does not', async ({ page }) => {
+  await page.goto('/news/');
+  await expect(people(item(page, 'Invited Talk at the Example Symposium'))).toHaveText('People: Full Member, Prof. Test Director');
+  const accepted = people(item(page, "The Lab's Paper Accepted & Awarded"));
+  await expect(accepted).toHaveText('People: Full Member, Alumnus Example');
+  await expect(accepted.getByRole('link')).toHaveText(['Full Member']);
+  await expect(people(item(page, 'A Visit from Example University')).getByRole('link', { name: "Dr. Zoë O'Neil & Co" }))
+    .toHaveAttribute('href', '/people/zoe-oneil/');
+  await accepted.getByRole('link', { name: 'Full Member' }).click();
+  await expect(page).toHaveURL('/people/full-member/');
+});
