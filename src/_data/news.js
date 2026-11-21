@@ -9,16 +9,20 @@ const dateInWords = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'l
 export default () => {
   const everyone = loadMembersBySlug();
   // Newest first, as loaded.
-  const items = loadNews().map((item) => ({
+  // An item's file gives its related Members as file names (`members`). Here
+  // the item gets them twice, in the order given, each under a name that says
+  // what it holds: `memberSlugs`, the file names, and `relatedMembers`, the
+  // names to show and the Profiles to link them to.
+  const items = loadNews().map(({ members: memberSlugs = [], ...item }) => ({
     ...item,
-    // The related Members, in the order the item gives them.
-    people: (item.members ?? []).map((slug) => namedPerson(everyone.get(slug))),
+    memberSlugs,
+    relatedMembers: memberSlugs.map((slug) => namedPerson(everyone.get(slug))),
     dateText: dateInWords.format(calendarDay(item.date)),
     talk: item.type === TALK_TYPE,
   }));
   return {
     items,
     // Member's slug -> the News items related to them, for their Profile.
-    byMember: itemsByMember(everyone, items, (item, slug) => item.members?.includes(slug)),
+    byMember: itemsByMember(everyone, items, (item, slug) => item.memberSlugs.includes(slug)),
   };
 };

@@ -12,8 +12,8 @@
   {%- for paragraph in item.body %}
   <p>{{ paragraph }}</p>
   {%- endfor %}
-  {%- if item.people.length %}
-  <p class="news-item__people">People: {% for person in item.people -%}
+  {%- if item.relatedMembers.length %}
+  <p class="news-item__people">People: {% for person in item.relatedMembers -%}
     {%- if person.profile and person.profile != onProfile -%}
     <a href="/people/{{ person.profile }}/">{{ person.name }}</a>
     {%- else -%}
