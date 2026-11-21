@@ -14,6 +14,7 @@ eleventyComputed:
 ---
 {%- from "partials/person.njk" import avatar -%}
 {%- from "partials/publication.njk" import publicationCard -%}
+{%- from "partials/news-item.njk" import newsItem -%}
 {#- One Profile page per current Member (Alumni have none). A field the Member
     did not share leaves nothing behind: no heading, no label. #}
 {%- set links = [
@@ -24,6 +25,7 @@ eleventyComputed:
   { label: "Personal site", url: member.website }
 ] | selectattr("url") | list -%}
 {%- set publications = research.byMember[member.slug] -%}
+{%- set newsItems = news.byMember[member.slug] -%}
 <div class="page wrap">
   <p class="back-link"><a href="/people/">All people</a></p>
   <div class="profile">
@@ -73,10 +75,18 @@ eleventyComputed:
     </div>
   </div>
   {%- if publications.length %}
-  <section class="profile-publications" aria-labelledby="publications">
+  <section class="profile-section" aria-labelledby="publications">
     <h2 id="publications">Publications</h2>
     {%- for publication in publications %}
     {{ publicationCard(publication, member.slug) }}
+    {%- endfor %}
+  </section>
+  {%- endif %}
+  {%- if newsItems.length %}
+  <section class="profile-section" aria-labelledby="news">
+    <h2 id="news">News</h2>
+    {%- for item in newsItems %}
+    {{ newsItem(item, 3) }}
     {%- endfor %}
   </section>
   {%- endif %}

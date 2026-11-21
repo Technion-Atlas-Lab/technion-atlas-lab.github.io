@@ -155,3 +155,50 @@ test('the failure names a file whose value holds a colon without quotes, and say
   // YAML's own message ("bad indentation of a mapping entry") does not say what to do.
   expect(build.output).toMatch(/tests\/content-broken\/publications\/bad-colon\.md\b.*\btitle\b.*\bquotes\b/);
 });
+
+const namesTalkField = namesFieldIn('news/bad-talk.md');
+const namesNewsField = namesFieldIn('news/bad-news.md');
+
+test('the failure names a News item file and its missing title', () => {
+  expect(build.output).toMatch(namesTalkField('title'));
+});
+
+test('the failure names a News item file and a date not written as year-month-day, and shows the form', () => {
+  expect(build.output).toMatch(new RegExp(`${namesTalkField('date').source}.*\\b2025-03-14\\b`));
+});
+
+test('the failure names a News item file and a date that is not a day of the calendar', () => {
+  expect(build.output).toMatch(new RegExp(`${namesNewsField('date').source}.*\\b2025-02-30\\b`));
+});
+
+test('the failure names a News item file and a type that is not one, and lists the types', () => {
+  expect(build.output).toMatch(new RegExp(`${namesNewsField('type').source}.*\\btalk\\b`));
+});
+
+test('the failure names a talk file with no recording link', () => {
+  expect(build.output).toMatch(new RegExp(`${namesTalkField('recording').source}.*\\btalk\\b`));
+});
+
+test('the failure names a News item file and a recording link that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesNewsField('recording').source}.*\\bhttps\\b`));
+});
+
+test('the failure names a News item file that has a recording link but is not a talk', () => {
+  expect(build.output).toMatch(new RegExp(`${namesFieldIn('news/bad-recording.md')('recording').source}.*\\btalk\\b`));
+});
+
+test('the failure names a News item file and a related Member who is not a Member or an Alumnus', () => {
+  expect(build.output).toMatch(new RegExp(`${namesTalkField('members').source}.*\\bno-such-member\\b`));
+});
+
+test('the failure names a News item file whose related Members are not a list', () => {
+  expect(build.output).toMatch(new RegExp(`${namesNewsField('members').source}.*\\blist\\b`));
+});
+
+test('the failure names a News item file and an unknown field', () => {
+  expect(build.output).toMatch(namesTalkField('location'));
+});
+
+test('the failure names a News item file with no body', () => {
+  expect(build.output).toMatch(namesTalkField('body'));
+});

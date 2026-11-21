@@ -189,3 +189,45 @@ test('at phone width a Profile with Publications does not scroll sideways', asyn
   await expect(publications(page).getByRole('article')).toHaveCount(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
+
+// The News items related to the Member, from tests/content/news/.
+const news = (page) => page.getByRole('region', { name: 'News', exact: true });
+
+test('a Profile lists the News items related to that Member, newest first', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  await expect(news(page).getByRole('heading', { level: 3 }))
+    .toHaveText(['Invited Talk at the Example Symposium', "The Lab's Paper Accepted & Awarded"]);
+  await page.goto('/people/test-director/');
+  await expect(news(page).getByRole('heading', { level: 3 })).toHaveText(['Invited Talk at the Example Symposium']);
+  await page.goto('/people/zoe-oneil/');
+  await expect(news(page).getByRole('heading', { level: 3 })).toHaveText(['A Visit from Example University']);
+});
+
+test('a News item on a Profile shows what it shows on News', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  const talk = news(page).getByRole('article').filter({ hasText: 'Invited Talk at the Example Symposium' });
+  await expect(talk.getByText('14 March 2025', { exact: true })).toBeVisible();
+  await expect(talk.getByText('Talk', { exact: true })).toBeVisible();
+  await expect(talk.getByText('Full Member spoke about containing tool-using agents.', { exact: true })).toBeVisible();
+  await expect(talk.getByRole('link', { name: 'Recording: Invited Talk at the Example Symposium' }))
+    .toHaveAttribute('href', 'https://example.org/video/invited-talk');
+});
+
+test('a Profile of a Member with no related News items has no News section', async ({ page }) => {
+  await page.goto('/people/bare-member/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Bare Member');
+  await expect(page.getByRole('main').getByText('News')).toHaveCount(0);
+});
+
+test('a Profile\'s News section follows its Publications', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  await expect(page.getByRole('main').getByRole('heading', { level: 2 }))
+    .toHaveText(['Research interests', 'Contact details', 'Links', 'Publications', 'News']);
+});
+
+test('at phone width a Profile with News items does not scroll sideways', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/people/full-member/');
+  await expect(news(page).getByRole('article')).toHaveCount(2);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});

@@ -2,5 +2,14 @@
 title: News
 description: "News and talks from ATLAS Lab."
 permalink: /news/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{%- from "partials/news-item.njk" import newsItem -%}
+{#- Every News item, newest first. #}
+<div class="page wrap">
+  {%- for item in news.items %}
+  {{ newsItem(item) }}
+  {%- else %}
+  <p>No news yet.</p>
+  {%- endfor %}
+</div>
