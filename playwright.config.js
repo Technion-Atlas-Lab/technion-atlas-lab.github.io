@@ -11,7 +11,8 @@ export default defineConfig({
   testIgnore: 'site-wide/**',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
+  // Off CI, one dot per passing test: a run's output is then its failures, not a line per pass.
+  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'dot',
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: 'retain-on-failure',

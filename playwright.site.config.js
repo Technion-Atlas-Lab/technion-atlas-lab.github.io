@@ -18,7 +18,7 @@ export default defineConfig({
   testDir: 'tests/site-wide',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  reporter: process.env.CI ? [['list'], ['html', { open: 'never', outputFolder: 'playwright-report-site' }]] : 'list',
+  reporter: process.env.CI ? [['list'], ['html', { open: 'never', outputFolder: 'playwright-report-site' }]] : 'dot',
   outputDir: 'test-results-site',
   use: {
     baseURL: `http://localhost:${PORT}`,

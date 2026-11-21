@@ -21,13 +21,17 @@ Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command
 
 ## 2. Send both visitors
 
-Read [`happy-path.md`](happy-path.md), [`adversarial.md`](adversarial.md) and `visitor-brief.md`. Spawn two general-purpose subagents in one message, so they run in parallel. Each prompt is that visitor's file followed by `visitor-brief.md`, both verbatim, plus one line naming the pages and behaviour this ticket changed, to explore first.
+Spawn two general-purpose subagents in one message, so they run in parallel: the happy-path visitor ([`happy-path.md`](happy-path.md)) and the adversarial visitor ([`adversarial.md`](adversarial.md)). Each visitor reads its own instructions, so its prompt holds three things:
+
+- "Read `.claude/skills/exploratory-qa/<that visitor's file>` and then `.claude/skills/exploratory-qa/visitor-brief.md`, in full, and do what they say. Your reply is the report the brief describes.";
+- one line naming the pages and behaviour this ticket changed, to explore first;
+- the open issues, as `gh issue list --state open --json number,title --jq '.[] | "#\(.number) \(.title)"'` prints them, under the words "Already known: when you see one of these, name its number in one line and move on."
 
 Done when: both visitors have returned a report that lists every journey or attack in their file as walked, with its findings or "no findings", or as blocked with what is missing.
 
 ## 3. Reproduce every finding
 
-Repeat each finding's steps yourself against the same server, in a session named `main`, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise it is **dropped**. Treat each entry under a visitor's "Unconfirmed" heading the same way. Dropped findings are listed in your summary and filed nowhere.
+Repeat each finding's steps yourself against the same server, in a session named `main`, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise it is **dropped**. Treat each entry under a visitor's "Unconfirmed" heading the same way. Dropped findings are listed in your summary and filed nowhere. An issue a visitor named as already known needs no reproduction.
 
 Done when: every finding and every unconfirmed entry is marked confirmed or dropped.
 
