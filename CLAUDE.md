@@ -23,12 +23,17 @@ A change is finished when each of these has passed, in order:
 1. `npm run check`, which runs the scripts `validate`, `lint`, `build`, `linkcheck`, `test` and `test:site` in order and stops at the first that fails.
 2. Each changed page's screenshots read at 390, 768 and 1280 px (`npm run shots -- /people/` saves them to `.shots/`). A change in behaviour (menu, focus, keyboard) is also walked in a browser with the `playwright-cli` skill.
 3. For a ticket that changes templates, styles or behaviour: the `exploratory-qa` skill run, and every finding handled as it says.
+4. The `code-review` skill run on the whole diff since `main`, last, so it also reads what exploratory QA changed; every finding fixed or named in the pull request.
 
 A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
 
 ## Rules
 
 `CODING_STANDARDS.md` is the one home of the rules, with their reasons; read it before the first edit of a session. Four of them decide what may enter the repository at all: no third-party requests, Consent, photo metadata, GLOSSARY terms.
+
+## Content types
+
+A ticket that adds a folder of items under `content/` (Student Projects, funders): follow `docs/agents/content-type-slice.md`, the list of every place such a slice touches.
 
 ## Research
 

@@ -1,7 +1,7 @@
 // The Lab's research, as the Research page and the Profile pages show it.
 // Research Areas live in <content set>/research-areas/ and Publications in
 // <content set>/publications/; this loads them and joins them to the people.
-import { ALUMNUS_ROLE, PREPRINT_STATUS, loadMembers, loadPublications, loadResearchAreas } from '../../lib/content.js';
+import { PREPRINT_STATUS, itemsByMember, loadMembersBySlug, namedPerson, loadPublications, loadResearchAreas } from '../../lib/content.js';
 import { figureSources } from '../../lib/photos.js';
 
 // A DOI as a web address. A DOI may hold characters such as # and ?, which
@@ -19,17 +19,12 @@ const links = (publication) => [
 ].filter((link) => link.url);
 
 export default async () => {
-  const people = new Map(loadMembers().map((person) => [person.slug, person]));
+  const people = loadMembersBySlug();
   const areas = loadResearchAreas();
   const areaOf = new Map(areas.map((area) => [area.slug, area]));
 
-  // An author is a name, or names a person's file. Only a current Member has
-  // a Profile to link to (`profile`); an Alumnus is shown by name alone.
-  const author = (entry) => {
-    if (typeof entry === 'string') return { name: entry };
-    const person = people.get(entry.member);
-    return { name: person.name, profile: person.role === ALUMNUS_ROLE ? null : person.slug };
-  };
+  // An author is a name, or names a person's file.
+  const author = (entry) => typeof entry === 'string' ? { name: entry } : namedPerson(people.get(entry.member));
 
   // Newest first, as loaded.
   const publications = await Promise.all(loadPublications().map(async ({ figureFile, ...publication }) => ({
@@ -50,7 +45,6 @@ export default async () => {
       publications: publications.filter((publication) => publication.area === area),
     })),
     // Member's slug -> that Member's Publications, for their Profile.
-    byMember: Object.fromEntries([...people.keys()].map((slug) =>
-      [slug, publications.filter((publication) => publication.authors.some((a) => a.profile === slug))])),
+    byMember: itemsByMember(people, publications, (publication, slug) => publication.authors.some((a) => a.profile === slug)),
   };
 };

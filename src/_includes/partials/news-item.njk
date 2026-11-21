@@ -1,0 +1,31 @@
+{#- A News item, shared by the News page and the Profile pages. #}
+
+{#- `level` is the item's heading level: 2 on News, and 3 on a Profile, where
+    the items sit under a "News" heading. `onProfile` is the slug of the Member
+    whose Profile shows the item: there the Member is named without a link to
+    the page the visitor is already on. #}
+{%- macro newsItem(item, level=2, onProfile=null) -%}
+<article class="news-item">
+  <h{{ level }} class="news-item__title">{{ item.title }}</h{{ level }}>
+  <p class="news-item__date"><time datetime="{{ item.date }}">{{ item.dateText }}</time>
+    {%- if item.talk %} <span class="badge">Talk</span>{% endif %}</p>
+  {%- for paragraph in item.body %}
+  <p>{{ paragraph }}</p>
+  {%- endfor %}
+  {%- if item.relatedMembers.length %}
+  <p class="news-item__people">People: {% for person in item.relatedMembers -%}
+    {%- if person.profile and person.profile != onProfile -%}
+    <a href="/people/{{ person.profile }}/">{{ person.name }}</a>
+    {%- else -%}
+    {{ person.name }}
+    {%- endif -%}
+    {%- if not loop.last %}, {% endif -%}
+    {%- endfor -%}
+  </p>
+  {%- endif %}
+  {%- if item.talk %}
+  {#- A plain link: the site embeds nothing. Named with the title, so a screen reader's list of links tells one "Recording" from the next. #}
+  <p class="news-item__recording"><a href="{{ item.recording }}" aria-label="Recording: {{ item.title }}">Recording</a></p>
+  {%- endif %}
+</article>
+{%- endmacro -%}

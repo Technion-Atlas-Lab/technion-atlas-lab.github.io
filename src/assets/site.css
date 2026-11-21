@@ -472,7 +472,7 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 .research-area + .research-area { margin-top: clamp(2.5rem, 6vw, 4rem); }
 
 .research-area h2,
-.profile-publications h2 {
+.profile-section h2 {
   margin: 0 0 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--teal);
@@ -484,7 +484,7 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 .research-area__description { max-width: 44rem; margin: 0 0 1rem; }
 
-.profile-publications { margin-top: clamp(2.5rem, 6vw, 4rem); }
+.profile-section { margin-top: clamp(2.5rem, 6vw, 4rem); }
 
 .publication {
   display: grid;
@@ -497,7 +497,7 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 }
 
 .research-area__description + .publication,
-.profile-publications h2 + .publication { margin-top: 1.5rem; }
+.profile-section h2 + .publication { margin-top: 1.5rem; }
 
 /* The figure sits beside the text where there is room for both (60rem,
    960px), and under it on a phone or a tablet. */
@@ -526,7 +526,33 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   border-radius: 0.5rem;
 }
 
-/* A Preprint's badge: navy on the teal, 10.2:1. */
+/* News: one item under the next, each with its date; shared with the Profiles */
+
+.news-item {
+  max-width: 48rem;
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.page > .news-item:first-child { margin-top: 0; }
+
+/* On a Profile the items are as wide as the Publication cards above them. */
+.profile-section .news-item { max-width: none; }
+
+.profile-section h2 + .news-item { margin-top: 1.5rem; }
+
+.news-item p { margin: 0.75rem 0 0; }
+
+.news-item__title { margin: 0; font-size: 1.1875rem; line-height: 1.3; }
+
+.news-item p.news-item__date { margin-top: 0.25rem; color: var(--muted); font-size: 0.9375rem; }
+
+.news-item p.news-item__recording { margin-top: 0.875rem; font-weight: 600; }
+
+/* The badge of a Preprint or a talk: navy on the teal, 10.2:1. */
 .badge {
   display: inline-block;
   margin-left: 0.25rem;

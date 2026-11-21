@@ -31,16 +31,17 @@ Done when: both visitors have returned a report that lists every journey or atta
 
 ## 3. Reproduce every finding
 
-Repeat each finding's steps yourself against the same server, in a session named `main`, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise it is **dropped**. Treat each entry under a visitor's "Unconfirmed" heading the same way. Dropped findings are listed in your summary and filed nowhere. An issue a visitor named as already known needs no reproduction.
+Repeat each finding's steps yourself against the same server, in a session named `main`, and look at its screenshot. A finding is **confirmed** when you see the same thing; otherwise it is **dropped**. Treat each entry under a visitor's "Design observations" and "Unconfirmed" headings the same way. Dropped findings are listed in your summary and filed nowhere. An issue a visitor named as already known needs no reproduction.
 
-Done when: every finding and every unconfirmed entry is marked confirmed or dropped.
+Done when: every finding, design observation and unconfirmed entry is marked confirmed or dropped.
 
 ## 4. Handle every confirmed finding
 
 - **In the ticket's scope** (caused by, or in the pages and behaviour of, the change under review): write a failing slice test for it, see it fail, then fix it.
+- **A design observation**, whatever its scope: file it as below; it asks for behaviour the ticket did not specify, which is the Maintainer's to decide.
 - **Everything else**: file an issue labelled `needs-triage` holding the finding's severity, URL, viewport and steps, with the screenshot described in words (`docs/agents/issue-tracker.md`). Search the open issues first, and comment on an existing one instead of filing a duplicate.
 
-Done when: every confirmed finding has a test that now passes or an issue number.
+Done when: every confirmed finding has a test that now passes or an issue number, and every confirmed design observation has an issue number.
 
 ## 5. Close down
 
