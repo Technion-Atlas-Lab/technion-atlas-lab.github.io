@@ -21,6 +21,8 @@ the same checks and publishes; if any check fails, nothing is published.
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
 | A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: add a file; its figure goes beside it) |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
+| The accessibility statement: its text, the date of the last check with the browsers and screen reader used, the Technion accessibility coordinator's details | `src/pages/accessibility.njk` (and its "last updated" date at the bottom) |
+| The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk` (and its "last updated" date at the bottom) |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |
 | The menu | `src/_data/menu.js` (each `url` must match its page's `permalink` in `src/pages/`) |

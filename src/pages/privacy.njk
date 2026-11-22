@@ -2,5 +2,40 @@
 title: Privacy
 description: "How the ATLAS Lab website handles visitors' data."
 permalink: /privacy/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{#- The Lab's privacy note: what the site does with a visitor's data, who is
+    responsible for it, and how a person asks to change or remove theirs
+    (docs/research/compliance-research.md, B2 to B4). The issue chooser sends
+    personal-information requests here (.github/ISSUE_TEMPLATE/config.yml). #}
+<div class="page wrap prose">
+  <p>This page explains what happens to your data when you visit this website, and what to do about information the site shows about you.</p>
+
+  <section aria-labelledby="cookies">
+    <h2 id="cookies">No cookies, no analytics</h2>
+    <p>This site sets no cookies and uses no analytics. It loads nothing from other services, has no forms, and asks you for no information.</p>
+  </section>
+
+  <section aria-labelledby="hosting">
+    <h2 id="hosting">Hosting</h2>
+    <p>The site is hosted on GitHub Pages, a service of GitHub, Inc., in the United States. GitHub logs the IP address of every visitor, for security purposes. The Lab cannot see these logs. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a> says how GitHub handles them.</p>
+  </section>
+
+  <section aria-labelledby="responsible">
+    <h2 id="responsible">Who is responsible</h2>
+    <p>The Technion – Israel Institute of Technology is the body responsible for the personal data on this site, under <a href="https://www.technion.ac.il/en/privacy-policy/">the Technion's privacy policy</a>. You can reach the Technion's data protection officer at <a href="mailto:dpo@technion.ac.il">dpo@technion.ac.il</a>.</p>
+  </section>
+
+  <section aria-labelledby="change">
+    <h2 id="change">Change or remove your information</h2>
+    <p>The site shows details about a person, such as a photo or an email address, only with that person's consent. To change or remove information about you, write to the Lab at <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>. Please do not ask in a public place, where the request itself could be read by anyone.</p>
+    <p>The files this site is built from are public, and so is their history: a detail removed from the site may still appear in an earlier version of them.</p>
+  </section>
+
+  <section aria-labelledby="other-sites">
+    <h2 id="other-sites">Links to other sites</h2>
+    <p>Pages that this site links to, such as publishers, video sites and Members' own pages, have privacy policies of their own.</p>
+  </section>
+
+  <p class="prose__updated">This page was last updated on <time datetime="2026-11-22">22 November 2026</time>.</p>
+</div>

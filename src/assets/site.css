@@ -564,6 +564,24 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   font-weight: 700;
 }
 
+/* Text pages (Accessibility, Privacy): headed sections in a column narrow enough to read */
+
+.prose > * { max-width: 44rem; }
+
+.prose > :first-child { margin-top: 0; }
+
+.prose h2 { margin: 2.5rem 0 0.75rem; font-size: 1.5rem; }
+
+.prose li + li { margin-top: 0.375rem; }
+
+/* The labels here are longer than a Profile's; the values still line up. */
+.prose .field-list dt { min-width: 11rem; }
+
+/* A phone number stays on one line. */
+.prose a[href^="tel:"] { white-space: nowrap; }
+
+.prose__updated { margin: 2.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+
 /* Motion: none at all when the visitor's system asks for reduced motion. */
 
 @media (prefers-reduced-motion: reduce) {
