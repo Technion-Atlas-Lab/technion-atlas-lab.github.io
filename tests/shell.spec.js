@@ -97,11 +97,3 @@ for (const label of MENU) {
     await expect(menu(page).locator('[aria-current="page"]')).toHaveText([label]);
   });
 }
-
-test('the footer of the page-not-found page links to Accessibility and Privacy', async ({ page }) => {
-  // The site-wide checks cover every page in the sitemap; this page is not in it.
-  await page.goto('/no-such-page/');
-  const footer = page.getByRole('contentinfo');
-  await expect(footer.getByRole('link', { name: 'Accessibility', exact: true })).toHaveAttribute('href', '/accessibility/');
-  await expect(footer.getByRole('link', { name: 'Privacy', exact: true })).toHaveAttribute('href', '/privacy/');
-});

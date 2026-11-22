@@ -15,8 +15,11 @@ test('Privacy says the site sets no cookies and uses no analytics', async ({ pag
 
 test('Privacy says GitHub hosts the site in the United States and logs visitor IP addresses', async ({ page }) => {
   const hosting = section(page, 'Hosting');
-  await expect(hosting).toContainText('GitHub, Inc., in the United States');
-  await expect(hosting).toContainText('logs the IP address of every visitor');
+  await expect(hosting).toContainText('GitHub, Inc., a company based in the United States');
+  // GitHub's own words: it stores and processes data in the United States and other countries.
+  await expect(hosting).toContainText('GitHub keeps and handles data in the United States and in other countries');
+  await expect(hosting).toContainText('logs and stores the IP address of every visitor, for security purposes');
+  await expect(hosting).toContainText('says how GitHub handles personal data');
   await expect(hosting.getByRole('link', { name: "GitHub's privacy statement", exact: true }))
     .toHaveAttribute('href', 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement');
 });
@@ -33,6 +36,7 @@ test('Privacy names the Technion as the responsible body, with its data protecti
 
 test('Privacy sends a request to change or remove personal data to the Lab mailbox', async ({ page }) => {
   const change = section(page, 'Change or remove your information');
+  await expect(change).toContainText("A Member's Profile shows details such as a photo or an email address only with that Member's consent.");
   await expect(change).toContainText('change or remove');
   await expect(change.getByRole('link', { name: 'test-mailbox@example.org', exact: true }))
     .toHaveAttribute('href', 'mailto:test-mailbox@example.org');

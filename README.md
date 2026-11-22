@@ -53,12 +53,12 @@ The slice tests never read `content/`. They build the site from the **test conte
 deliberately invalid: a test checks that the build refuses it.
 
 The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
-`content/` and visit every page in its sitemap at 390, 768 and 1280 px in Chromium, and at 390 px
+`content/` and visit every page in its sitemap, and the page-not-found page, at 320, 390, 768 and 1280 px in Chromium, and at 390 px
 in WebKit (Safari's engine). Every page must have no accessibility violations at WCAG 2.2 AA
 (axe), no sideways scrolling, no request to any other site, no broken internal links, exactly one
 main heading, a skip link that moves focus to the main content, no link to the Lab's issue
 tracker, no cookie and nothing stored in the browser, the Accessibility and Privacy links in its
-footer, and `lang="en"`. They assert
+footer, no motion when the system asks for reduced motion, and `lang="en"`. They assert
 nothing about what a page says, so any content must pass them.
 
 Pull requests also save the screenshots from `npm run shots` as a `screenshots` artifact on the

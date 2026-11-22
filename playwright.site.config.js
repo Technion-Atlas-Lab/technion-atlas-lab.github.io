@@ -1,7 +1,8 @@
 // Site-wide checks (npm run test:site): build the site from the real content
 // (content/), serve the build the way GitHub Pages does, and check every page
-// in the sitemap for accessibility, mobile layout and privacy, at phone, tablet
-// and desktop widths, plus iPhone Safari's engine at phone width.
+// in the sitemap, and the page-not-found page, for accessibility, mobile layout
+// and privacy, at 320 px and at phone, tablet and desktop widths, plus iPhone
+// Safari's engine at phone width.
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 8282;
@@ -25,6 +26,8 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [
+    // The narrowest screen the accessibility statement promises (1280 px at 400% zoom).
+    chromiumAt(320),
     chromiumAt(390),
     chromiumAt(768),
     chromiumAt(1280),

@@ -28,6 +28,8 @@ test('Accessibility says what is known not to be accessible', async ({ page }) =
 
 test('Accessibility gives the last check: its date, the browsers and the screen reader', async ({ page }) => {
   const check = section(page, 'Last check');
+  // An automatic test finds only part of what the standard asks, and the page says so.
+  await expect(check).toContainText('Every page is tested automatically for WCAG 2.2 level AA problems whenever the site changes. Automatic tests find only some problems');
   // Placeholders until the accessibility check of the finished site (ticket #56).
   await expect(check.getByRole('term')).toHaveText(['Date of the last check', 'Browsers', 'Screen reader']);
   await expect(check.getByRole('definition')).toHaveText(['Not yet checked', 'To be confirmed', 'To be confirmed']);
@@ -49,11 +51,13 @@ test('Accessibility names the Technion accessibility coordinator, with a phone n
 
 test('Accessibility links to the Technion statements in English and Hebrew, and to campus accessibility', async ({ page }) => {
   const technion = section(page, 'Accessibility at the Technion');
+  // What the Technion's statement holds, as read on 22 November 2026: its websites, and a pointer to the campus site.
+  await expect(technion).toContainText("The Technion's own statement covers its websites, and points to its campus accessibility site for buildings and access routes.");
   await expect(technion.getByRole('link', { name: "The Technion's accessibility statement, in English", exact: true }))
     .toHaveAttribute('href', 'https://www.technion.ac.il/en/accessaility-statement/');
   await expect(technion.getByRole('link', { name: "The Technion's accessibility statement, in Hebrew", exact: true }))
     .toHaveAttribute('href', 'https://www.technion.ac.il/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa/');
-  await expect(technion.getByRole('link', { name: 'Physical accessibility on the Technion campus, in Hebrew', exact: true }))
+  await expect(technion.getByRole('link', { name: 'Accessibility on the Technion campus, in Hebrew', exact: true }))
     .toHaveAttribute('href', 'https://accessibility.net.technion.ac.il/');
 });
 
