@@ -77,3 +77,10 @@ for (const width of [320, 390]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
+
+test('opened at one of its sections, Accessibility keeps some room above that heading', async ({ page }) => {
+  await page.goto('/accessibility/#report');
+  const heading = page.getByRole('heading', { name: 'Report a problem', exact: true });
+  await expect(heading).toBeInViewport();
+  expect((await heading.boundingBox()).y).toBeGreaterThanOrEqual(16);
+});

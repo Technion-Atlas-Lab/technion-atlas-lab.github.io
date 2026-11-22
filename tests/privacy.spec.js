@@ -55,3 +55,10 @@ for (const width of [320, 390]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
+
+test('opened at one of its sections, Privacy keeps some room above that heading', async ({ page }) => {
+  await page.goto('/privacy/#cookies');
+  const heading = page.getByRole('heading', { name: 'No cookies, no analytics', exact: true });
+  await expect(heading).toBeInViewport();
+  expect((await heading.boundingBox()).y).toBeGreaterThanOrEqual(16);
+});
