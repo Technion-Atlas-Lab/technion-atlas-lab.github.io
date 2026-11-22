@@ -13,12 +13,6 @@ test('Privacy says the site sets no cookies and uses no analytics', async ({ pag
   await expect(section(page, 'No cookies, no analytics')).toContainText('sets no cookies and uses no analytics');
 });
 
-test('Privacy sets no cookie and stores nothing in the browser', async ({ page, context }) => {
-  await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toHaveText('Privacy');
-  expect(await context.cookies()).toEqual([]);
-  expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0);
-});
-
 test('Privacy says GitHub hosts the site in the United States and logs visitor IP addresses', async ({ page }) => {
   const hosting = section(page, 'Hosting');
   await expect(hosting).toContainText('GitHub, Inc., in the United States');

@@ -98,15 +98,10 @@ for (const label of MENU) {
   });
 }
 
-test('the footer of every page links to Accessibility and Privacy', async ({ page, request }) => {
-  const sitemap = await (await request.get('/sitemap.xml')).text();
-  const paths = [...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
-  // Every page of the test content set: Home, the eight menu pages, these two, and the Profiles.
-  expect(paths.length).toBeGreaterThan(11);
-  for (const path of [...paths, '/no-such-page/']) {
-    await page.goto(path);
-    const footer = page.getByRole('contentinfo');
-    await expect(footer.getByRole('link', { name: 'Accessibility', exact: true }), path).toHaveAttribute('href', '/accessibility/');
-    await expect(footer.getByRole('link', { name: 'Privacy', exact: true }), path).toHaveAttribute('href', '/privacy/');
-  }
+test('the footer of the page-not-found page links to Accessibility and Privacy', async ({ page }) => {
+  // The site-wide checks cover every page in the sitemap; this page is not in it.
+  await page.goto('/no-such-page/');
+  const footer = page.getByRole('contentinfo');
+  await expect(footer.getByRole('link', { name: 'Accessibility', exact: true })).toHaveAttribute('href', '/accessibility/');
+  await expect(footer.getByRole('link', { name: 'Privacy', exact: true })).toHaveAttribute('href', '/privacy/');
 });

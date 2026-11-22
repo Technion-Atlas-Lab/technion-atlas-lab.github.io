@@ -7,7 +7,7 @@ layout: layouts/page.njk
 {#- The site's accessibility statement, which Israeli law and the Technion
     require (docs/research/compliance-research.md, A3 and A4). Every feature
     listed is built into the pages: the site has no overlay or toolbar widget. #}
-<div class="page wrap prose">
+<div class="page wrap text-page">
   <p>ATLAS Lab wants everyone to be able to use this website, including people with disabilities.</p>
 
   <section aria-labelledby="standard">
@@ -51,7 +51,7 @@ layout: layouts/page.njk
 
   <section aria-labelledby="report">
     <h2 id="report">Report a problem</h2>
-    <p>If you meet a barrier on this site, or need something on it in an accessible form, write to the Lab at <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>. Tell us the page and what went wrong, and we will fix it or send you what you need.</p>
+    <p>If you meet a barrier on this site, or need something on it in an accessible form, write to the Lab mailbox, <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>. Tell us the page and what went wrong, and we will fix it or send you what you need.</p>
     {#- The coordinator's details as the Technion publishes them in its own
         statement (linked below); the law requires the statement to give them. #}
     <p>You can also contact the Technion accessibility coordinator, Dikla Nachman: <a href="tel:+972733781956">073-378-1956</a>, <a href="mailto:adminlogistic@technion.ac.il">adminlogistic@technion.ac.il</a>.</p>
@@ -67,5 +67,5 @@ layout: layouts/page.njk
     </ul>
   </section>
 
-  <p class="prose__updated">This statement was last updated on <time datetime="2026-11-22">22 November 2026</time>.</p>
+  <p class="text-page__updated">This statement was last updated on <time datetime="2026-11-22">22 November 2026</time>.</p>
 </div>

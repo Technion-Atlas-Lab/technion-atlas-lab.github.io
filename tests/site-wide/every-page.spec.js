@@ -117,6 +117,20 @@ for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
       expect(links.filter((href) => ISSUE_TRACKER.test(href))).toEqual([]);
     });
 
+    test('sets no cookie and stores nothing in the browser', async ({ page, context }) => {
+      // eslint-disable-next-line playwright/no-networkidle -- a cookie set late, after the page loaded, counts too
+      await page.goto(path, { waitUntil: 'networkidle' });
+      expect(await context.cookies()).toEqual([]);
+      expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0);
+    });
+
+    test('links to Accessibility and Privacy from its footer', async ({ page }) => {
+      await page.goto(path);
+      const footer = page.getByRole('contentinfo');
+      await expect(footer.getByRole('link', { name: 'Accessibility', exact: true })).toHaveAttribute('href', '/accessibility/');
+      await expect(footer.getByRole('link', { name: 'Privacy', exact: true })).toHaveAttribute('href', '/privacy/');
+    });
+
     test('declares its language as English', async ({ page }) => {
       await page.goto(path);
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');

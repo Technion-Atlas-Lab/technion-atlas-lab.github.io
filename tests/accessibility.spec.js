@@ -17,7 +17,7 @@ test('Accessibility names the standard the site aims to meet', async ({ page }) 
 
 test('Accessibility lists the accessibility features, each built into the pages', async ({ page }) => {
   const features = section(page, 'Accessibility features').getByRole('listitem');
-  for (const feature of ['skip link', 'keyboard', 'heading', 'text alternative', 'contrast', '320', 'reduced motion']) {
+  for (const feature of ['skip link', 'keyboard', 'heading', 'text alternative', 'contrast', '320', 'reduced motion', 'JavaScript']) {
     await expect(features.filter({ hasText: feature })).toHaveCount(1);
   }
 });

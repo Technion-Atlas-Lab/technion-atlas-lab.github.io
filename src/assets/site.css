@@ -479,8 +479,9 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   font-size: 1.5rem;
 }
 
-/* Opened by its address (/research/#area), a section keeps some room above its heading. */
-.research-area h2 { scroll-margin-top: 1.5rem; }
+/* Opened by its address (/research/#area, /privacy/#change), a section keeps some room above its heading. */
+.research-area h2,
+.text-page h2 { scroll-margin-top: 1.5rem; }
 
 .research-area__description { max-width: 44rem; margin: 0 0 1rem; }
 
@@ -566,24 +567,21 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 /* Text pages (Accessibility, Privacy): headed sections in a column narrow enough to read */
 
-.prose > * { max-width: 44rem; }
+.text-page > * { max-width: 44rem; }
 
-.prose > :first-child { margin-top: 0; }
+.text-page > :first-child { margin-top: 0; }
 
-.prose h2 { margin: 2.5rem 0 0.75rem; font-size: 1.5rem; }
+.text-page h2 { margin: 2.5rem 0 0.75rem; font-size: 1.5rem; }
 
-/* Opened by its address (/privacy/#change), a section keeps some room above its heading. */
-.prose h2 { scroll-margin-top: 1.5rem; }
-
-.prose li + li { margin-top: 0.375rem; }
+.text-page li + li { margin-top: 0.375rem; }
 
 /* The labels here are longer than a Profile's; the values still line up. */
-.prose .field-list dt { min-width: 11rem; }
+.text-page .field-list dt { min-width: 11rem; }
 
 /* A phone number stays on one line. */
-.prose a[href^="tel:"] { white-space: nowrap; }
+.text-page a[href^="tel:"] { white-space: nowrap; }
 
-.prose__updated { margin: 2.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+.text-page__updated { margin: 2.5rem 0 0; color: var(--muted); font-size: 0.9375rem; }
 
 /* Motion: none at all when the visitor's system asks for reduced motion. */
 
