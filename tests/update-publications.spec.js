@@ -167,3 +167,18 @@ test('an exclusion list entry without a reason stops the command, naming the fil
   expect(run.output).toMatch(/Cannot update the Publications: \S*excluded-publications\.yaml: entry 1 needs a "reason"/);
   expect(run.file('enclave-attestation.md')).toBe(run.original('enclave-attestation.md'));
 });
+
+test('a work excluded by the DOI the report gives it stays excluded, though its record lists only its arXiv Preprint', ({}, testInfo) => {
+  // arXiv says 2605.00006 was published as 10.5555/example.2026.measuring.
+  const run = updatePublications([], testInfo, (dir) => {
+    fs.writeFileSync(path.join(dir, 'excluded-publications.yaml'), '- doi: 10.5555/example.2026.measuring\n  reason: Not the Lab\'s work.\n');
+  });
+  expect(run.status, run.output).toBe(0);
+  expect(run.output).not.toContain(`${ADD} 10.5555/example.2026.measuring`);
+  expect(run.output).toContain('- "Measuring How Agents Escape" (10.5555/example.2026.measuring): Not the Lab\'s work.');
+});
+
+test('a work the Lab lists is matched whatever its year: --since skips only works it does not list', ({}, testInfo) => {
+  const run = updatePublications(['--since', '2023'], testInfo);
+  expect(run.output).toMatch(/publications\/early-agents\.md has a paper link/);
+});

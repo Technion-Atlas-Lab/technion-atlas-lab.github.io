@@ -12,7 +12,8 @@ import { exclusionListFile, updatePublications } from '../lib/update-publication
 
 const USAGE = 'Usage: npm run update-publications [-- --since <year>]';
 
-const works = (n) => `${n} work${n === 1 ? '' : 's'}`;
+// "1 work", "2 works".
+const count = (n, noun) => `${n} ${noun}${n === 1 ? '' : 's'}`;
 
 // A part of the report: its heading, then one line per item.
 const part = (heading, items) => [heading, ...items.map((item) => `  - ${item}`)];
@@ -22,10 +23,10 @@ function describe(report) {
   const kinds = Object.entries(notPapers);
   const skippedOther = kinds.reduce((sum, [, n]) => sum + n, 0);
   return [
-    read.length ? `Read the ORCID record${read.length === 1 ? '' : 's'} of ${read.length} Member${read.length === 1 ? '' : 's'}: ${read.map((m) => m.name).join(', ')}.`
+    read.length ? `Read the ORCID record${read.length === 1 ? '' : 's'} of ${count(read.length, 'Member')}: ${read.map((m) => m.name).join(', ')}.`
       : 'Read no ORCID record: no current Member\'s file in members/ has an orcid that ORCID holds.',
-    ...(older ? [`Skipped ${works(older)} from before ${since}${sinceIsDefault ? ', the year of the Lab\'s oldest Publication: pass --since <year> to read further back' : ''}.`] : []),
-    ...(skippedOther ? [`Skipped ${works(skippedOther)} that ${skippedOther === 1 ? 'is not a paper' : 'are not papers'} (${kinds.map(([kind, n]) => n === 1 ? kind : `${kind}: ${n}`).join(', ')}).`] : []),
+    ...(older ? [`Skipped ${count(older, 'work')} from before ${since}${sinceIsDefault ? ', the year of the Lab\'s oldest Publication: pass --since <year> to read further back' : ''}.`] : []),
+    ...(skippedOther ? [`Skipped ${count(skippedOther, 'work')} that ${skippedOther === 1 ? 'is not a paper' : 'are not papers'} (${kinds.map(([kind, n]) => n === 1 ? kind : `${kind}: ${n}`).join(', ')}).`] : []),
     '',
     `New: ${report.found.length}. Not on the site yet; each needs its Research Area from the Maintainer.`,
     ...report.found.flatMap(({ citation, source, preprint, where }) => [
