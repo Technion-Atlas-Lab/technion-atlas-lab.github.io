@@ -2,12 +2,12 @@
 permalink: /index.html
 layout: layouts/base.njk
 ---
-{%- from "partials/news-item.njk" import newsItem -%}
-{%- from "partials/publication.njk" import publicationCard -%}
 {#- Home introduces the Lab within seconds: its name and mission on a banner,
     then the Research Areas, the latest News, the featured Publications and the
     way to Positions. The banner is static; animating it is a later ticket
     (spec #32). A section with nothing to show is left out. #}
+{%- from "partials/news-item.njk" import newsItem -%}
+{%- from "partials/publication.njk" import publicationCard -%}
 <div class="home-banner">
   <div class="wrap">
     <h1>{{ site.name }}</h1>

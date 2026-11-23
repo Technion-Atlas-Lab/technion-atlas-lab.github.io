@@ -68,18 +68,24 @@ test('the latest News leads to the News page', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('News');
 });
 
-test('Home shows only the featured Publications', async ({ page }) => {
+test('Home shows only the featured Publications, newest first', async ({ page }) => {
   const featured = section(page, 'Featured Publications');
-  // One of the five Publications is featured.
-  await expect(featured.getByRole('article').getByRole('heading')).toHaveText(['Sandbox Escapes in Tool-Using Agents']);
-  await expect(page.getByRole('main').getByText('Early Work on Agent Isolation')).toHaveCount(0);
+  // Two of the five Publications are featured.
+  await expect(featured.getByRole('article').getByRole('heading')).toHaveText([
+    'Sandbox Escapes in Tool-Using Agents', // 2024
+    'Zero-Trust Attestation for Enclaves', // 2023; by title it would come last
+  ]);
+  // The newest Publication of all is not featured.
   await expect(page.getByRole('main').getByText('A Survey of Prompt Injection & Its Defences')).toHaveCount(0);
+  await expect(page.getByRole('main').getByText('Early Work on Agent Isolation')).toHaveCount(0);
 });
 
 test('a featured Publication leads to its Research Area, and the section to every Publication', async ({ page }) => {
   const featured = section(page, 'Featured Publications');
   await expect(featured.getByRole('article').getByRole('link', { name: 'AI Agent Security', exact: true }))
     .toHaveAttribute('href', '/research/#agent-security');
+  await expect(featured.getByRole('article').getByRole('link', { name: 'Trusted Hardware', exact: true }))
+    .toHaveAttribute('href', '/research/#trusted-hardware');
   await featured.getByRole('link', { name: 'All Publications', exact: true }).click();
   await expect(page).toHaveURL('/research/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Research');
