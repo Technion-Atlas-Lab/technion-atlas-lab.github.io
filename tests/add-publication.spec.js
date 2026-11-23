@@ -179,9 +179,9 @@ test('with recorded responses, an address that was not recorded stops the comman
   expect(run.output).toMatch(/no recorded response for https:\/\/api\.crossref\.org\/works\/10\.5555%2Fnever-recorded/);
 });
 
-test('the recorded responses are Crossref and arXiv alone: no run above asked DBLP or anyone else', () => {
+test('the recorded responses are ORCID, Crossref and arXiv alone: no run asked DBLP or anyone else', () => {
   const hosts = Object.keys(JSON.parse(fs.readFileSync('tests/recorded/index.json', 'utf8'))).map((url) => new URL(url).host);
-  expect([...new Set(hosts)].sort()).toEqual(['api.crossref.org', 'export.arxiv.org']);
+  expect([...new Set(hosts)].sort()).toEqual(['api.crossref.org', 'export.arxiv.org', 'pub.orcid.org']);
 });
 
 test('a BibTeX entry becomes a Publication file, its LaTeX read as plain text', ({}, testInfo) => {

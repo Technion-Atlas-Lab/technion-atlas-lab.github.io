@@ -35,6 +35,7 @@ npm run validate
 | News item | `news/<name>.md` |
 | Student Project | `student-projects/<name>.md` |
 | Partner | `partners/<name>.md` |
+| Exclusion list | `excluded-publications.yaml` |
 
 ---
 
@@ -316,4 +317,31 @@ name: Example Science Foundation
 logo: example-science-foundation.png
 link: https://example.org/foundation
 ---
+```
+
+---
+
+## `excluded-publications.yaml`: the exclusion list
+
+The works an ORCID record credits to a Member that the Lab does not list, such as a paper by
+another person of the same name. `npm run update-publications` skips each one, and checks this
+file when it runs: the build does not read it. The `update-publications` skill adds an entry only
+after asking the Maintainer.
+
+A YAML list. Each entry names one work by exactly one of `doi`, `arxiv` or `title`, and says why.
+
+| Field | Required | What it is |
+|---|---|---|
+| `doi` | one of three | The work's DOI alone: `10.1234/example`. |
+| `arxiv` | one of three | The work's arXiv link: `https://arxiv.org/abs/2603.01234`. Quote an id written alone (`"2603.01234"`): unquoted, YAML reads it as a number. |
+| `title` | one of three | The work's title, for a work with neither; any spelling matches. |
+| `reason` | yes | Why the Lab does not list it. |
+
+An empty list is `[]`.
+
+```yaml
+- doi: 10.1234/example
+  reason: Written by another person of the same name.
+- arxiv: https://arxiv.org/abs/2603.01234
+  reason: Not the Lab's work; written before the author joined.
 ```

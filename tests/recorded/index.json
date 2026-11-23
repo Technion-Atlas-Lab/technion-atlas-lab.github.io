@@ -3,5 +3,12 @@
   "https://api.crossref.org/works/10.5555%2F2026.01.04.463034": { "status": 200, "file": "crossref-preprint.json" },
   "https://api.crossref.org/works/10.5555%2Fno-such-work": { "status": 404, "file": "crossref-not-found.txt" },
   "https://export.arxiv.org/api/query?id_list=2603.01234": { "status": 200, "file": "arxiv-entry.xml" },
-  "https://export.arxiv.org/api/query?id_list=9999.99999": { "status": 200, "file": "arxiv-no-entry.xml" }
+  "https://export.arxiv.org/api/query?id_list=9999.99999": { "status": 200, "file": "arxiv-no-entry.xml" },
+  "https://api.crossref.org/works/10.5555%2Fexample.2026.survey": { "status": 200, "file": "crossref-journal.json" },
+  "https://api.crossref.org/works/10.5555%2Fexample.2026.measuring": { "status": 200, "file": "crossref-measuring.json" },
+  "https://api.crossref.org/works/10.5555%2Fexample.2019.old": { "status": 200, "file": "crossref-older.json" },
+  "https://export.arxiv.org/api/query?id_list=2605.00006": { "status": 200, "file": "arxiv-published.xml" },
+  "https://pub.orcid.org/v3.0/0000-0002-1825-0097/works": { "status": 200, "file": "orcid-full-member.json" },
+  "https://pub.orcid.org/v3.0/0000-0002-0000-0002/works": { "status": 200, "file": "orcid-second-member.json" },
+  "https://pub.orcid.org/v3.0/0000-0000-0000-0000/works": { "status": 404, "file": "orcid-not-found.txt" }
 }

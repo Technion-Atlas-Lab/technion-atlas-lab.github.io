@@ -19,7 +19,8 @@ the same checks and publishes; if any check fails, nothing is published.
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata from the published copy; the committed file is public too, so strip it first, as the `add-person` skill does. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
-| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it) |
+| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it. To find Members' new papers, ask Claude to update the Publications: the `update-publications` skill reads their ORCID records) |
+| A work in a Member's ORCID record that the Lab does not list (a paper by someone of the same name) | `content/excluded-publications.yaml`, the exclusion list |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
 | A Student Project's title, description, status (Offered or Completed), Research Area, supervisors, year, students' names or links to its report, code and video | That project's file in `content/student-projects/` (add a Student Project: add a file; a student's name goes in only with their Consent) |
 | The text of the "How to take a project" box | `src/pages/projects.njk` |
@@ -53,13 +54,14 @@ Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` on
 | `npx playwright-cli install-browser chrome-for-testing` | One-time install of the browser the agent's Playwright CLI opens (its own build, separate from the tests' browsers). `.playwright/cli.config.json` tells the CLI to use it. |
 | `npm run check` | Runs all six checks above in order (validate, lint, build, link check, slice tests, site-wide checks) and stops at the first that fails. Run it before opening a pull request. |
 | `npm run add-publication -- <source> --area <research-area>` | Writes a Publication's file from a DOI (read from Crossref), an arXiv link (read from arXiv) or a file holding one BibTeX entry, with each author who is a Member or an Alumnus named by their file. Without `--area` it writes nothing and lists the Research Areas. `--name <file-name>` sets the file's name. |
+| `npm run update-publications` | Reads the ORCID record of each current Member who has an ORCID iD, adds to a listed Publication the DOI or arXiv link it lacks, and reports the new works (with the `add-publication` command for each), the works on the exclusion list and those to review. It changes no other field. `--since <year>` reads works from that year on; by default, from the year of the Lab's oldest Publication. |
 | `npm run shots` | Saves screenshots of every page at 390, 768 and 1280 px to `.shots/`, for review. `npm run shots -- /about/` takes just the pages named. |
 
 The slice tests never read `content/`. They build the site from the **test content set** in
 `tests/content/`, so real content can change without breaking them. `tests/content-broken/` is
 deliberately invalid: a test checks that the build refuses it. `tests/recorded/` holds recorded
-Crossref and arXiv responses: the tests of `npm run add-publication` read those and never touch
-the network.
+ORCID, Crossref and arXiv responses: the tests of `npm run add-publication` and
+`npm run update-publications` read those and never touch the network.
 
 The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
 `content/` and visit every page in its sitemap, and the page-not-found page, at 320, 390, 768 and 1280 px in Chromium, and at 390 px
