@@ -1,4 +1,4 @@
-// Site-wide checks: every page in the sitemap, built from the real content, at
+// Site-wide checks: every page in the sitemap and the page-not-found page, built from the real content, at
 // every width in playwright.site.config.js. They hold for any content, so they
 // assert nothing about what a page says: only that every visitor can reach and
 // read it, on any screen, without the site contacting anyone else.
@@ -17,7 +17,10 @@ const isForeign = (url, own) => (url.protocol === 'http:' || url.protocol === 'h
 // Any issue page of a repository in the Lab's GitHub organization.
 const ISSUE_TRACKER = /^https?:\/\/(www\.)?github\.com\/Technion-Atlas-Lab\/[^/]+\/issues\b/i;
 
-for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
+// The page-not-found page is not in the sitemap; visitors meet it all the same.
+const PAGE_NOT_FOUND = '/404.html';
+
+for (const path of [...sitemapPaths(CHECKED_BUILD_DIR), PAGE_NOT_FOUND]) {
   test.describe(path, () => {
     test('has no accessibility violations at WCAG 2.2 AA', async ({ page }) => {
       await page.goto(path);
@@ -115,6 +118,35 @@ for (const path of sitemapPaths(CHECKED_BUILD_DIR)) {
       await page.goto(path);
       const links = await page.locator('a[href]').evaluateAll((as) => as.map((a) => a.href));
       expect(links.filter((href) => ISSUE_TRACKER.test(href))).toEqual([]);
+    });
+
+    test('sets no cookie and stores nothing in the browser', async ({ page, context }) => {
+      // eslint-disable-next-line playwright/no-networkidle -- a cookie set late, after the page loaded, counts too
+      await page.goto(path, { waitUntil: 'networkidle' });
+      expect(await context.cookies()).toEqual([]);
+      expect(await page.evaluate(() => localStorage.length + sessionStorage.length)).toBe(0);
+    });
+
+    test('links to Accessibility and Privacy from its footer', async ({ page }) => {
+      await page.goto(path);
+      const footer = page.getByRole('contentinfo');
+      await expect(footer.getByRole('link', { name: 'Accessibility', exact: true })).toHaveAttribute('href', '/accessibility/');
+      await expect(footer.getByRole('link', { name: 'Privacy', exact: true })).toHaveAttribute('href', '/privacy/');
+    });
+
+    test('moves nothing when the visitor\'s system asks for reduced motion', async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(path);
+      // The longest transition or animation on the page, in seconds.
+      const longest = await page.evaluate(() => {
+        const seconds = (list) => list.split(',').map((value) => parseFloat(value) * (value.trim().endsWith('ms') ? 0.001 : 1));
+        return Math.max(0, ...[...document.querySelectorAll('*')].flatMap((el) => {
+          const style = getComputedStyle(el);
+          return [...seconds(style.transitionDuration), ...seconds(style.animationDuration)];
+        }));
+      });
+      // A thousandth of a second: too short to see.
+      expect(longest).toBeLessThanOrEqual(0.001);
     });
 
     test('declares its language as English', async ({ page }) => {

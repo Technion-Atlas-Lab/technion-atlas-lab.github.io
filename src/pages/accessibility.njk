@@ -2,5 +2,70 @@
 title: Accessibility
 description: "The accessibility statement of the ATLAS Lab website."
 permalink: /accessibility/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{#- The site's accessibility statement, which Israeli law and the Technion
+    require (docs/research/compliance-research.md, A3 and A4). Every feature
+    listed is built into the pages: the site has no overlay or toolbar widget. #}
+<div class="page wrap text-page">
+  <p>ATLAS Lab wants everyone to be able to use this website, including people with disabilities.</p>
+
+  <section aria-labelledby="standard">
+    <h2 id="standard">Standard</h2>
+    <p>This site aims to meet Israeli Standard 5568 and the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
+  </section>
+
+  <section aria-labelledby="features">
+    <h2 id="features">Accessibility features</h2>
+    <ul>
+      <li>Every page opens with a skip link that leads straight to the main content.</li>
+      <li>Every page can be used with the keyboard alone, and the element in focus is clearly marked.</li>
+      <li>Every page has landmarks, one main heading, and the headings under it in order, for screen readers.</li>
+      <li>Every image that carries meaning has a text alternative.</li>
+      <li>Text has a contrast of at least 4.5:1 against its background.</li>
+      <li>Pages fit a screen as narrow as 320 pixels, and can be zoomed to 400%, with no sideways scrolling.</li>
+      <li>Animation is turned off when your system asks for reduced motion.</li>
+      <li>Every page reads in full with JavaScript turned off.</li>
+    </ul>
+    <p>These features are part of the pages themselves. The site has no accessibility toolbar or overlay; to enlarge the text, use your browser's zoom.</p>
+  </section>
+
+  <section aria-labelledby="limitations">
+    <h2 id="limitations">Known limitations</h2>
+    <ul>
+      <li>Papers, recordings and other pages that this site links to are published by others, and may not be accessible. A recording of a talk may have no captions.</li>
+    </ul>
+    <p>If anything on this site is not accessible to you, please tell us (see "Report a problem" below).</p>
+  </section>
+
+  <section aria-labelledby="last-check">
+    <h2 id="last-check">Last check</h2>
+    <p>Every page is tested automatically for WCAG 2.2 level AA problems whenever the site changes. Automatic tests find only some problems; a check by a person, with a screen reader, has not been done yet.</p>
+    {#- Placeholders until the accessibility check of the finished site (ticket #56). #}
+    <dl class="field-list">
+      <div><dt>Date of the last check</dt><dd>Not yet checked</dd></div>
+      <div><dt>Browsers</dt><dd>To be confirmed</dd></div>
+      <div><dt>Screen reader</dt><dd>To be confirmed</dd></div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="report">
+    <h2 id="report">Report a problem</h2>
+    <p>If you meet a barrier on this site, or need something on it in an accessible form, write to the Lab mailbox, <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>. Tell us the page and what went wrong, and we will fix it or send you what you need.</p>
+    {#- The coordinator's details as the Technion publishes them in its own
+        statement (linked below); the law requires the statement to give them. #}
+    <p>You can also contact the Technion accessibility coordinator, Dikla Nachman: <a href="tel:+972733781956">073-378-1956</a>, <a href="mailto:adminlogistic@technion.ac.il">adminlogistic@technion.ac.il</a>.</p>
+  </section>
+
+  <section aria-labelledby="technion">
+    <h2 id="technion">Accessibility at the Technion</h2>
+    <p>The Technion's own statement covers its websites, and points to its campus accessibility site for buildings and access routes.</p>
+    <ul>
+      <li><a href="https://www.technion.ac.il/en/accessaility-statement/">The Technion's accessibility statement, in English</a></li>
+      <li><a href="https://www.technion.ac.il/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa/" hreflang="he">The Technion's accessibility statement, in Hebrew</a></li>
+      <li><a href="https://accessibility.net.technion.ac.il/" hreflang="he">Accessibility on the Technion campus, in Hebrew</a></li>
+    </ul>
+  </section>
+
+  <p class="text-page__updated">This statement was last updated on <time datetime="2026-11-22">22 November 2026</time>.</p>
+</div>

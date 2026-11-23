@@ -21,6 +21,8 @@ the same checks and publishes; if any check fails, nothing is published.
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
 | A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: add a file; its figure goes beside it) |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
+| The accessibility statement: its text, the date of the last check with the browsers and screen reader used, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
+| The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk`, with its "last updated" date at the bottom; `tests/privacy.spec.js` expects the same address and date |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |
 | The menu | `src/_data/menu.js` (each `url` must match its page's `permalink` in `src/pages/`) |
@@ -51,11 +53,12 @@ The slice tests never read `content/`. They build the site from the **test conte
 deliberately invalid: a test checks that the build refuses it.
 
 The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
-`content/` and visit every page in its sitemap at 390, 768 and 1280 px in Chromium, and at 390 px
+`content/` and visit every page in its sitemap, and the page-not-found page, at 320, 390, 768 and 1280 px in Chromium, and at 390 px
 in WebKit (Safari's engine). Every page must have no accessibility violations at WCAG 2.2 AA
 (axe), no sideways scrolling, no request to any other site, no broken internal links, exactly one
 main heading, a skip link that moves focus to the main content, no link to the Lab's issue
-tracker, and `lang="en"`. They assert
+tracker, no cookie and nothing stored in the browser, the Accessibility and Privacy links in its
+footer, no motion when the system asks for reduced motion, and `lang="en"`. They assert
 nothing about what a page says, so any content must pass them.
 
 Pull requests also save the screenshots from `npm run shots` as a `screenshots` artifact on the
