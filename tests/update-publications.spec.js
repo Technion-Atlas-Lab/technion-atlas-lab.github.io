@@ -83,20 +83,9 @@ test('a Publication the record matches by title gains the DOI and arXiv link it 
   const run = updatePublications([], testInfo);
   expect(run.output).toContain('Updated: 1.');
   expect(run.output).toContain('publications/enclave-attestation.md: added doi 10.5555/example.2023.enclave, arxiv https://arxiv.org/abs/2302.00004');
-  expect(run.file('enclave-attestation.md')).toBe(`---
-# Same year as side-channels.md: first by file name, second by title.
-title: Zero-Trust Attestation for Enclaves
-authors:
-  - Dana Outside
-  - member: test-director
-venue: Example Hardware Conference
-year: 2023
-research_area: trusted-hardware
-status: published
-doi: 10.5555/example.2023.enclave
-arxiv: https://arxiv.org/abs/2302.00004
----
-`);
+  // Every line it had, comments included, then the two it gained.
+  expect(run.file('enclave-attestation.md')).toBe(run.original('enclave-attestation.md')
+    .replace(/\n---\n$/, '\ndoi: 10.5555/example.2023.enclave\narxiv: https://arxiv.org/abs/2302.00004\n---\n'));
 });
 
 test('the DOI decides before the title: a work with one Publication\'s DOI and another\'s title is the first', ({}, testInfo) => {
