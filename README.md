@@ -16,7 +16,7 @@ the same checks and publishes; if any check fails, nothing is published.
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file, or ask Claude, which uses the `add-person` skill; remove one: delete it, unless a Publication names them as an author or a News item relates to them, in which case make them an Alumnus, with the `move-to-alumni` skill) |
-| A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
+| A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata from the published copy; the committed file is public too, so strip it first, as the `add-person` skill does. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
 | A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: add a file; its figure goes beside it) |

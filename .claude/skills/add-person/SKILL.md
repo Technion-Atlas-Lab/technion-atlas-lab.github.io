@@ -26,7 +26,7 @@ Done when: every detail about the person in the request is under one heading.
 Ask only what the request left open:
 
 - **Role**, when it was not given; for an Alumnus, the former role and the year they left.
-- **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right. For an Alumnus the place follows the rule in step 3 of the `move-to-alumni` skill, with nothing to ask.
+- **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right. For an Alumnus the place follows the rule in the `order` row of `content/SCHEMA.md`, with nothing to ask.
 - **Consent**, for each field under "Consent unstated", named in plain words: "Did <name> give Consent to publish their GitHub link and bio?"
 - **File name**, in two cases: the name is not in Latin letters (ask for its Latin spelling), or the file already exists (ask for another name). The rule for the name is in step 3.
 
@@ -40,19 +40,19 @@ The file holds `name`, `role`, `order` and the fields under "With Consent"; a bi
 
 When the person takes a place before the last in their role group, raise the `order` of each Member after them, so no two share a number. A gap in the numbers is fine.
 
-**Photo**: the repository is public and its history is permanent, so the photo is committed already stripped of its embedded metadata (camera, author, location). Write it beside the Member's file, keeping the extension of the photo given (`.jpg`, `.jpeg`, `.png` or `.webp`), and name it in the `photo` field:
+**Photo**: the repository is public and its history is permanent, so the photo is committed already stripped of its embedded metadata (camera, author, location). Write it beside the Member's file under the person's file name, with the extension of the photo given, and name it in the `photo` field. The command reads one path and writes another, so a photo already lying at the target path is first moved out to `.builds/`:
 
 ```bash
-node -e "import('sharp').then(({ default: sharp }) => sharp(process.argv[1]).rotate().toFile(process.argv[2]))" <the photo given> content/members/<file-name>.jpg
+node -e "import('sharp').then(({ default: sharp }) => sharp(process.argv[1]).rotate().toFile(process.argv[2]))" <the photo given> content/members/<file-name>.<extension>
 ```
 
 Then print what is left:
 
 ```bash
-node -e "import('sharp').then(async ({ default: sharp }) => { const m = await sharp(process.argv[1]).metadata(); console.log(['exif', 'icc', 'iptc', 'xmp'].filter((k) => m[k])); })" content/members/<file-name>.jpg
+node -e "import('sharp').then(async ({ default: sharp }) => { const m = await sharp(process.argv[1]).metadata(); console.log(['exif', 'icc', 'iptc', 'xmp'].filter((k) => m[k])); })" content/members/<file-name>.<extension>
 ```
 
-Done when: `npm run validate` passes, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", the text under the front matter is empty or a bio with Consent, and the check of a photo, when there is one, prints `[]`.
+Done when: `npm run validate` passes, `git status --short` shows no copy of the photo but the stripped one, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", the text under the front matter is empty or a bio with Consent, and the check of a photo, when there is one, prints `[]`.
 
 ## 4. Finish
 

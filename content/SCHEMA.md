@@ -73,7 +73,7 @@ Add a field only when the Maintainer states that the person gave Consent for it
 |---|---|---|
 | `name` | yes | The person's name as shown. A title such as `Prof.` is left out of the initials avatar. |
 | `role` | yes | One of `Lab Director`, `Postdoctoral Researcher`, `PhD Student`, `MSc Student`, `Research Staff`, `Alumnus`. The People page groups Members by role, in this order. |
-| `order` | yes | A whole number: the person's place within their role group, lowest first. Equal numbers fall back to name order. |
+| `order` | yes | A whole number: the person's place within their role group, lowest first. Equal numbers fall back to name order. The Alumni are numbered from 1 by the `year` they left, most recent first. |
 | `photo` | no | The file name of a photo kept beside this file: `member-name.jpg` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, cropped square and with all embedded metadata removed, never as committed. Without one, the person gets an avatar of their initials. |
 | `email` | no | An email address. |
 | `phone` | no | A phone number in international form: `+972 4 000 0000`. Personal or office, as the Member chose. |
@@ -86,8 +86,9 @@ Add a field only when the Maintainer states that the person gave Consent for it
 
 The text under the front matter is the **bio**: plain text, with a blank line between paragraphs.
 
-An Alumnus may keep the fields they had as a Member; the Alumni row shows only the photo or
-initials avatar, name, former role, year and current position.
+The Alumni row shows only the photo or initials avatar, name, former role, year and current
+position. Validation lets an Alumnus keep the other fields they had as a Member, but nothing
+publishes them, so the `move-to-alumni` skill removes them.
 
 ```markdown
 ---
