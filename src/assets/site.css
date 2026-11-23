@@ -143,10 +143,17 @@ img { max-width: 100%; height: auto; }
 .site-menu ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1rem; /* all eight items on one row at tablet width (768px) */
+  gap: 0 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* At tablet width (768px) the menu sits under the logo, every item on one row,
+   with room for a visitor's system font a tenth wider than the tests'. */
+@media (min-width: 48rem) and (max-width: 59.99rem) {
+  .site-menu { font-size: 1rem; }
+  .site-menu ul { gap: 0 0.875rem; }
 }
 
 .site-menu a {
