@@ -30,7 +30,9 @@ npm run add-publication -- <source> --area <research-area>
 
 When it answers `Cannot add the Publication`, it wrote nothing and says what to do: do that, then run it again. When the reason is that the Lab already lists the Publication, the skill ends: tell the Maintainer which file lists it.
 
-Done when: the command prints `Wrote content/publications/<file-name>.md`.
+Keep the file as written, for step 4 to compare against: `mkdir -p .builds/add-publication && cp content/publications/<file-name>.md .builds/add-publication/as-written.md`.
+
+Done when: the command prints `Wrote content/publications/<file-name>.md`, and its copy is in `.builds/add-publication/`.
 
 ## 4. Finish the file
 
@@ -40,7 +42,7 @@ Read the file and the command's report, then:
 - **The Maintainer's own additions**, each only when the request gave it: the `arxiv` link passed over in step 1, `pdf`, `code` and `video` links, `featured: true`, a figure beside the file with its `figure_alt`, and the summary, in the Maintainer's words, as plain text under the front matter.
 - **The title, venue, year and status told to the Maintainer** as the file has them, so they can correct what the source got wrong.
 
-Done when: `npm run validate` passes, every `CHECK:` line is settled, the Maintainer has been told the four details, and the file differs from what the command wrote only by a settled `CHECK:` line, an addition the Maintainer gave, a correction they asked for, or the placeholder comment.
+Done when: `npm run validate` passes, every `CHECK:` line is settled, the Maintainer has been told the four details, and `diff .builds/add-publication/as-written.md content/publications/<file-name>.md` shows only a settled `CHECK:` line, an addition the Maintainer gave, a correction they asked for, or the placeholder comment.
 
 ## 5. Open the pull request
 

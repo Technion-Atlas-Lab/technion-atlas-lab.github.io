@@ -17,7 +17,9 @@ node tests/support/build-and-serve.js 8383 tests/content .builds/qa
 
 It builds the test content set, the content the slice tests assert against, so a finding converts straight into a slice test.
 
-Done when: `curl -sI http://localhost:8383/` returns `200`, and the open command in `visitor-brief.md` opens the page in a session named `check` (then close it). If the browser is reported missing, run the one-time install in the README's Commands section.
+Delete the last run's screenshots, so a report's paths name only this run's: `rm -f .playwright-cli/qa-*.png`.
+
+Done when: `curl -sI http://localhost:8383/` returns `200`, `.playwright-cli/` holds no `qa-*.png`, and the open command in `visitor-brief.md` opens the page in a session named `check` (then close it). If the browser is reported missing, run the one-time install in the README's Commands section.
 
 ## 2. Send both visitors
 
