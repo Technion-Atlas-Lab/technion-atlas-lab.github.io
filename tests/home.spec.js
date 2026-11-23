@@ -2,19 +2,10 @@
 // latest News, the featured Publications and the way to Positions. Built from
 // the test content set (tests/content/).
 import { test, expect } from '@playwright/test';
+import { backgroundBehind } from './support/background.js';
 
 // A section of Home, found by its heading.
 const section = (page, name) => page.getByRole('main').getByRole('region', { name, exact: true });
-
-// The colour a visitor sees behind an element: its own background, or the
-// nearest ancestor's that is not transparent.
-const backgroundBehind = (locator) => locator.evaluate((element) => {
-  for (let el = element; el; el = el.parentElement) {
-    const colour = getComputedStyle(el).backgroundColor;
-    if (colour !== 'rgba(0, 0, 0, 0)' && colour !== 'transparent') return colour;
-  }
-  return null;
-});
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -117,3 +108,10 @@ for (const width of [320, 390, 768]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
+
+test('a Research Area card leads to its section from its very edge, the coloured top border included', async ({ page }) => {
+  const card = section(page, 'Research Areas').getByRole('listitem').filter({ hasText: 'Trusted Hardware' });
+  const box = await card.boundingBox();
+  await page.mouse.click(box.x + box.width / 2, box.y + 1);
+  await expect(page).toHaveURL('/research/#trusted-hardware');
+});
