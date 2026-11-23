@@ -39,7 +39,7 @@ Create `content/news/<file-name>.md`, the file name a few words of the title: `i
 
 When the item announces a Publication that `content/publications/` does not list, offer in one line to add it with the `add-publication` skill.
 
-Done when: `npm run validate` passes, every fact in the title and body is one the Maintainer gave, a talk's title names the occasion as well as the talk, and the body names no related Member.
+Done when: `npm run validate` passes, every fact in the title and body is one the Maintainer gave, the title follows the `title` row of `content/SCHEMA.md`, and the body names no related Member.
 
 ## 4. Open the pull request
 
