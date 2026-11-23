@@ -33,6 +33,7 @@ npm run validate
 | Research Area | `research-areas/<name>.md` |
 | Publication | `publications/<name>.md` |
 | News item | `news/<name>.md` |
+| Student Project | `student-projects/<name>.md` |
 
 ---
 
@@ -47,6 +48,7 @@ Plain YAML, one `field: value` per line.
 | `mission` | yes | The Lab's mission, as written. Write it as a YAML block (see the example below) to keep its line breaks. Also Home's description for search engines and link previews, on one line. |
 | `mailbox` | yes | The Lab mailbox, an email address. |
 | `url` | yes | The site's address: `https://` and the host, with nothing after it. Used for canonical addresses, link previews and the sitemap. Change it at Go-live. |
+| `student_project_course` | yes | A link to the page of the Technion course through which a Student Project is taken, a web address starting with `https://`. The "How to take a project" box on the Projects page leads to it. |
 
 ```yaml
 name: ATLAS Lab
@@ -57,6 +59,7 @@ mission: |-
   AI Trust, Learning, Architecture, and Security
 mailbox: atlaslab.at.technion@gmail.com
 url: https://technion-atlas-lab.github.io
+student_project_course: https://example.org/student-project-course
 ```
 
 ---
@@ -229,4 +232,56 @@ members:
 recording: https://example.org/video/invited-talk
 ---
 Member Name spoke at the Example Symposium about how to contain an agent that may call tools.
+```
+
+---
+
+## `student-projects/<name>.md`: a Student Project
+
+One file per Student Project. The Projects page shows the Offered ones first, in title order,
+then the Completed ones, newest first (those of one year are in title order). A project also
+appears on the Profile of each supervisor who is a current Member.
+
+| Field | Required | What it is |
+|---|---|---|
+| `title` | yes | The project's title, shown as its heading. |
+| `status` | yes | `offered` (open for new students to take) or `completed`. |
+| `research_area` | yes | The file name of exactly one Research Area in `research-areas/`, without `.md`. |
+| `supervisors` | yes | A YAML list of the supervisors, each written once, as their file name in `members/`, without `.md`. The card names them in this order, each as their file has it, linked to the Profile for a current Member and unlinked for an Alumnus. |
+| `year` | Completed only, yes | The year the project was completed: `2024`. |
+| `students` | no | A YAML list of the names of the students who took the project. Add a name only when the Maintainer states that the student gave Consent for it (`CODING_STANDARDS.md`); without the field, the card names no student. |
+| `report`, `code`, `video` | no | Links to the project's report, code and video, each a web address starting with `https://`. Plain links: the site embeds nothing. |
+
+The text under the front matter is the **description**, and is required: plain text, with a
+blank line between paragraphs.
+
+Removing a Member's or a Research Area's file while a Student Project still names it stops the
+build, which names the project. To keep a departing Member's Student Projects, make them an Alumnus.
+
+```markdown
+---
+title: "Fuzzing Tool-Using Agents"
+status: offered
+research_area: agent-security
+supervisors:
+  - member-name
+---
+Build a fuzzer that feeds a tool-using agent malformed tool results.
+```
+
+```markdown
+---
+title: "A Red-Team Kit for Prompt Injection"
+status: completed
+year: 2024
+research_area: agent-security
+supervisors:
+  - member-name
+  - alumnus-name
+students:
+  - Student Name
+report: https://example.org/report.pdf
+code: https://example.org/code
+---
+A kit of prompt injection attacks for testing an agent before it ships.
 ```

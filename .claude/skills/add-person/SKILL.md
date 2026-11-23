@@ -26,7 +26,7 @@ Ask, in one round, only what the request left open:
 - **Role**, when it was not given.
 - **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right.
 - **Consent**, for each field under "Consent unstated", named in plain words: "Did <name> give Consent to publish their GitHub link and bio?" A field the Maintainer cannot confirm is dropped.
-- **File name**: the person's name without a title, in lowercase ASCII letters with hyphens (`Dr. Ada Lovelace` becomes `ada-lovelace`). Publications and News name the person by it, so it is chosen once, for good. It needs a question in two cases: a name written in another script (ask for its Latin spelling), or a file that already exists (ask for another name).
+- **File name**: the person's name without a title, in lowercase ASCII letters with hyphens (`Dr. Ada Lovelace` becomes `ada-lovelace`). Publications, News items and Student Projects name the person by it, so it is chosen once, for good. It needs a question in two cases: a name written in another script (ask for its Latin spelling), or a file that already exists (ask for another name).
 
 Done when: the role, the order and the file name are settled, and every field is under "With Consent" or dropped.
 

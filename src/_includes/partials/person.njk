@@ -1,4 +1,4 @@
-{#- Pieces the People page and the Profile pages share. #}
+{#- Pieces the pages that show or name people share. #}
 
 {#- A person's picture: their photo, or an avatar of their initials.
     `sizes` is how wide the picture is shown, so the browser fetches the right
@@ -10,4 +10,19 @@
 {%- else -%}
 <span class="avatar" aria-hidden="true">{{ person.initials }}</span>
 {%- endif -%}
+{%- endmacro -%}
+
+{#- The people beside a Publication, a News item or a Student Project, by
+    name, with commas between them. A current Member's name links to their
+    Profile, except on that Profile itself: `onProfile` is the slug of the
+    Member whose Profile shows the names. #}
+{%- macro names(people, onProfile=null) -%}
+{%- for person in people -%}
+{%- if person.profile and person.profile != onProfile -%}
+<a href="/people/{{ person.profile }}/">{{ person.name }}</a>
+{%- else -%}
+{{ person.name }}
+{%- endif -%}
+{%- if not loop.last %}, {% endif -%}
+{%- endfor -%}
 {%- endmacro -%}

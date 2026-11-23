@@ -1,4 +1,5 @@
 {#- A Publication's card, shared by the Research page and the Profile pages. #}
+{%- from "partials/person.njk" import names -%}
 
 {#- `onProfile` is the slug of the Member whose Profile shows the card: there
     the Member is named without a link to the page the visitor is already on,
@@ -10,16 +11,7 @@
     <p class="publication__area"><a href="/research/#{{ publication.area.slug }}">{{ publication.area.title }}</a></p>
     {%- endif %}
     <h3 class="publication__title">{{ publication.title }}</h3>
-    <p class="publication__authors">
-      {%- for author in publication.authors -%}
-      {%- if author.profile and author.profile != onProfile -%}
-      <a href="/people/{{ author.profile }}/">{{ author.name }}</a>
-      {%- else -%}
-      {{ author.name }}
-      {%- endif -%}
-      {%- if not loop.last %}, {% endif -%}
-      {%- endfor -%}
-    </p>
+    <p class="publication__authors">{{ names(publication.authors, onProfile) }}</p>
     <p class="publication__venue"><span>{{ publication.venue }}, {{ publication.year }}</span>
       {%- if publication.preprint %} <span class="badge">Preprint</span>{% endif %}</p>
     {%- for paragraph in publication.summary %}
