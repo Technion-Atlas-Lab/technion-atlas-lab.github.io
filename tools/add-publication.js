@@ -2,7 +2,7 @@
 // arXiv link (read from arXiv) or a file holding one BibTeX entry, and says
 // which authors it matched to Members. The add-publication skill runs it.
 //
-// Usage: npm run add-publication -- <DOI | arXiv link | file.bib> --area <research-area> [--name <file-name>]
+// Run it with: npm run add-publication (USAGE below says how).
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { bibtexCitation } from '../lib/bibtex.js';

@@ -9,5 +9,7 @@ Each file has the shape of a real answer, recorded on 2026-11-23 and cut down to
 services always send. The Publications in them are made up, and their authors are the people of
 the test content set (`tests/content/members/`), so a test can say which author is a Member.
 
+The `.bib` files are made-up BibTeX entries, each opening with a comment saying which case it is.
+
 To record a new shape: `curl` the address, save the answer here, replace the real paper's details
 with made-up ones, and add a line to `index.json`.

@@ -28,7 +28,8 @@ function addPublication(args, testInfo) {
 }
 
 // What publications/ of the test content set holds before the command runs.
-const BEFORE = fs.readdirSync('tests/content/publications').sort();
+const BEFORE = ['early-agents.md', 'enclave-attestation.md', 'prompt-injection-survey.md', 'sandbox-escapes.jpg',
+  'sandbox-escapes.md', 'side-channels.md'];
 
 test('a DOI becomes a Publication file, its authors matched to Members and Alumni', ({}, testInfo) => {
   const run = addPublication(['10.5555/example.2025.containing', '--area', 'agent-security'], testInfo);
@@ -59,8 +60,8 @@ test('the report names the file and says how each author was written', ({}, test
   expect(run.output).toContain('4. Test Director: Member (Prof. Test Director, members/test-director.md)');
 });
 
-test('a DOI written as a doi.org link, in another case, finds the same work', ({}, testInfo) => {
-  const run = addPublication(['https://doi.org/10.5555/example.2025.containing', '--area', 'agent-security'], testInfo);
+test('a DOI written as a doi.org link, in capital letters, finds the same work', ({}, testInfo) => {
+  const run = addPublication(['https://doi.org/10.5555/EXAMPLE.2025.Containing', '--area', 'agent-security'], testInfo);
   expect(run.status, run.output).toBe(0);
   expect(run.file('containing-tool-using-agents.md')).toContain('doi: 10.5555/example.2025.containing\n');
 });
@@ -236,4 +237,52 @@ test('a BibTeX entry with no venue is refused, naming the file and what is missi
   const run = addPublication(['tests/recorded/no-venue.bib', '--area', 'agent-security'], testInfo);
   expect(outcome(run), run.output).toEqual(REFUSED);
   expect(run.output).toMatch(/tests\/recorded\/no-venue\.bib.*\bvenue\b/);
+});
+
+test('a BibTeX entry in double quotes keeps its accents, its dollar sign and its link', ({}, testInfo) => {
+  const run = addPublication(['tests/recorded/hard-entry.bib', '--area', 'formal-methods'], testInfo);
+  expect(run.status, run.output).toBe(0);
+  expect(run.file('saving-5-million.md')).toBe(`---
+title: "Saving $5 Million: Detecting Violations"
+authors:
+  - Petr Šimon
+  - Zoë Müller
+venue: Example Journal of Formal Methods
+year: 2022
+research_area: formal-methods
+status: published
+paper: https://example.org/~member/paper--final.pdf
+---
+`);
+  expect(run.output).not.toContain('CHECK');
+});
+
+test('a title with < and > is refused whole, never cut short', ({}, testInfo) => {
+  const run = addPublication(['tests/recorded/angle-brackets.bib', '--area', 'formal-methods'], testInfo);
+  expect(outcome(run), run.output).toEqual(REFUSED);
+  expect(run.output).toMatch(/field "title" must be plain text, not HTML/);
+});
+
+test('a BibTeX entry as DBLP writes one for an arXiv paper becomes a Preprint, not a copy of a Publication with a like DOI', ({}, testInfo) => {
+  const run = addPublication(['tests/recorded/dblp-arxiv.bib', '--area', 'agent-security'], testInfo);
+  expect(run.status, run.output).toBe(0);
+  expect(run.file('a-paper-listed-under-corr.md')).toBe(`---
+title: A Paper Listed Under CoRR
+authors:
+  - Dana Outsider
+  - member: full-member
+venue: arXiv
+year: 2026
+research_area: agent-security
+status: preprint
+doi: 10.5555/example-2024.001.a
+arxiv: https://arxiv.org/abs/2603.01234
+---
+`);
+});
+
+test('a BibTeX abbreviation where a venue should be is reported to check', ({}, testInfo) => {
+  const run = addPublication(['tests/recorded/abbreviation.bib', '--area', 'agent-security'], testInfo);
+  expect(run.status, run.output).toBe(0);
+  expect(run.output).toMatch(/CHECK: .*\bvenue\b.*"esas".*abbreviation/);
 });

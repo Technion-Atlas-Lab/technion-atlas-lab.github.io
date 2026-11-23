@@ -1,6 +1,6 @@
 // The Lab's people, as the People page and the Profile pages show them.
 // Members and Alumni live in <content set>/members/; this loads and groups them.
-import { ALUMNUS_ROLE, MEMBER_ROLES, loadMembers } from '../../lib/content.js';
+import { ALUMNUS_ROLE, MEMBER_ROLES, loadMembers, withoutTitle } from '../../lib/content.js';
 import { photoSources } from '../../lib/photos.js';
 
 // The Lab Director's group gets one wide card.
@@ -16,11 +16,9 @@ const GROUP_TITLES = {
 };
 
 // The letters of an initials avatar: the first letters of the first and last
-// words of a name, skipping a leading title such as "Prof." or "Dr.". A last
-// word with a full stop is a name ("Ada B."), and a name is never skipped whole.
+// words of a name, without a leading title such as "Prof." or "Dr.".
 function initials(name) {
-  const words = name.split(/\s+/).filter(Boolean);
-  while (words.length > 1 && words[0].endsWith('.')) words.shift();
+  const words = withoutTitle(name).split(' ');
   const letters = [words[0], words.length > 1 ? words.at(-1) : ''].map((word) => [...(word ?? '')][0] ?? '');
   return letters.join('').toUpperCase();
 }

@@ -94,8 +94,8 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 - `GLOSSARY.md`: the Lab's vocabulary (Member, Publication, Research Area, ...).
 - `CODING_STANDARDS.md`: the rules a reviewer (person or agent) applies to every change.
 - `docs/adr/`: why the big decisions were made.
-- `docs/agents/`: how agents use the issue tracker, triage labels and domain docs, and the
-  places a new content type touches.
+- `docs/agents/`: how agents use the issue tracker, triage labels and domain docs, the
+  places a new content type touches, and how content is added during the Design phase.
 - `docs/research/`: the research behind the site: Israeli accessibility and privacy law,
   Technion rules, the reference lab sites, and other labs' agent setups.
 - `.claude/skills/`: the skills the agent uses here. The site's own skills are added as the site
