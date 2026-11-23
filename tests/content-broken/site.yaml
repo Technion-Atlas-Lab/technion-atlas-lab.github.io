@@ -9,5 +9,6 @@ url: http://test-site.example.org/atlas/
 student_project_course: example.org/courses/project-course
 map: example.org/maps/test-building
 positions: ""
+publications_since: 2020
 motto: Not a field the schema knows.
 constructor: An unknown field that shares its name with a built-in property.

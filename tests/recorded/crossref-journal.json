@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "publisher": "Example Press",
+    "DOI": "10.5555/example.2026.survey",
+    "type": "journal-article",
+    "created": { "date-parts": [[2026, 5, 2]], "date-time": "2026-05-02T09:12:40Z", "timestamp": 1777713160000 },
+    "source": "Crossref",
+    "title": ["A Survey of Prompt Injection &amp; Its Defences"],
+    "prefix": "10.5555",
+    "author": [
+      { "given": "Zoë", "family": "O'Neil", "sequence": "first", "affiliation": [] },
+      { "given": "Full", "family": "Member", "sequence": "additional", "affiliation": [] }
+    ],
+    "container-title": ["Example Journal of Agent Security"],
+    "original-title": [],
+    "subtitle": [],
+    "short-title": [],
+    "issued": { "date-parts": [[2026, 5]] },
+    "URL": "https://doi.org/10.5555/example.2026.survey",
+    "relation": { "has-preprint": [{ "id-type": "doi", "id": "10.48550/arxiv.2501.00002", "asserted-by": "object" }] },
+    "published": { "date-parts": [[2026, 5]] }
+  }
+}

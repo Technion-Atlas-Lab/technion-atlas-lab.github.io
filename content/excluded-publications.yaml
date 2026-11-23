@@ -1,0 +1,6 @@
+# The exclusion list: works an ORCID record credits to a Member that the Lab
+# does not list, such as a paper by another person of the same name.
+# npm run update-publications skips each one. content/SCHEMA.md says how an
+# entry is written; the update-publications skill adds one only after asking
+# the Maintainer.
+[]

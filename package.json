@@ -16,6 +16,7 @@
     "test:site": "playwright test -c playwright.site.config.js",
     "shots": "node tools/shots.js",
     "add-publication": "node tools/add-publication.js",
+    "update-publications": "node tools/update-publications.js",
     "check": "npm run validate && npm run lint && npm run build -- --quiet && npm run linkcheck && npm test && npm run test:site"
   },
   "devDependencies": {

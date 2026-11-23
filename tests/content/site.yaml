@@ -12,3 +12,5 @@ address: |-
   1 Example Road, Testville 1234567
 map: https://example.org/maps/test-building
 positions: We are always glad to hear from strong students, in the test content set too.
+# The first year update-publications reads new works from.
+publications_since: 2022

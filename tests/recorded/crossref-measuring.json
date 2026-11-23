@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "publisher": "Example Press",
+    "DOI": "10.5555/example.2026.measuring",
+    "type": "proceedings-article",
+    "created": { "date-parts": [[2026, 9, 14]], "date-time": "2026-09-14T11:02:05Z", "timestamp": 1789383725000 },
+    "source": "Crossref",
+    "title": ["Measuring How Agents Escape"],
+    "prefix": "10.5555",
+    "author": [
+      { "given": "Full", "family": "Member", "sequence": "first", "affiliation": [] },
+      { "given": "Dana", "family": "Outsider", "sequence": "additional", "affiliation": [] }
+    ],
+    "event": { "name": "2026 Example Conference on Agent Security", "location": "Haifa, Israel" },
+    "container-title": ["2026 Example Conference on Agent Security"],
+    "original-title": [],
+    "subtitle": [],
+    "short-title": [],
+    "issued": { "date-parts": [[2026, 9]] },
+    "URL": "https://doi.org/10.5555/example.2026.measuring",
+    "relation": {},
+    "published": { "date-parts": [[2026, 9]] }
+  }
+}

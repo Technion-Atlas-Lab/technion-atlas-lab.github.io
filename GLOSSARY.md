@@ -65,10 +65,16 @@ A person's agreement to publish specific Profile fields, or a student's agreemen
 The Member responsible for the website.
 
 **Site settings**:
-The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link, the postal address, the map link, the Positions text), kept in one file.
+The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link, the postal address, the map link, the Positions text, the first year `update-publications` reads new works from), kept in one file.
 
 **Citation**:
 A Publication's details as a **source** outside the site gives them: Crossref for a DOI, arXiv for an arXiv link, or a BibTeX entry. The site's tools turn a citation into a Publication's file.
+
+**ORCID record**:
+The list of works an ORCID iD's owner has claimed, read from ORCID's public API. A work in it may be a Publication the Lab lists, a new one, or one wrongly credited to the Member.
+
+**Exclusion list**:
+The committed list of works an ORCID record credits to a Member that the Lab does not list, each with its reason. Only the Maintainer adds to it.
 
 **Test content set**:
 Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.

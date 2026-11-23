@@ -1,0 +1,25 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "publisher": "Example Press",
+    "DOI": "10.5555/example.2019.old",
+    "type": "journal-article",
+    "created": { "date-parts": [[2019, 3, 1]], "date-time": "2019-03-01T08:00:00Z", "timestamp": 1551427200000 },
+    "source": "Crossref",
+    "title": ["Before the Lab: Isolating Processes"],
+    "prefix": "10.5555",
+    "author": [
+      { "given": "Full", "family": "Member", "sequence": "first", "affiliation": [] }
+    ],
+    "container-title": ["Example Journal of Systems"],
+    "original-title": [],
+    "subtitle": [],
+    "short-title": [],
+    "issued": { "date-parts": [[2019, 3]] },
+    "URL": "https://doi.org/10.5555/example.2019.old",
+    "relation": {},
+    "published": { "date-parts": [[2019, 3]] }
+  }
+}

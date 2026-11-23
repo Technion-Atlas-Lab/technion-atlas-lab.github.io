@@ -22,3 +22,6 @@ map: https://www.google.com/maps/search/?api=1&query=Taub+Building+Technion
 # The Positions text: the standing message at the top of the Positions page, one paragraph.
 # Design-phase placeholder wording. Replace in the Content phase.
 positions: "We are always glad to hear from strong students. Placeholder text: this paragraph shows where the Lab's standing message to prospective students will appear once real content is added."
+# The first year update-publications reads new works from: a work in a
+# Member's ORCID record from before it is not the Lab's.
+publications_since: 2020

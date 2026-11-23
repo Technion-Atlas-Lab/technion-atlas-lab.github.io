@@ -1,0 +1,1060 @@
+{
+  "last-modified-date": {
+    "value": 1763892000000
+  },
+  "group": [
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2025.containing",
+            "external-id-normalized": {
+              "value": "10.5555/example.2025.containing",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1001,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Containing Tool-Using Agents: A Field Study"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2025.containing",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2025.containing",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2025"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1001",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": []
+      },
+      "work-summary": [
+        {
+          "put-code": 1002,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Containing tool-using agents: a field study"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2025"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1002",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/EXAMPLE.2024#001?a",
+            "external-id-normalized": {
+              "value": "10.5555/example.2024#001?a",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1003,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Auditing Side Channels"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/EXAMPLE.2024#001?a",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2024#001?a",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2024"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1003",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2023.enclave",
+            "external-id-normalized": {
+              "value": "10.5555/example.2023.enclave",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          },
+          {
+            "external-id-type": "arxiv",
+            "external-id-value": "arXiv:2302.00004",
+            "external-id-normalized": {
+              "value": "arxiv:2302.00004",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1004,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Zero-trust attestation for enclaves"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2023.enclave",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2023.enclave",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              },
+              {
+                "external-id-type": "arxiv",
+                "external-id-value": "arXiv:2302.00004",
+                "external-id-normalized": {
+                  "value": "arxiv:2302.00004",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1004",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2022.early",
+            "external-id-normalized": {
+              "value": "10.5555/example.2022.early",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1005,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Early Work on Agent Isolation"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2022.early",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2022.early",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2022"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1005",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/wrong.person",
+            "external-id-normalized": {
+              "value": "10.5555/wrong.person",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1006,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Glazes of the Late Bronze Age"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/wrong.person",
+                "external-id-normalized": {
+                  "value": "10.5555/wrong.person",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2024"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1006",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/2026.01.04.463034",
+            "external-id-normalized": {
+              "value": "10.5555/2026.01.04.463034",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1007,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Attesting Enclaves & Their Agents"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/2026.01.04.463034",
+                "external-id-normalized": {
+                  "value": "10.5555/2026.01.04.463034",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "preprint",
+          "publication-date": {
+            "year": {
+              "value": "2026"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1007",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.48550/arXiv.2603.01234",
+            "external-id-normalized": {
+              "value": "10.48550/arxiv.2603.01234",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1008,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Agents & Their Tools"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.48550/arXiv.2603.01234",
+                "external-id-normalized": {
+                  "value": "10.48550/arxiv.2603.01234",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "preprint",
+          "publication-date": {
+            "year": {
+              "value": "2026"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1008",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "arxiv",
+            "external-id-value": "arXiv:2605.00006",
+            "external-id-normalized": {
+              "value": "arxiv:2605.00006",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1009,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Escaping Agents, Measured"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "arxiv",
+                "external-id-value": "arXiv:2605.00006",
+                "external-id-normalized": {
+                  "value": "arxiv:2605.00006",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "preprint",
+          "publication-date": {
+            "year": {
+              "value": "2026"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1009",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2026.measuring",
+            "external-id-normalized": {
+              "value": "10.5555/example.2026.measuring",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1010,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Measuring How Agents Escape"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2026.measuring",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2026.measuring",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2026"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1010",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2026.survey",
+            "external-id-normalized": {
+              "value": "10.5555/example.2026.survey",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1011,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "A Survey of Prompt Injection & Its Defences"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2026.survey",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2026.survey",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2026"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1011",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": []
+      },
+      "work-summary": [
+        {
+          "put-code": 1012,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "A Workshop Paper Without Identifiers"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2024"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1012",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/data.traces",
+            "external-id-normalized": {
+              "value": "10.5555/data.traces",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1013,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Agent Escape Traces"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/data.traces",
+                "external-id-normalized": {
+                  "value": "10.5555/data.traces",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "data-set",
+          "publication-date": {
+            "year": {
+              "value": "2024"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1013",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1763892000000
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.5555/example.2019.old",
+            "external-id-normalized": {
+              "value": "10.5555/example.2019.old",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": null,
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 1014,
+          "created-date": {
+            "value": 1763892000000
+          },
+          "last-modified-date": {
+            "value": 1763892000000
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-1825-0097",
+              "path": "0000-0002-1825-0097",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Example Source"
+            }
+          },
+          "title": {
+            "title": {
+              "value": "Before the Lab: Isolating Processes"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.5555/example.2019.old",
+                "external-id-normalized": {
+                  "value": "10.5555/example.2019.old",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": null,
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2019"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-1825-0097/work/1014",
+          "display-index": "1"
+        }
+      ]
+    }
+  ],
+  "path": "/0000-0002-1825-0097/works"
+}

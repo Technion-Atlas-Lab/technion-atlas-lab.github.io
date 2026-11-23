@@ -12,14 +12,15 @@ the same checks and publishes; if any check fails, nothing is published.
 
 | To change | Edit |
 |---|---|
-| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, or the Positions text (the standing message that opens Positions and fills Home's "Join the Lab" band) | `content/site.yaml` |
+| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, the Positions text (the standing message that opens Positions and fills Home's "Join the Lab" band), or the first year `update-publications` reads new Publications from | `content/site.yaml` |
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file, or ask Claude, which uses the `add-person` skill; remove one: delete it, unless a Publication names them as an author, a News item relates to them or a Student Project names them as a supervisor, in which case make them an Alumnus, with the `move-to-alumni` skill) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata from the published copy; the committed file keeps whatever it carries. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
-| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary, or whether Home features it (`featured: true`) | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it) |
+| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary, or whether Home features it (`featured: true`) | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it. To find Members' new papers, ask Claude to update the Publications: the `update-publications` skill reads their ORCID records) |
+| A work in a Member's ORCID record that the Lab does not list (a paper by someone of the same name) | `content/excluded-publications.yaml`, the exclusion list |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
 | A Student Project's title, description, status (Offered or Completed), Research Area, supervisors, year, students' names or links to its report, code and video | That project's file in `content/student-projects/` (add a Student Project: add a file; a student's name goes in only with their Consent) |
 | The text of the "How to take a project" box | `src/pages/projects.njk` |
@@ -55,13 +56,14 @@ Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` on
 | `npx playwright-cli install-browser chrome-for-testing` | One-time install of the browser the agent's Playwright CLI opens (its own build, separate from the tests' browsers). `.playwright/cli.config.json` tells the CLI to use it. |
 | `npm run check` | Runs all six checks above in order (validate, lint, build, link check, slice tests, site-wide checks) and stops at the first that fails. Run it before opening a pull request. |
 | `npm run add-publication -- <source> --area <research-area>` | Writes a Publication's file from a DOI (read from Crossref), an arXiv link (read from arXiv) or a file holding one BibTeX entry, with each author who is a Member or an Alumnus named by their file. Without `--area` it writes nothing and lists the Research Areas. `--name <file-name>` sets the file's name. |
+| `npm run update-publications` | Reads the ORCID record of each current Member who has an ORCID iD, adds to a listed Publication the DOI or arXiv link it lacks, and reports the new works (with the `add-publication` command for each), the works on the exclusion list and those to review. It changes no other field. A work the Lab does not list is skipped when it is older than `publications_since` in `content/site.yaml`, or than `--since <year>` for one run. |
 | `npm run shots` | Saves screenshots of every page at 390, 768 and 1280 px to `.shots/`, for review. `npm run shots -- /about/` takes just the pages named. |
 
 The slice tests never read `content/`. They build the site from the **test content set** in
 `tests/content/`, so real content can change without breaking them. `tests/content-broken/` is
 deliberately invalid: a test checks that the build refuses it. `tests/recorded/` holds recorded
-Crossref and arXiv responses: the tests of `npm run add-publication` read those and never touch
-the network.
+ORCID, Crossref and arXiv responses: the tests of `npm run add-publication` and
+`npm run update-publications` read those and never touch the network.
 
 The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
 `content/` and visit every page in its sitemap, and the page-not-found page, at 320, 390, 768 and 1280 px in Chromium, and at 390 px

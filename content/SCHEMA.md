@@ -35,6 +35,7 @@ npm run validate
 | News item | `news/<name>.md` |
 | Student Project | `student-projects/<name>.md` |
 | Partner | `partners/<name>.md` |
+| Exclusion list | `excluded-publications.yaml` |
 
 ---
 
@@ -53,6 +54,7 @@ Plain YAML, one `field: value` per line.
 | `address` | yes | The Lab's postal address, building first. Write it as a YAML block (see the example below): the Contact and About pages show each line on a line of its own. |
 | `map` | yes | A link to a map that shows the Lab's building, a web address starting with `https://`. The "Open the map" link on the Contact page leads to it. A plain link: the site embeds nothing. |
 | `positions` | yes | The Positions text: the standing message to prospective students that opens the Positions page and fills Home's "Join the Lab" band, one paragraph. Quote it when it holds a colon and a space. |
+| `publications_since` | yes | The first year `npm run update-publications` reads new works from: `2020`. A work in a Member's ORCID record from before it is skipped, unless the Lab lists it. The site does not show it. |
 
 ```yaml
 name: ATLAS Lab
@@ -69,6 +71,7 @@ address: |-
   Technion City, Haifa 3200003, Israel
 map: https://example.org/map
 positions: We are always glad to hear from strong students.
+publications_since: 2020
 ```
 
 ---
@@ -317,4 +320,31 @@ name: Example Science Foundation
 logo: example-science-foundation.png
 link: https://example.org/foundation
 ---
+```
+
+---
+
+## `excluded-publications.yaml`: the exclusion list
+
+The works an ORCID record credits to a Member that the Lab does not list, such as a paper by
+another person of the same name. `npm run update-publications` skips each one, and checks this
+file when it runs: the build does not read it. The `update-publications` skill adds an entry only
+after asking the Maintainer.
+
+A YAML list. Each entry names one work by exactly one of `doi`, `arxiv` or `title`, and says why.
+
+| Field | Required | What it is |
+|---|---|---|
+| `doi` | one of three | The work's DOI alone: `10.1234/example`. |
+| `arxiv` | one of three | The work's arXiv link: `https://arxiv.org/abs/2603.01234`. Quote an id written alone (`"2603.01234"`): unquoted, YAML reads it as a number. |
+| `title` | one of three | The work's title, for a work with neither; any spelling matches. |
+| `reason` | yes | Why the Lab does not list it. |
+
+An empty list is `[]`.
+
+```yaml
+- doi: 10.1234/example
+  reason: Written by another person of the same name.
+- arxiv: https://arxiv.org/abs/2603.01234
+  reason: Not the Lab's work; written before the author joined.
 ```
