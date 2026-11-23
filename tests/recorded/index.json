@@ -1,0 +1,7 @@
+{
+  "https://api.crossref.org/works/10.5555%2Fexample.2025.containing": { "status": 200, "file": "crossref-proceedings.json" },
+  "https://api.crossref.org/works/10.5555%2F2026.01.04.463034": { "status": 200, "file": "crossref-preprint.json" },
+  "https://api.crossref.org/works/10.5555%2Fno-such-work": { "status": 404, "file": "crossref-not-found.txt" },
+  "https://export.arxiv.org/api/query?id_list=2603.01234": { "status": 200, "file": "arxiv-entry.xml" },
+  "https://export.arxiv.org/api/query?id_list=9999.99999": { "status": 200, "file": "arxiv-no-entry.xml" }
+}

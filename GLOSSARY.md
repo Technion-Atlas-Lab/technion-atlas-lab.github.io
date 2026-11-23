@@ -64,6 +64,9 @@ The Member responsible for the website.
 **Site settings**:
 The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link), kept in one file.
 
+**Citation**:
+A Publication's details as a **source** outside the site gives them: Crossref for a DOI, arXiv for an arXiv link, or a BibTeX entry. The site's tools turn a citation into a Publication's file.
+
 **Test content set**:
 Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.
 

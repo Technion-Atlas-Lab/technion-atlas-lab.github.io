@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "institution": [{ "name": "Example Preprint Server" }],
+    "publisher": "Example Preprints Inc",
+    "DOI": "10.5555/2026.01.04.463034",
+    "type": "posted-content",
+    "subtype": "preprint",
+    "source": "Crossref",
+    "title": ["Attesting Enclaves &amp; Their Agents"],
+    "prefix": "10.5555",
+    "author": [
+      { "given": "Bare", "family": "Member", "sequence": "first", "affiliation": [] },
+      { "name": "The Example Consortium", "sequence": "additional", "affiliation": [] }
+    ],
+    "container-title": [],
+    "group-title": "Security",
+    "posted": { "date-parts": [[2026, 1, 4]] },
+    "issued": { "date-parts": [[2026, 1, 4]] },
+    "URL": "https://doi.org/10.5555/2026.01.04.463034",
+    "relation": {},
+    "published": { "date-parts": [[2026, 1, 4]] }
+  }
+}
