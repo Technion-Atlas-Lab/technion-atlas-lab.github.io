@@ -1,4 +1,5 @@
 {#- A Student Project's card, shared by the Projects page and the Profile pages. #}
+{%- from "partials/person.njk" import names -%}
 
 {#- `onProfile` is the slug of the Member whose Profile shows the card: there
     the Member is named without a link to the page the visitor is already on,
@@ -16,16 +17,7 @@
   {%- endfor %}
   <dl class="field-list student-project__fields">
     <div><dt>Research Area</dt><dd><a href="/research/#{{ project.area.slug }}">{{ project.area.title }}</a></dd></div>
-    <div><dt>{{ "Supervisors" if project.supervisors.length > 1 else "Supervisor" }}</dt><dd>
-      {%- for person in project.supervisors -%}
-      {%- if person.profile and person.profile != onProfile -%}
-      <a href="/people/{{ person.profile }}/">{{ person.name }}</a>
-      {%- else -%}
-      {{ person.name }}
-      {%- endif -%}
-      {%- if not loop.last %}, {% endif -%}
-      {%- endfor -%}
-    </dd></div>
+    <div><dt>{{ "Supervisors" if project.supervisors.length > 1 else "Supervisor" }}</dt><dd>{{ names(project.supervisors, onProfile) }}</dd></div>
     {%- if project.students.length %}
     <div><dt>{{ "Students" if project.students.length > 1 else "Student" }}</dt><dd>{{ project.students | join(", ") }}</dd></div>
     {%- endif %}

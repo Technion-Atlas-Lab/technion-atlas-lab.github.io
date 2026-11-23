@@ -479,8 +479,9 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   font-size: 1.5rem;
 }
 
-/* Opened by its address (/research/#area, /privacy/#change), a section keeps some room above its heading. */
+/* Opened by its address (/research/#area, /privacy/#change, /projects/#offered), a section keeps some room above its heading. */
 .research-area h2,
+.project-group h2,
 .text-page h2 { scroll-margin-top: 1.5rem; }
 
 .research-area__description { max-width: 44rem; margin: 0 0 1rem; }
@@ -518,7 +519,8 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 .publication p.publication__summary { margin-top: 0.75rem; }
 
-.publication .link-list { margin-top: 0.875rem; font-weight: 600; }
+.publication .link-list,
+.student-project .link-list { margin-top: 0.875rem; font-weight: 600; }
 
 .publication__figure {
   display: block;
@@ -576,7 +578,6 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--teal);
   font-size: 1.5rem;
-  scroll-margin-top: 1.5rem; /* opened by its address (/projects/#offered), it keeps some room above */
 }
 
 .student-project {
@@ -601,8 +602,6 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 /* "Research Area" is longer than a Profile's labels; the values still line up. */
 .student-project__fields dt { min-width: 7.5rem; }
-
-.student-project .link-list { margin-top: 0.875rem; font-weight: 600; }
 
 /* The badge of a Preprint, a talk or an Offered Student Project: navy on the teal, 10.2:1. */
 .badge {

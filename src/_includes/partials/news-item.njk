@@ -1,4 +1,5 @@
 {#- A News item, shared by the News page and the Profile pages. #}
+{%- from "partials/person.njk" import names -%}
 
 {#- `level` is the item's heading level: 2 on News, and 3 on a Profile, where
     the items sit under a "News" heading. `onProfile` is the slug of the Member
@@ -13,15 +14,7 @@
   <p>{{ paragraph }}</p>
   {%- endfor %}
   {%- if item.relatedMembers.length %}
-  <p class="news-item__people">People: {% for person in item.relatedMembers -%}
-    {%- if person.profile and person.profile != onProfile -%}
-    <a href="/people/{{ person.profile }}/">{{ person.name }}</a>
-    {%- else -%}
-    {{ person.name }}
-    {%- endif -%}
-    {%- if not loop.last %}, {% endif -%}
-    {%- endfor -%}
-  </p>
+  <p class="news-item__people">People: {{ names(item.relatedMembers, onProfile) }}</p>
   {%- endif %}
   {%- if item.talk %}
   {#- A plain link: the site embeds nothing. Named with the title, so a screen reader's list of links tells one "Recording" from the next. #}
