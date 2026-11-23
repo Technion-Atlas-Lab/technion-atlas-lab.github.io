@@ -19,7 +19,7 @@ the same checks and publishes; if any check fails, nothing is published.
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
-| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: add a file; its figure goes beside it) |
+| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it) |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
 | The accessibility statement: its text, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
 | The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk`, with its "last updated" date at the bottom; `tests/privacy.spec.js` expects the same address and date |
@@ -46,11 +46,14 @@ Install [Node.js](https://nodejs.org/) 22.12 or newer, then run `npm install` on
 | `npm run test:site` | Runs the site-wide checks on every page of the real site. Run `npx playwright install chromium webkit` once first. |
 | `npx playwright-cli install-browser chrome-for-testing` | One-time install of the browser the agent's Playwright CLI opens (its own build, separate from the tests' browsers). `.playwright/cli.config.json` tells the CLI to use it. |
 | `npm run check` | Runs all six checks above in order (validate, lint, build, link check, slice tests, site-wide checks) and stops at the first that fails. Run it before opening a pull request. |
+| `npm run add-publication -- <source> --area <research-area>` | Writes a Publication's file from a DOI (read from Crossref), an arXiv link (read from arXiv) or a file holding one BibTeX entry, with each author who is a Member or an Alumnus named by their file. Without `--area` it writes nothing and lists the Research Areas. `--name <file-name>` sets the file's name. |
 | `npm run shots` | Saves screenshots of every page at 390, 768 and 1280 px to `.shots/`, for review. `npm run shots -- /about/` takes just the pages named. |
 
 The slice tests never read `content/`. They build the site from the **test content set** in
 `tests/content/`, so real content can change without breaking them. `tests/content-broken/` is
-deliberately invalid: a test checks that the build refuses it.
+deliberately invalid: a test checks that the build refuses it. `tests/recorded/` holds recorded
+Crossref and arXiv responses: the tests of `npm run add-publication` read those and never touch
+the network.
 
 The **site-wide checks** (`tests/site-wide/`) do the opposite: they build the site from the real
 `content/` and visit every page in its sitemap, and the page-not-found page, at 320, 390, 768 and 1280 px in Chromium, and at 390 px
@@ -98,6 +101,8 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
 - `.claude/skills/`: the skills the agent uses here. The site's own skills are added as the site
   is built. `playwright-cli` comes from Playwright (installed by `npx playwright-cli install
   --skills`) and lets the agent open the site in a browser to see what a visitor sees.
+  `add-publication` adds a Publication from a DOI, an arXiv link or a BibTeX entry, and
+  `add-news` writes a News item or a talk.
   `exploratory-qa` sends two agents, a happy-path visitor and an adversarial visitor, through
   the locally served site after each ticket that changes templates, styles or behaviour.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install

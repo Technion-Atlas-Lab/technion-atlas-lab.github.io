@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "publisher": "Example Press",
+    "DOI": "10.5555/example.2025.containing",
+    "type": "proceedings-article",
+    "created": { "date-parts": [[2025, 12, 12]], "date-time": "2025-12-12T20:38:49Z", "timestamp": 1765571929000 },
+    "page": "770-778",
+    "source": "Crossref",
+    "title": ["Containing <i>Tool-Using</i> Agents: A Field Study"],
+    "prefix": "10.5555",
+    "author": [
+      { "given": "Full", "family": "Member", "sequence": "first", "affiliation": [] },
+      { "given": "Casey", "family": "Collaborator", "sequence": "additional", "affiliation": [] },
+      { "given": "Alumnus", "family": "Example", "sequence": "additional", "affiliation": [] },
+      { "given": "Test", "family": "Director", "sequence": "additional", "affiliation": [] }
+    ],
+    "event": { "name": "2025 Example Symposium on Agent Security (ESAS)", "location": "Haifa, Israel" },
+    "container-title": ["2025 Example Symposium on Agent Security (ESAS)"],
+    "original-title": [],
+    "subtitle": [],
+    "short-title": [],
+    "issued": { "date-parts": [[2025, 6]] },
+    "URL": "https://doi.org/10.5555/example.2025.containing",
+    "relation": {},
+    "published": { "date-parts": [[2025, 6]] }
+  }
+}
