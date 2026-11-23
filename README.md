@@ -12,20 +12,21 @@ the same checks and publishes; if any check fails, nothing is published.
 
 | To change | Edit |
 |---|---|
-| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, or the Positions text (the standing message that opens Positions) | `content/site.yaml` |
+| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, or the Positions text (the standing message that opens Positions and fills Home's "Join the Lab" band) | `content/site.yaml` |
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file, or ask Claude, which uses the `add-person` skill; remove one: delete it, unless a Publication names them as an author, a News item relates to them or a Student Project names them as a supervisor, in which case make them an Alumnus, with the `move-to-alumni` skill) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata from the published copy; the committed file is public too, so strip it first, as the `add-person` skill does. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
-| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it) |
+| A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary, or whether Home features it (`featured: true`) | That Publication's file in `content/publications/` (add a Publication: `npm run add-publication` writes the file from a DOI, an arXiv link or a BibTeX entry; its figure goes beside it) |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
 | A Student Project's title, description, status (Offered or Completed), Research Area, supervisors, year, students' names or links to its report, code and video | That project's file in `content/student-projects/` (add a Student Project: add a file; a student's name goes in only with their Consent) |
 | The text of the "How to take a project" box | `src/pages/projects.njk` |
 | A Partner on the "Collaborating with" page: its name, logo or link | That Partner's file in `content/partners/` (add a Partner: add a file; its logo goes beside it. The build resizes the logo and removes its metadata.) |
 | About: the Lab's story, the Lab Director's introduction, the sentence about where the Lab is | `src/pages/about.njk` (the mission and the address on it come from `content/site.yaml`, the Lab Director's name from `content/members/`) |
 | Positions: how to apply, the note for undergraduates | `src/pages/positions.njk` |
+| Home: its section headings, the "Join the Lab" heading and button | `src/pages/index.njk` (the name, mission and Positions text on it come from `content/site.yaml`; the Research Areas, the 3 latest News items and the featured Publications from their folders in `content/`) |
 | Contact: the wording around the Lab mailbox, the address and the map link | `src/pages/contact.njk` |
 | The accessibility statement: its text, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
 | The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk`, with its "last updated" date at the bottom; `tests/privacy.spec.js` expects the same address and date |
