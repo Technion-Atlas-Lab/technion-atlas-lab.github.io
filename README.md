@@ -15,7 +15,7 @@ the same checks and publishes; if any check fails, nothing is published.
 | The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
-| A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it, unless a Publication names them as an author or a News item relates to them, in which case make them an Alumnus) |
+| A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file, or ask Claude, which uses the `add-person` skill; remove one: delete it, unless a Publication names them as an author or a News item relates to them, in which case make them an Alumnus, with the `move-to-alumni` skill) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
@@ -100,6 +100,9 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
   --skills`) and lets the agent open the site in a browser to see what a visitor sees.
   `exploratory-qa` sends two agents, a happy-path visitor and an adversarial visitor, through
   the locally served site after each ticket that changes templates, styles or behaviour.
+  `add-person` adds a Member from the details you give ("add Dr. Ada Lovelace as a postdoc; she
+  gave Consent for her email, ..."), and `move-to-alumni` turns a Member who left into an Alumnus
+  ("Ada graduated, move her to the Alumni"). Each asks only what you left open.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install
   it the first time you trust this folder.
 

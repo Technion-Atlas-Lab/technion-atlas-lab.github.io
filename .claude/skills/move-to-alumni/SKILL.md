@@ -9,20 +9,20 @@ The Alumnus fields and their formats are in the `members/<name>.md` section of `
 
 ## 1. Find the Member
 
-Find the file in `content/members/` whose `name` the Maintainer means, and record what names it:
+Find the file in `content/members/` whose `name` the Maintainer means (`grep -H '^name:' content/members/*.md`), and record the Publications and News items that name it, where `<file-name>` is the file's name without `.md`:
 
 ```bash
-grep -rn "<file-name>$" content/publications content/news
+grep -rnw "<file-name>" content/publications content/news
 ```
 
-Done when: exactly one file is chosen, its `role` is a current Member's, and the grep's output is saved for step 3. With no match or several, ask the Maintainer which.
+Done when: exactly one file is chosen, its `role` is any but `Alumnus`, and the grep's output is saved for step 3; a Member credited nowhere gives no output. With no match or several, ask the Maintainer which.
 
 ## 2. Ask the judgement calls, in one round
 
 Ask only what the request left open:
 
 - **Year** the person left the Lab; propose the current year.
-- **Current position**: a Profile field, so it is written only when the Maintainer says the person gave Consent to publish it. Without Consent, the field is left out.
+- **Current position**: what it is, and whether the person gave Consent to publish it. It is a Profile field, so the position alone is not Consent; without Consent, the field is left out.
 
 Done when: the year is settled, and the current position is settled with Consent or left out.
 
@@ -31,10 +31,10 @@ Done when: the year is settled, and the current position is settled with Consent
 The file keeps its name: Publications and News name the person by it, which is what keeps them credited.
 
 - `former_role`: the role the Member held. Then `role: Alumnus`, `year`, and `current_position` when settled.
-- `order`: the Alumni are listed by most recent `year` first. Give the person their place by that rule and renumber the other Alumni files to match; within one year, keep the order already there and put the person last.
-- Remove every other field except `name` and `photo`, and remove the bio. An Alumnus has no Profile page, so the site publishes none of them, and Consent covered publishing them on the Profile.
+- `order`: the Alumni are numbered from 1 by most recent `year` first; within one year, those already there keep their order and the person comes last. Renumber the other Alumni files to match: with Alumni of 2025, 2024 and 2023 numbered 1, 2, 3, a person leaving in 2026 becomes 1 and the others 2, 3, 4. The role group the person left keeps its numbers; a gap is fine.
+- The file ends holding `name`, `role`, `order`, `former_role`, `year`, and `photo` and `current_position` when it has them: what the Alumni row shows. Remove every other field and the bio. An Alumnus has no Profile page to publish them on, and the repository is public.
 
-Done when: `npm run validate` passes, `git status --short` lists only files in `content/members/`, and the grep from step 1 prints the same lines as before.
+Done when: `npm run validate` passes, the file is still at the same path, and the grep from step 1 prints the same lines as before.
 
 ## 4. Finish
 
