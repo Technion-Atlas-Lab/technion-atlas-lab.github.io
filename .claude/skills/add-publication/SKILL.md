@@ -1,11 +1,11 @@
 ---
 name: add-publication
-description: Adds a Publication to the Lab's site as a file in content/publications/, from a DOI, an arXiv link or a BibTeX entry. Use when the Maintainer asks to add or list a paper or a Preprint.
+description: Adds a Publication from a DOI, an arXiv link or a BibTeX entry. Use when the Maintainer asks to add a paper.
 ---
 
 # Add a Publication
 
-`npm run add-publication` reads the citation and writes the file; you never type a citation by hand. The README's Commands table says what the command takes; the fields are in the `publications/<name>.md` section of `content/SCHEMA.md`.
+`npm run add-publication` reads the citation and writes the file, so every detail of the citation comes from the source. The README's Commands table says what the command takes; the fields are in the `publications/<name>.md` section of `content/SCHEMA.md`.
 
 ## 1. Settle the source
 
@@ -17,10 +17,10 @@ Done when: you hold exactly one DOI, arXiv link or `.bib` path.
 
 ## 2. Ask the judgement calls, in one round
 
-- **Research Area**: the Maintainer assigns it, always. Run the command with the source and no `--area`: it lists the Research Areas. Show the list and ask which one. An area named in the request is the answer already.
-- **Design phase**: `docs/agents/design-phase.md`, with `publications` as the folder.
+- **Research Area**: the Maintainer assigns it. Run the command with the source and no `--area`: it lists the Research Areas. Show the list and ask which one. An area named in the request is the answer already.
+- **Placeholder or real**: when `grep -l 'Design-phase placeholder' content/publications/*.md` prints a file, the site is in the Design phase: read `docs/agents/design-phase.md` and ask its question.
 
-Done when: the Research Area is one of the file names the command listed, and the Design-phase question, when it applies, is answered.
+Done when: the Research Area is one of the file names the command listed, and in the Design phase the Maintainer has said placeholder or real.
 
 ## 3. Run the command
 
@@ -38,13 +38,12 @@ Read the file and the command's report, then:
 
 - **Every `CHECK:` line settled**, as the line says. An author who "may be" a Member is the Maintainer's to confirm: ask, and on a yes replace the name with `member: <file name>`.
 - **The Maintainer's own additions**, each only when the request gave it: the `arxiv` link passed over in step 1, `pdf`, `code` and `video` links, `featured: true`, a figure beside the file with its `figure_alt`, and the summary, in the Maintainer's words, as plain text under the front matter.
+- **The title, venue, year and status told to the Maintainer** as the file has them, so they can correct what the source got wrong.
 
-Beyond those two, the file stays as the command wrote it. Tell the Maintainer the title, venue, year and status as written, so they can correct what the source got wrong.
+Done when: `npm run validate` passes, every `CHECK:` line is settled, the Maintainer has been told the four details, and the file differs from what the command wrote only by a settled `CHECK:` line, an addition the Maintainer gave, a correction they asked for, or the placeholder comment.
 
-Done when: `npm run validate` passes, every `CHECK:` line is settled, and the file differs from what the command wrote only by a settled `CHECK:` line, an addition the Maintainer gave, or the placeholder comment.
+## 5. Open the pull request
 
-## 5. Finish
-
-Follow "Branches" and "Before you finish any change" in `CLAUDE.md`. The changed pages are `/research/` and `/people/<file-name>/` for each author who is a current Member.
+The changed pages are `/research/` and `/people/<file-name>/` for each author who is a current Member.
 
 Done when: the pull request is open and its body names the source, the Research Area the Maintainer assigned, and each author written as a Member or an Alumnus.
