@@ -1,61 +1,56 @@
 ---
 name: add-person
-description: Adds a person to the Lab's site as a file in content/members/, holding only the Profile fields that have Consent. Use when the Maintainer asks to add a Member (a new student, postdoc or staff member), or an Alumnus the site never listed.
+description: Adds a person to the Lab's site. Use when the Maintainer asks to add a Member, or an Alumnus the site never listed.
 ---
 
 # Add a person
 
-The fields, their formats and the roles are in the `members/<name>.md` section of `content/SCHEMA.md`.
+The fields, their formats and the roles are in the `members/<name>.md` section of `content/SCHEMA.md`. Two branches have their own home: a photo ([`photo.md`](photo.md)) and an Alumnus (the last section here).
 
 ## 1. Sort what the Maintainer gave
 
 Put every detail in the request under one of three headings:
 
-- **Stated**: the name, and the role when given; for an Alumnus, also the former role and the year they left.
+- **Stated**: the name, and the role when given.
 - **With Consent**: each Profile field the Maintainer says the person gave Consent for.
 - **Consent unstated**: each Profile field given with no word on Consent.
 
-The bio, the photo and an Alumnus's current position are Profile fields too. A statement of Consent covers the fields it names; a field given in another sentence is "Consent unstated".
-
-Every value comes from the Maintainer's words: the file holds what they gave, and nothing you found by looking the person up.
+The bio and the photo are Profile fields too. A statement of Consent covers the fields it names; a field given in another sentence is "Consent unstated".
 
 Done when: every detail about the person in the request is under one heading.
 
-## 2. Ask the judgement calls, in one round
+## 2. Ask once
 
-Ask only what the request left open:
+Ask, in one round, only what the request left open:
 
-- **Role**, when it was not given; for an Alumnus, the former role and the year they left.
-- **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right. For an Alumnus the place follows the rule in the `order` row of `content/SCHEMA.md`, with nothing to ask.
-- **Consent**, for each field under "Consent unstated", named in plain words: "Did <name> give Consent to publish their GitHub link and bio?"
-- **File name**, in two cases: the name is not in Latin letters (ask for its Latin spelling), or the file already exists (ask for another name). The rule for the name is in step 3.
+- **Role**, when it was not given.
+- **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right.
+- **Consent**, for each field under "Consent unstated", named in plain words: "Did <name> give Consent to publish their GitHub link and bio?" A field the Maintainer cannot confirm is dropped.
+- **File name**: the person's name without a title, in lowercase ASCII letters with hyphens (`Dr. Ada Lovelace` becomes `ada-lovelace`). Publications and News name the person by it, so it is chosen once, for good. It needs a question in two cases: a name written in another script (ask for its Latin spelling), or a file that already exists (ask for another name).
 
-Done when: the role, the order and the file name are settled, and every field is under "With Consent" or dropped. A field whose Consent the Maintainer could not confirm is dropped.
+Done when: the role, the order and the file name are settled, and every field is under "With Consent" or dropped.
 
 ## 3. Write the file
 
-Create `content/members/<file-name>.md`. The file name is the person's name without a title, in lowercase ASCII letters with hyphens: `Dr. Ada Lovelace` becomes `ada-lovelace.md`. It becomes the address of the Profile page, and Publications and News name the person by it, so it stays for good. The `name` field keeps the title.
-
-The file holds `name`, `role`, `order` and the fields under "With Consent"; a bio with Consent is the text under the front matter. An Alumnus also gets `former_role` and `year`.
+Create `content/members/<file-name>.md` holding `name` (with its title), `role`, `order` and the fields under "With Consent"; a bio with Consent is the text under the front matter. Every value in the file is one the Maintainer gave.
 
 When the person takes a place before the last in their role group, raise the `order` of each Member after them, so no two share a number. A gap in the numbers is fine.
 
-**Photo**: the repository is public and its history is permanent, so the photo is committed already stripped of its embedded metadata (camera, author, location). Write it beside the Member's file under the person's file name, with the extension of the photo given, and name it in the `photo` field. The command reads one path and writes another, so a photo already lying at the target path is first moved out to `.builds/`:
+When a photo is under "With Consent", follow [`photo.md`](photo.md).
 
-```bash
-node -e "import('sharp').then(({ default: sharp }) => sharp(process.argv[1]).rotate().toFile(process.argv[2]))" <the photo given> content/members/<file-name>.<extension>
-```
+Done when: `npm run validate` passes, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", and the text under the front matter is empty or a bio with Consent.
 
-Then print what is left:
+## 4. Open the pull request
 
-```bash
-node -e "import('sharp').then(async ({ default: sharp }) => { const m = await sharp(process.argv[1]).metadata(); console.log(['exif', 'icc', 'iptc', 'xmp'].filter((k) => m[k])); })" content/members/<file-name>.<extension>
-```
+The changed pages, for the checks in `CLAUDE.md`, are `/people/` and `/people/<file-name>/`.
 
-Done when: `npm run validate` passes, `git status --short` shows no copy of the photo but the stripped one, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", the text under the front matter is empty or a bio with Consent, and the check of a photo, when there is one, prints `[]`.
+Done when: the pull request is open, its body lists the fields published and says the Maintainer stated Consent for each, and the Maintainer has been told each field dropped.
 
-## 4. Finish
+## An Alumnus the site never listed
 
-Follow "Branches" and "Before you finish any change" in `CLAUDE.md`. The changed pages are `/people/` and, for a current Member, `/people/<file-name>/`.
+The same four steps, with these differences:
 
-Done when: the pull request is open and its body lists the fields published, saying the Maintainer stated Consent for each, and the Maintainer has been told each field dropped for want of Consent.
+- **Step 1**: the former role and the year they left are "Stated"; the current position is a Profile field.
+- **Step 2**: ask the former role and the year when not given. The order follows the Alumni rule in the `order` row of `content/SCHEMA.md`, renumbering the other Alumni to match, with nothing to ask.
+- **Step 3**: the file also holds `role: Alumnus`, `former_role` and `year`.
+- **Step 4**: an Alumnus has no Profile page, so the changed page is `/people/`.

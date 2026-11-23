@@ -1,6 +1,6 @@
 ---
 name: move-to-alumni
-description: Turns a current Member who has left the Lab into an Alumnus, keeping their Publications and News credited. Use when the Maintainer says a Member graduated, left the Lab, or should move to the Alumni.
+description: Turns a current Member into an Alumnus, keeping their Publications and News credited. Use when the Maintainer says a Member has graduated or left the Lab.
 ---
 
 # Move a Member to the Alumni
@@ -9,20 +9,22 @@ The Alumnus fields and their formats are in the `members/<name>.md` section of `
 
 ## 1. Find the Member
 
-Find the file in `content/members/` whose `name` the Maintainer means (`grep -H '^name:' content/members/*.md`), and list the Publications and News items that name it, where `<file-name>` is the file's name without `.md`:
+Find the file in `content/members/` whose `name` the Maintainer means (`grep -H '^name:' content/members/*.md`). With no match or several, ask the Maintainer which.
+
+List the Publications and News items that name it, where `<file-name>` is the file's name without `.md`; a Member credited nowhere gives no output:
 
 ```bash
 grep -rnE " <file-name> *$" content/publications content/news
 ```
 
-Done when: exactly one file is chosen, its `role` is any but `Alumnus`, and the items are listed for step 4; a Member credited nowhere gives no output. With no match or several, ask the Maintainer which.
+Done when: exactly one file is chosen, its `role` is any but `Alumnus`, and the items are listed for step 4.
 
-## 2. Ask the judgement calls, in one round
+## 2. Ask once
 
-Ask only what the request left open:
+Ask, in one round, only what the request left open:
 
 - **Year** the person left the Lab; propose the current year.
-- **Current position**: what it is, and whether the person gave Consent to publish it. It is a Profile field, so the position alone is not Consent; without Consent, the field is left out.
+- **Current position**: what it is, and whether the person gave Consent to publish it. It is a Profile field: it is written when the Maintainer states Consent for it, and left out otherwise.
 
 Done when: the year is settled, and the current position is settled with Consent or left out.
 
@@ -36,8 +38,8 @@ The file keeps its name: Publications and News name the person by it, which is w
 
 Done when: `npm run validate` passes, the file is still at the same path, and `git status --short` lists only files in `content/members/`.
 
-## 4. Finish
+## 4. Open the pull request
 
-Follow "Branches" and "Before you finish any change" in `CLAUDE.md`. The changed pages are `/people/`, `/research/`, `/news/` and the Profile of each current Member who shares an item listed in step 1: the person is in the Alumni, and their name on each of those items is plain text where it was a link. Their Profile page is gone; `npm run check` fails on any link still leading to it.
+The changed pages, for the checks in `CLAUDE.md`, are `/people/`, `/research/`, `/news/` and the Profile of each current Member who shares an item listed in step 1. On each, the person's name is plain text where it was a link; their own Profile page is gone.
 
 Done when: the pull request is open and its body says whether the current position was published with Consent.
