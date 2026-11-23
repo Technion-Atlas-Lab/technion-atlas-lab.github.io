@@ -222,28 +222,29 @@ title order). An item also appears on the Profile of each related Member.
 
 | Field | Required | What it is |
 |---|---|---|
-| `title` | yes | The item's title, shown as its heading. |
+| `title` | yes | The item's title, shown as its heading: a headline about what happened. A talk's names the occasion as well as the talk: `"Invited talk at the Example Symposium: Containing Tool-Using Agents"`. |
 | `date` | yes | The day of the event or announcement, written as year-month-day: `2025-03-14`. Shown as "14 March 2025". |
 | `type` | yes | `news` or `talk`. A talk carries a "Talk" badge and a link to its recording. |
 | `members` | no | A YAML list of the related Members, each written once, as their file name in `members/`, without `.md`. The item names them in this order, each as their file has it, linked to the Profile for a current Member and unlinked for an Alumnus, and appears on the Profile of each current Member. Leave the field out for an item that involves no one in particular. |
 | `recording` | talk only, yes | A link to the talk's recording, a web address starting with `https://`. A plain link: the site embeds nothing. |
 
 The text under the front matter is the **body**, and is required: plain text, with a blank line
-between paragraphs.
+between paragraphs. It leaves out the related Members' names: the item lists them under "People:"
+right below it.
 
 Removing a Member's file while a News item still names them stops the build, which names the
 item. To keep a departing Member's News, make them an Alumnus.
 
 ```markdown
 ---
-title: "Invited Talk: Containing Tool-Using Agents"
+title: "Invited talk at the Example Symposium: Containing Tool-Using Agents"
 date: 2025-03-14
 type: talk
 members:
   - member-name
 recording: https://example.org/video/invited-talk
 ---
-Member Name spoke at the Example Symposium about how to contain an agent that may call tools.
+A talk on how to contain an agent that may call tools.
 ```
 
 ---

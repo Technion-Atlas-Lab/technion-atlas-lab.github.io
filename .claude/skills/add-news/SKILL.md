@@ -33,13 +33,13 @@ Done when: the date is a day of the calendar, the type is `talk` or `news` by th
 
 Create `content/news/<file-name>.md`, the file name a few words of the title: `invited-talk-example-symposium.md`.
 
-- **`title`**: what happened, as a headline.
+- **`title`**: a headline about what happened, as the `title` row of `content/SCHEMA.md` says.
 - **`members`**: the related Members' file names, in the order the request names them.
-- **The body**, under the front matter: one to three sentences of plain text, holding only facts from the request. A link other than the recording has no field: leave it out and tell the Maintainer.
+- **The body**, under the front matter: one to three sentences of plain text, holding only facts from the request. It leaves out the related Members' names (`content/SCHEMA.md`, the body). A link other than the recording has no field: leave it out and tell the Maintainer.
 
 When the item announces a Publication that `content/publications/` does not list, offer in one line to add it with the `add-publication` skill.
 
-Done when: `npm run validate` passes, and every fact in the title and body is one the Maintainer gave.
+Done when: `npm run validate` passes, every fact in the title and body is one the Maintainer gave, the title follows the `title` row of `content/SCHEMA.md`, and the body names no related Member.
 
 ## 4. Open the pull request
 

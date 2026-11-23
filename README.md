@@ -118,6 +118,9 @@ here, so a new Maintainer gets the whole workflow by cloning the repo:
   `add-person` adds a Member from the details you give ("add Dr. Ada Lovelace as a postdoc; she
   gave Consent for her email, ..."), and `move-to-alumni` turns a Member who left into an Alumnus
   ("Ada graduated, move her to the Alumni"). Each asks only what you left open.
+  `skill-audit`, which runs only when you type `/skill-audit`, runs every skill here on sample
+  requests in throwaway copies of the repo and reports whether each still works; nothing it
+  writes is committed or published.
 - `.claude/settings.json`: enables the `mattpocock-skills` plugin. Claude Code offers to install
   it the first time you trust this folder.
 

@@ -4,7 +4,7 @@
 .playwright-cli/
 
 # Dependencies
-node_modules/
+node_modules
 
 # Build output: the site, and the sites the tests and screenshots build
 _site/
@@ -18,3 +18,6 @@ test-results/
 playwright-report/
 test-results-site/
 playwright-report-site/
+
+# Throwaway worktrees made by agents and the skill-audit skill
+.claude/worktrees/
