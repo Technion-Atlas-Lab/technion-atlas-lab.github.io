@@ -565,7 +565,9 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   background: var(--paper-alt);
 }
 
-.how-to h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+/* Named twice, so a text page's own heading rule does not win over it. */
+.how-to h2,
+.text-page .how-to h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
 
 .how-to p { margin: 0.5rem 0 0; }
 
@@ -637,7 +639,7 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
    link, and keeps its shape inside that place, however wide or tall it is. */
 .partner img {
   display: block;
-  width: 12rem;
+  width: 12rem; /* the template's `sizes` says the same */
   max-width: 100%;
   max-height: 6rem;
   margin-inline: auto;
@@ -675,10 +677,8 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 /* Who wrote the words above it (About). */
 .text-page .signature { color: var(--muted); font-weight: 600; }
 
-/* A box on a text page (How to apply): room above it, and the box's own small heading. */
+/* A box on a text page (How to apply): room above it. */
 .text-page .how-to { margin-top: 2rem; }
-
-.text-page .how-to h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
 
 /* A section that opens a text page has no gap above its heading. */
 .text-page > section:first-child > h2 { margin-top: 0; }

@@ -12,7 +12,7 @@ the same checks and publishes; if any check fails, nothing is published.
 
 | To change | Edit |
 |---|---|
-| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, or the standing message that opens Positions | `content/site.yaml` |
+| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), the course page the "How to take a project" box links to, the Lab's postal address, the map link on Contact, or the Positions text (the standing message that opens Positions) | `content/site.yaml` |
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
 | A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it, unless a Publication names them as an author, a News item relates to them or a Student Project names them as a supervisor, in which case make them an Alumnus) |

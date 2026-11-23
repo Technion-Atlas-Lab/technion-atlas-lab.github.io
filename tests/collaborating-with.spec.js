@@ -57,18 +57,19 @@ test('the page shows names and logos only', async ({ page }) => {
 });
 
 test('a linked logo holds its place before the picture has arrived, so keyboard focus has something to ring', async ({ page }) => {
-  // On a slow connection: the logos never arrive during this test.
-  await page.route('**/logos/**', () => {});
+  // On a slow connection: no picture arrives during this test.
+  await page.route((url) => url.hostname === 'localhost', (route) => route.request().resourceType() === 'image' ? undefined : route.continue());
   await page.goto('/collaborating-with/', { waitUntil: 'domcontentloaded' });
   const { width, height } = await partners(page).nth(2).getByRole('link').boundingBox();
   expect(width).toBeGreaterThanOrEqual(44);
   expect(height).toBeGreaterThanOrEqual(44);
 });
 
-test('the logo in the test content set does carry camera metadata', async () => {
+test('the logo in the test content set does carry camera and author metadata', async () => {
   // Without this, the check below would pass on a logo that had nothing to strip.
   const { exif, width, height } = await sharp(fs.readFileSync('tests/content/partners/example-foundation.png')).metadata();
   expect(exif.includes('TestCam')).toBe(true);
+  expect(exif.includes('Test Photographer')).toBe(true);
   expect([width, height]).toEqual([1200, 400]);
 });
 
@@ -87,6 +88,7 @@ test('a served logo is resized, keeps its shape, and carries no embedded metadat
       expect(served[block], `${address} carries ${block}`).toBeUndefined();
     }
     expect(bytes.includes('TestCam'), `${address} names the camera`).toBe(false);
+    expect(bytes.includes('Test Photographer'), `${address} names the photographer`).toBe(false);
     expect(served.width, address).toBeLessThanOrEqual(WIDEST);
     // Three times as wide as it is high, as committed.
     expect(served.width / served.height, address).toBeCloseTo(3, 1);

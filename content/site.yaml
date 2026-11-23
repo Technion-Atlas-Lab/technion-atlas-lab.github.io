@@ -19,6 +19,6 @@ address: |-
   Technion City, Haifa 3200003, Israel
 # Where the "Open the map" link on the Contact page leads: a plain link, never an embedded map.
 map: https://www.google.com/maps/search/?api=1&query=Taub+Building+Technion
-# The standing message at the top of the Positions page, one paragraph.
+# The Positions text: the standing message at the top of the Positions page, one paragraph.
 # Design-phase placeholder wording. Replace in the Content phase.
 positions: "We are always glad to hear from strong students. Placeholder text: this paragraph shows where the Lab's standing message to prospective students will appear once real content is added."

@@ -7,7 +7,7 @@ layout: layouts/page.njk
 {#- Every Partner, in name order: names and logos only. A Partner is shown by
     its logo, whose alt text is its name, or by its name where it has no logo;
     either one links to the Partner's site when the Partner has a link. #}
-{%- macro shown(partner) -%}
+{%- macro logoOrName(partner) -%}
 {%- if partner.logo -%}
 <img src="{{ partner.logo.src }}" srcset="{{ partner.logo.srcset }}" sizes="12rem" alt="{{ partner.name }}" width="{{ partner.logo.width }}" height="{{ partner.logo.height }}" loading="lazy">
 {%- else -%}
@@ -20,9 +20,9 @@ layout: layouts/page.njk
     {%- for partner in partners %}
     <li class="partner">
       {%- if partner.link -%}
-      <a href="{{ partner.link }}">{{ shown(partner) }}</a>
+      <a href="{{ partner.link }}">{{ logoOrName(partner) }}</a>
       {%- else -%}
-      {{ shown(partner) }}
+      {{ logoOrName(partner) }}
       {%- endif -%}
     </li>
     {%- endfor %}

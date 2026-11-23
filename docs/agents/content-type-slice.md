@@ -9,7 +9,7 @@ The places a slice touches when it adds a content type (a new folder of items un
    - a function in `CHECKS` for each new kind of field, and the kind's name in `TEXT_KINDS` when its value is text;
    - a `load<Type>()` that returns the items in the order the pages show them.
 4. **Schema doc**: `content/SCHEMA.md`, a row in the Types table and a section with every field and an example. It changes in the same commit as `SCHEMA`.
-5. **Data for the templates**: `src/_data/<type>.js`, which joins the items to the Members.
+5. **Data for the templates**: `src/_data/<type>.js`, which joins the items to what they name: the Members, a Research Area, a picture as published.
 6. **Templates**: the page in `src/pages/`, with `layout: layouts/page.njk`, and its entry in `src/_data/menu.js` when the menu lists it; a macro in `src/_includes/partials/` when two pages show the item; a `profile-section` in `src/pages/profile.njk` when Profiles list it.
 7. **Styles**: a section in `src/assets/site.css`.
 8. **Broken content**: `tests/content-broken/<folder>/` and a test per rule in `tests/validation.spec.js`, where one build serves every test.
