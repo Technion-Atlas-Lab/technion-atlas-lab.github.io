@@ -2,7 +2,68 @@
 permalink: /index.html
 layout: layouts/base.njk
 ---
-<div class="page wrap">
-  <h1>{{ site.name }}</h1>
-  <p>{{ site.full_name }}</p>
+{#- Home introduces the Lab within seconds: its name and mission on a banner,
+    then the Research Areas, the latest News, the featured Publications and the
+    way to Positions. The banner is static; animating it is a later ticket
+    (spec #32). A section with nothing to show is left out. #}
+{%- from "partials/news-item.njk" import newsItem -%}
+{%- from "partials/publication.njk" import publicationCard -%}
+<div class="home-banner">
+  <div class="wrap">
+    <h1>{{ site.name }}</h1>
+    <p class="home-banner__mission">{{ site.mission }}</p>
+  </div>
 </div>
+
+{%- if research.areas.length %}
+<section class="home-section" aria-labelledby="research-areas">
+  <div class="wrap">
+    <h2 id="research-areas">Research Areas</h2>
+    <ul class="area-list">
+      {%- for area in research.areas %}
+      <li class="area-card">
+        <h3 class="area-card__title"><a href="/research/#{{ area.slug }}">{{ area.title }}</a></h3>
+        {%- for paragraph in area.description %}
+        <p>{{ paragraph }}</p>
+        {%- endfor %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+{%- if news.latest.length %}
+<section class="home-section home-section--alt" aria-labelledby="latest-news">
+  <div class="wrap">
+    <h2 id="latest-news">Latest News</h2>
+    <div class="home-news">
+      {%- for item in news.latest %}
+      {{ newsItem(item, 3) }}
+      {%- endfor %}
+    </div>
+    <p class="home-section__more"><a href="/news/">All News</a></p>
+  </div>
+</section>
+{%- endif %}
+
+{%- if research.featured.length %}
+<section class="home-section" aria-labelledby="featured-publications">
+  <div class="wrap">
+    <h2 id="featured-publications">Featured Publications</h2>
+    {%- for publication in research.featured %}
+    {{ publicationCard(publication, withArea=true) }}
+    {%- endfor %}
+    <p class="home-section__more"><a href="/research/">All Publications</a></p>
+  </div>
+</section>
+{%- endif %}
+
+{#- The call to action: the Positions text, and the way to the Positions page. #}
+<section class="cta-band" aria-labelledby="join-the-lab">
+  <div class="wrap">
+    <h2 id="join-the-lab">Join the Lab</h2>
+    <p>{{ site.positions }}</p>
+    <p><a class="cta-band__link" href="/positions/">See Positions</a></p>
+  </div>
+</section>

@@ -1,20 +1,11 @@
 // The shell every page shares: the header with the logo and the menu, the
 // skip link, the footer, and the page a visitor gets for an unknown address.
 import { test, expect } from '@playwright/test';
+import { backgroundBehind } from './support/background.js';
 
 const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'Collaborating with', 'Contact'];
 
 const menu = (page) => page.getByRole('navigation', { name: 'Main' });
-
-// The colour a visitor sees behind an element: its own background, or the
-// nearest ancestor's that is not transparent.
-const backgroundBehind = (locator) => locator.evaluate((element) => {
-  for (let el = element; el; el = el.parentElement) {
-    const colour = getComputedStyle(el).backgroundColor;
-    if (colour !== 'rgba(0, 0, 0, 0)' && colour !== 'transparent') return colour;
-  }
-  return null;
-});
 
 for (const path of ['/about/', '/no-such-page/']) {
   test(`${path} opens with its heading on a banner in the footer's colour`, async ({ page }) => {

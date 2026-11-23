@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import { test, expect } from '@playwright/test';
 import sharp from 'sharp';
+import { backgroundBehind } from './support/background.js';
 
 const LONG_NAME = 'Maximiliana Alexandrina Wolfeschlegelsteinhausenbergerdorff-Featherstonehaugh de la Fuente y Montgomery the Third';
 
@@ -199,4 +200,17 @@ test('a Research Area opened by its anchor has room above its heading', async ({
   const heading = page.getByRole('heading', { name: 'Trusted Hardware', level: 2 });
   await expect(heading).toBeInViewport();
   expect((await heading.boundingBox()).y).toBeGreaterThanOrEqual(16);
+});
+
+test('a Research Area opened by its anchor is marked, so it is found even where the page cannot scroll it to the top', async ({ page }) => {
+  // The last area is shorter than the window: the page ends before its heading reaches the top.
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/research/#formal-methods');
+  const opened = page.getByRole('heading', { name: 'Formal Methods', level: 2 });
+  const other = page.getByRole('heading', { name: 'Trusted Hardware', level: 2 });
+  await expect(opened).toBeInViewport();
+  expect(await backgroundBehind(opened)).not.toBe(await backgroundBehind(other));
+  // Opened without an anchor, no area is marked.
+  await page.goto('/research/');
+  expect(await backgroundBehind(opened)).toBe(await backgroundBehind(other));
 });

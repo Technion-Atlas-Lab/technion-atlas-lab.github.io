@@ -80,7 +80,7 @@ eleventyComputed:
   <section class="profile-section" aria-labelledby="publications">
     <h2 id="publications">Publications</h2>
     {%- for publication in publications %}
-    {{ publicationCard(publication, member.slug) }}
+    {{ publicationCard(publication, member.slug, withArea=true) }}
     {%- endfor %}
   </section>
   {%- endif %}
