@@ -8,8 +8,9 @@ import playwright from 'eslint-plugin-playwright';
 import globals from 'globals';
 
 export default defineConfig([
-  // Built sites and test output hold copies of src/, not code of their own.
-  globalIgnores(['_site/', '.builds/', '.shots/',
+  // Built sites, test output and throwaway worktrees hold copies of the code,
+  // not code of their own.
+  globalIgnores(['_site/', '.builds/', '.shots/', '.claude/worktrees/',
     'test-results/', 'test-results-site/', 'playwright-report/', 'playwright-report-site/']),
   {
     files: ['**/*.js'],
