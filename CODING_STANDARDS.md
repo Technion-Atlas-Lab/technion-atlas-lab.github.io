@@ -16,7 +16,7 @@ The rules a reviewer applies to every change. They are judgement calls: CI alrea
 - **JavaScript is the mobile menu toggle only**, and every page reads fully with JavaScript off.
 - **Plain CSS with custom properties**: every colour lives in `:root` at the top of `src/assets/site.css`; fonts are the system stack.
 - **Links and assets use root-relative URLs** (`/assets/...`, `/about/`). GitHub Pages serves the page-not-found page at any address, so a relative URL breaks there.
-- **Profile data is committed only with the person's Consent**: a Profile field is added only when the Maintainer states that the person gave Consent for it. Photos are stripped of all embedded metadata, including location. The repository is public and git history is permanent.
+- **A person's data is committed only with that person's Consent**: a Profile field is added only when the Maintainer states that the person gave Consent for it, and so is a student's name on a Student Project. Photos are stripped of all embedded metadata, including location. The repository is public and git history is permanent.
 
 ## Code
 

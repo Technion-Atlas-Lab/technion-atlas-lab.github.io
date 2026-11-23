@@ -479,8 +479,9 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
   font-size: 1.5rem;
 }
 
-/* Opened by its address (/research/#area, /privacy/#change), a section keeps some room above its heading. */
+/* Opened by its address (/research/#area, /privacy/#change, /projects/#offered), a section keeps some room above its heading. */
 .research-area h2,
+.project-group h2,
 .text-page h2 { scroll-margin-top: 1.5rem; }
 
 .research-area__description { max-width: 44rem; margin: 0 0 1rem; }
@@ -518,7 +519,8 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 .publication p.publication__summary { margin-top: 0.75rem; }
 
-.publication .link-list { margin-top: 0.875rem; font-weight: 600; }
+.publication .link-list,
+.student-project .link-list { margin-top: 0.875rem; font-weight: 600; }
 
 .publication__figure {
   display: block;
@@ -553,7 +555,55 @@ img.avatar { display: block; width: 100%; object-fit: cover; }
 
 .news-item p.news-item__recording { margin-top: 0.875rem; font-weight: 600; }
 
-/* The badge of a Preprint or a talk: navy on the teal, 10.2:1. */
+/* Projects: how to take a Student Project, then a card per project; the cards are shared with the Profiles */
+
+.how-to {
+  max-width: 48rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--teal);
+  border-radius: 0.75rem;
+  background: var(--paper-alt);
+}
+
+.how-to h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+
+.how-to p { margin: 0.5rem 0 0; }
+
+.how-to__link { font-weight: 600; }
+
+.project-group { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+.project-group h2 {
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--teal);
+  font-size: 1.5rem;
+}
+
+.student-project {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.profile-section h2 + .student-project { margin-top: 1.5rem; }
+
+.student-project p { max-width: 44rem; margin: 0.75rem 0 0; }
+
+.student-project__title { margin: 0; font-size: 1.1875rem; line-height: 1.3; }
+
+.student-project p.student-project__status { margin-top: 0.25rem; color: var(--muted); font-size: 0.9375rem; }
+
+.student-project__status .badge { margin-left: 0; }
+
+.student-project__fields { margin-top: 0.75rem; font-size: 0.9375rem; }
+
+/* "Research Area" is longer than a Profile's labels; the values still line up. */
+.student-project__fields dt { min-width: 7.5rem; }
+
+/* The badge of a Preprint, a talk or an Offered Student Project: navy on the teal, 10.2:1. */
 .badge {
   display: inline-block;
   margin-left: 0.25rem;

@@ -236,3 +236,57 @@ test('at phone width a Profile with News items does not scroll sideways', async 
   await expect(news(page).getByRole('article')).toHaveCount(2);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
+
+// The Student Projects the Member supervises, from tests/content/student-projects/.
+const studentProjects = (page) => page.getByRole('region', { name: 'Student Projects', exact: true });
+
+test('a Profile lists the Student Projects that Member supervises, Offered first, then Completed newest first', async ({ page }) => {
+  await page.goto('/people/test-director/');
+  await expect(studentProjects(page).getByRole('heading', { level: 3 })).toHaveText([
+    'Benchmarking Enclave Attestation', // Offered
+    'Fuzzing Tool-Using Agents', // Offered
+    'Agent Audit Logs & Their Limits', // Completed in 2024
+    'A Sandbox Visualiser', // Completed in 2023
+  ]);
+  await page.goto('/people/zoe-oneil/');
+  await expect(studentProjects(page).getByRole('heading', { level: 3 }))
+    .toHaveText(['Fuzzing Tool-Using Agents', 'Prompt Injection Red-Team Kit']);
+});
+
+test('a Student Project on a Profile shows what it shows on Projects, and whether it is Offered or Completed', async ({ page }) => {
+  await page.goto('/people/zoe-oneil/');
+  const kit = studentProjects(page).getByRole('article').filter({ hasText: 'Prompt Injection Red-Team Kit' });
+  await expect(kit.getByText('Completed in 2024', { exact: true })).toBeVisible();
+  await expect(kit.getByText('A kit of prompt injection attacks for testing an agent before it ships.', { exact: true })).toBeVisible();
+  await expect(kit.getByRole('term')).toHaveText(['Research Area', 'Supervisors', 'Students']);
+  await expect(kit.getByRole('link', { name: 'AI Agent Security' })).toHaveAttribute('href', '/research/#agent-security');
+  await expect(kit.getByRole('link', { name: 'Report: Prompt Injection Red-Team Kit' }))
+    .toHaveAttribute('href', 'https://example.org/reports/red-team-kit.pdf');
+  // On Projects the heading above says a project is Offered; here the project says so itself.
+  const fuzzing = studentProjects(page).getByRole('article').filter({ hasText: 'Fuzzing Tool-Using Agents' });
+  await expect(fuzzing.getByText('Offered', { exact: true })).toBeVisible();
+  await expect(kit.getByText('Offered', { exact: true })).toHaveCount(0);
+  // The Profile's own Member is named without a link to the page the visitor is on.
+  const supervisors = fuzzing.getByRole('definition').filter({ hasText: 'Prof. Test Director' });
+  await expect(supervisors).toHaveText("Dr. Zoë O'Neil & Co, Prof. Test Director");
+  await expect(supervisors.getByRole('link')).toHaveText(['Prof. Test Director']);
+});
+
+test('a Profile of a Member who supervises no Student Project has no Student Projects section', async ({ page }) => {
+  await page.goto('/people/full-member/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Full Member');
+  await expect(studentProjects(page)).toHaveCount(0);
+  await expect(page.getByRole('main').getByRole('heading', { name: 'Student Projects' })).toHaveCount(0);
+});
+
+test('a Profile\'s Student Projects section follows its News', async ({ page }) => {
+  await page.goto('/people/test-director/');
+  await expect(page.getByRole('main').getByRole('heading', { level: 2 })).toHaveText(['Publications', 'News', 'Student Projects']);
+});
+
+test('at phone width a Profile with Student Projects does not scroll sideways', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/people/test-director/');
+  await expect(studentProjects(page).getByRole('article')).toHaveCount(4);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});

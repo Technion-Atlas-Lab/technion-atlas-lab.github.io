@@ -12,15 +12,17 @@ the same checks and publishes; if any check fails, nothing is published.
 
 | To change | Edit |
 |---|---|
-| The Lab's name, full name, mission or Lab mailbox, or the site's address (at Go-live) | `content/site.yaml` |
+| The Lab's name, full name, mission or Lab mailbox, the site's address (at Go-live), or the course page the "How to take a project" box links to | `content/site.yaml` |
 | The Lab mailbox or the site's address, as GitHub's "New issue" page shows them | The files in `.github/ISSUE_TEMPLATE/`, which repeat them because GitHub cannot read `content/site.yaml`: the Lab mailbox is in all three, the site's address in `config.yml` and `report-a-problem.yml` |
 | What the feedback forms ask | `.github/ISSUE_TEMPLATE/report-a-problem.yml`, `.github/ISSUE_TEMPLATE/suggest-an-idea.yml` |
-| A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it, unless a Publication names them as an author or a News item relates to them, in which case make them an Alumnus) |
+| A Member's name, role, place in their group, bio, contact details or links | That Member's file in `content/members/` (add a Member: add a file; remove one: delete it, unless a Publication names them as an author, a News item relates to them or a Student Project names them as a supervisor, in which case make them an Alumnus) |
 | A Member's photo | Put the photo in `content/members/` and name it in the Member's `photo` field. The build resizes it and removes its metadata. |
 | The Alumni (former role, year, current position) | The Alumnus's file in `content/members/`, with `role: Alumnus` |
 | A Research Area's title, description or place on the Research page | That area's file in `content/research-areas/` (add an area: add a file) |
 | A Publication's title, authors, venue, year, Research Area, Preprint status, links, figure or summary | That Publication's file in `content/publications/` (add a Publication: add a file; its figure goes beside it) |
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
+| A Student Project's title, description, status (Offered or Completed), Research Area, supervisors, year, students' names or links to its report, code and video | That project's file in `content/student-projects/` (add a Student Project: add a file; a student's name goes in only with their Consent) |
+| The text of the "How to take a project" box | `src/pages/projects.njk` |
 | The accessibility statement: its text, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
 | The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk`, with its "last updated" date at the bottom; `tests/privacy.spec.js` expects the same address and date |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |

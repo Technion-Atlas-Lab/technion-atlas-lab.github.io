@@ -2,5 +2,31 @@
 title: Projects
 description: "ATLAS Lab's Student Projects, Offered and Completed."
 permalink: /projects/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{%- from "partials/student-project.njk" import studentProject -%}
+{#- How to take a Student Project, then the Offered ones, then the Completed
+    ones, newest first. Other pages link to /projects/#offered. #}
+<div class="page wrap">
+  <section class="how-to" aria-labelledby="how-to-take-a-project">
+    <h2 id="how-to-take-a-project">How to take a project</h2>
+    <p>A Student Project is taken through a Technion course. Choose an Offered Student Project below, then follow the steps on the course page.</p>
+    <p class="how-to__link"><a href="{{ site.student_project_course }}">Student Project course page</a></p>
+  </section>
+  <section class="project-group" aria-labelledby="offered">
+    <h2 id="offered">Offered Student Projects</h2>
+    {%- for project in projects.offered %}
+    {{ studentProject(project) }}
+    {%- else %}
+    <p>No Student Projects are offered at the moment.</p>
+    {%- endfor %}
+  </section>
+  {%- if projects.completed.length %}
+  <section class="project-group" aria-labelledby="completed">
+    <h2 id="completed">Completed Student Projects</h2>
+    {%- for project in projects.completed %}
+    {{ studentProject(project) }}
+    {%- endfor %}
+  </section>
+  {%- endif %}
+</div>
