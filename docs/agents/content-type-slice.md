@@ -13,7 +13,7 @@ The places a slice touches when it adds a content type (a new folder of items un
 6. **Templates**: the page in `src/pages/` (its `layout` changes from `layouts/stub.njk` to `layouts/page.njk`); a macro in `src/_includes/partials/` when two pages show the item; a `profile-section` in `src/pages/profile.njk` when Profiles list it.
 7. **Styles**: a section in `src/assets/site.css`.
 8. **Broken content**: `tests/content-broken/<folder>/` and a test per rule in `tests/validation.spec.js`, where one build serves every test.
-9. **Placeholder content**: `content/<folder>/`, each file opening with `# Design-phase placeholder` and naming only placeholder people (`member-name-*`, `alumnus-name-*`).
+9. **Placeholder content**: `content/<folder>/`, each file opening with `# Design-phase placeholder` and naming only placeholder people (`member-name-*`, `alumnus-name-*`; `Student Name One` for someone with no file in `members/`).
 10. **Docs**: a row in the README's "To change X, edit file Y" table; `GLOSSARY.md` for each new term.
 
 Done when: `npm run check` passes and each of the ten places is changed or has a reason not to be.
