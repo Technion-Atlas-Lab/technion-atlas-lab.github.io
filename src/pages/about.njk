@@ -2,5 +2,36 @@
 title: About
 description: "About ATLAS Lab: its mission, its story, and where it is at the Technion."
 permalink: /about/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{#- The mission and the address come from the site settings, and the Lab
+    Director from content/members/. The story and the Lab Director's
+    introduction are written here: Design-phase placeholders, not the Lab's
+    real text. Replace them in the Content phase. #}
+<div class="page wrap text-page">
+  <section aria-labelledby="mission">
+    <h2 id="mission">Our mission</h2>
+    <p class="lead mission">{{ site.mission }}</p>
+  </section>
+
+  <section aria-labelledby="story">
+    <h2 id="story">Our story</h2>
+    <p>Placeholder text. This is not the Lab's real story: the paragraph shows where a short account of how the Lab began will appear once real content is added.</p>
+    <p>A second placeholder paragraph shows where the Lab's work today, and where it is heading, will be described.</p>
+  </section>
+
+  <section aria-labelledby="from-the-lab-director">
+    <h2 id="from-the-lab-director">From the Lab Director</h2>
+    <p>Placeholder text. This is not a real introduction: the paragraph shows where a few words of welcome from the Lab Director will appear once real content is added.</p>
+    {%- if people.director %}
+    <p class="signature"><a href="/people/{{ people.director.slug }}/">{{ people.director.name }}</a>, {{ people.director.role }}</p>
+    {%- endif %}
+  </section>
+
+  <section aria-labelledby="where-we-are">
+    <h2 id="where-we-are">Where we are</h2>
+    <p>{{ site.name }} is part of the Faculty of Computer Science at the Technion – Israel Institute of Technology, in Haifa.</p>
+    <address class="postal-address">{{ site.address }}</address>
+    <p>For the Lab mailbox and a map, see <a href="/contact/">Contact</a>.</p>
+  </section>
+</div>

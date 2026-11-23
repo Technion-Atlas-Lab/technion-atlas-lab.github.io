@@ -30,6 +30,9 @@ A student project supervised by the Lab, either **Offered** (open for new studen
 **News item**:
 A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The Members an item involves are its **related Members**; it also appears on the Profile of each of them who is a current Member.
 
+**Partner**:
+An organization the Lab collaborates with, such as a funding body, a company or another university's lab. The **Collaborating with** page shows each Partner by its logo or its name. An organization, where a Collaborator is a person.
+
 **Lab mailbox**:
 The Lab's shared email account, held by the PI and the Maintainer and passed on to each successor.
 
@@ -62,7 +65,7 @@ A person's agreement to publish specific Profile fields, or a student's agreemen
 The Member responsible for the website.
 
 **Site settings**:
-The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link), kept in one file.
+The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link, the postal address, the map link, the Positions text), kept in one file.
 
 **Test content set**:
 Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.

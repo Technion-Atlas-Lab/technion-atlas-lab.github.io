@@ -2,7 +2,7 @@
 // skip link, the footer, and the page a visitor gets for an unknown address.
 import { test, expect } from '@playwright/test';
 
-const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'Funding', 'Contact'];
+const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'Collaborating with', 'Contact'];
 
 const menu = (page) => page.getByRole('navigation', { name: 'Main' });
 

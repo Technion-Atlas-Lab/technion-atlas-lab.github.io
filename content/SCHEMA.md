@@ -34,6 +34,7 @@ npm run validate
 | Publication | `publications/<name>.md` |
 | News item | `news/<name>.md` |
 | Student Project | `student-projects/<name>.md` |
+| Partner | `partners/<name>.md` |
 
 ---
 
@@ -49,6 +50,9 @@ Plain YAML, one `field: value` per line.
 | `mailbox` | yes | The Lab mailbox, an email address. |
 | `url` | yes | The site's address: `https://` and the host, with nothing after it. Used for canonical addresses, link previews and the sitemap. Change it at Go-live. |
 | `student_project_course` | yes | A link to the page of the Technion course through which a Student Project is taken, a web address starting with `https://`. The "How to take a project" box on the Projects page leads to it. |
+| `address` | yes | The Lab's postal address, building first. Write it as a YAML block (see the example below): the Contact and About pages show each line on a line of its own. |
+| `map` | yes | A link to a map that shows the Lab's building, a web address starting with `https://`. The "Open the map" link on the Contact page leads to it. A plain link: the site embeds nothing. |
+| `positions` | yes | The Positions text: the standing message to prospective students that opens the Positions page, one paragraph. Quote it when it holds a colon and a space. |
 
 ```yaml
 name: ATLAS Lab
@@ -60,6 +64,11 @@ mission: |-
 mailbox: atlaslab.at.technion@gmail.com
 url: https://technion-atlas-lab.github.io
 student_project_course: https://example.org/student-project-course
+address: |-
+  Example Building, Room 123
+  Technion City, Haifa 3200003, Israel
+map: https://example.org/map
+positions: We are always glad to hear from strong students.
 ```
 
 ---
@@ -283,4 +292,27 @@ report: https://example.org/report.pdf
 code: https://example.org/code
 ---
 A kit of prompt injection attacks for testing an agent before it ships.
+```
+
+---
+
+## `partners/<name>.md`: a Partner
+
+One file per Partner, an organization the Lab collaborates with. The "Collaborating with" page
+shows every Partner, in name order, by its logo or its name and nothing else.
+
+| Field | Required | What it is |
+|---|---|---|
+| `name` | yes | The Partner's name. Shown as text when the Partner has no logo, and read out as the logo's alt text when it has one. |
+| `logo` | no | The file name of a logo kept beside this file: `partner-name.png` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, in its own shape and with all embedded metadata removed, never as committed. The page shows it on white. |
+| `link` | no | A link to the Partner's own site, a web address starting with `https://`. The logo or the name leads to it. |
+
+A Partner's file has no text under the front matter.
+
+```markdown
+---
+name: Example Science Foundation
+logo: example-science-foundation.png
+link: https://example.org/foundation
+---
 ```

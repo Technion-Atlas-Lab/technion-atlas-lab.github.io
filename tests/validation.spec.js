@@ -263,3 +263,37 @@ test('the failure names a Student Project file whose students are not a list', (
 test('the failure names a Student Project file that has a year but is not Completed', () => {
   expect(build.output).toMatch(new RegExp(`${namesFieldIn('student-projects/bad-offered.md')('year').source}.*\\bCompleted\\b`));
 });
+
+test('the failure names a map link in the site settings that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesField('map').source}.*\\bhttps\\b`));
+});
+
+test('the failure names the site settings and their missing address', () => {
+  expect(build.output).toMatch(namesField('address'));
+});
+
+test('the failure names the site settings and a Positions text that is empty', () => {
+  expect(build.output).toMatch(namesField('positions'));
+});
+
+const namesPartnerField = namesFieldIn('partners/bad-partner.md');
+
+test('the failure names a Partner file and its missing name', () => {
+  expect(build.output).toMatch(namesPartnerField('name'));
+});
+
+test('the failure names a Partner file and a logo that is not there', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPartnerField('logo').source}.*no-such-logo\\.png`));
+});
+
+test('the failure names a Partner file and a link that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesPartnerField('link').source}.*\\bhttps\\b`));
+});
+
+test('the failure names a Partner file and an unknown field', () => {
+  expect(build.output).toMatch(namesPartnerField('amount'));
+});
+
+test('the failure names a Partner file with text under its fields, which a Partner does not use', () => {
+  expect(build.output).toMatch(/tests\/content-broken\/partners\/bad-partner\.md\b.*\bafter the front matter\b/);
+});

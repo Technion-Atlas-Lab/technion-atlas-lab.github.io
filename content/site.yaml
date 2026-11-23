@@ -12,3 +12,13 @@ url: https://technion-atlas-lab.github.io
 # The page of the Technion course through which a Student Project is taken.
 # Design-phase placeholder, not the real course page. Replace in the Content phase.
 student_project_course: https://example.org/student-project-course
+# The Lab's postal address, building first, as the Contact and About pages show it.
+# Design-phase placeholder: the room is not the real one. Replace in the Content phase.
+address: |-
+  Taub Building (Computer Science), Room 000
+  Technion City, Haifa 3200003, Israel
+# Where the "Open the map" link on the Contact page leads: a plain link, never an embedded map.
+map: https://www.google.com/maps/search/?api=1&query=Taub+Building+Technion
+# The standing message at the top of the Positions page, one paragraph.
+# Design-phase placeholder wording. Replace in the Content phase.
+positions: "We are always glad to hear from strong students. Placeholder text: this paragraph shows where the Lab's standing message to prospective students will appear once real content is added."

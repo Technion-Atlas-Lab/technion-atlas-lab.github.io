@@ -7,6 +7,6 @@ export default [
   { label: 'News', url: '/news/' },
   { label: 'Projects', url: '/projects/' },
   { label: 'Positions', url: '/positions/' },
-  { label: 'Funding', url: '/funding/' },
+  { label: 'Collaborating with', url: '/collaborating-with/' },
   { label: 'Contact', url: '/contact/' },
 ];

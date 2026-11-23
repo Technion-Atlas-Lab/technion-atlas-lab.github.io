@@ -9,7 +9,7 @@ const SITE = 'https://test-site.example.org';
 
 // Every page the shell links to: Home, the menu, and the footer.
 const PAGES = ['/', '/about/', '/people/', '/research/', '/news/', '/projects/', '/positions/',
-  '/funding/', '/contact/', '/accessibility/', '/privacy/'];
+  '/collaborating-with/', '/contact/', '/accessibility/', '/privacy/'];
 
 // The content of the one tag matching `selector`; a duplicated tag fails the test.
 const metaContent = (page, selector) => page.locator(selector).getAttribute('content');

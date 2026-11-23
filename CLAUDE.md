@@ -33,7 +33,7 @@ A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
 
 ## Content types
 
-A ticket that adds a folder of items under `content/` (Student Projects, funders): follow `docs/agents/content-type-slice.md`, the list of every place such a slice touches.
+A ticket that adds a folder of items under `content/` (Student Projects, Partners): follow `docs/agents/content-type-slice.md`, the list of every place such a slice touches.
 
 ## Research
 

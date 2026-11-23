@@ -2,5 +2,25 @@
 title: Positions
 description: "How to apply to join ATLAS Lab."
 permalink: /positions/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{#- Always says how to apply, whether or not an opening is advertised: the
+    standing message is the `positions` site setting, and applications go to
+    the Lab mailbox. Undergraduates are sent to the Offered Student Projects. #}
+<div class="page wrap text-page">
+  <p class="lead">{{ site.positions }}</p>
+
+  <section class="how-to" aria-labelledby="how-to-apply">
+    <h2 id="how-to-apply">How to apply</h2>
+    <p>Email the Lab mailbox, <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>, with:</p>
+    <ul>
+      <li>your CV;</li>
+      <li>a short statement: what you would like to work on in the Lab, and why.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="undergraduates">
+    <h2 id="undergraduates">Undergraduate students</h2>
+    <p>An undergraduate joins the Lab through a Student Project, taken as a Technion course. See the <a href="/projects/#offered">Offered Student Projects</a>.</p>
+  </section>
+</div>
