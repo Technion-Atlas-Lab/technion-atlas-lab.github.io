@@ -145,9 +145,13 @@ test('an ORCID iD that ORCID does not hold is left for review, and the other rec
   expect(run.output).toContain('New: 3.');
 });
 
-test('works from before the Lab\'s oldest Publication, and works that are not papers, are skipped and counted', ({}, testInfo) => {
-  const run = updatePublications([], testInfo);
-  expect(run.output).toContain('Skipped 1 work from before 2022, the year of the Lab\'s oldest Publication: pass --since <year> to read further back.');
+test('works the Lab does not list from before the year site.yaml sets, and works that are not papers, are skipped and counted', ({}, testInfo) => {
+  const run = updatePublications([], testInfo, (dir) => {
+    // A year after the oldest Publication's: the setting decides, not the Publications.
+    const file = path.join(dir, 'site.yaml');
+    fs.writeFileSync(file, `${fs.readFileSync(file, 'utf8')}publications_since: 2020\n`.replace('publications_since: 2022\n', ''));
+  });
+  expect(run.output).toContain('Skipped 1 work from before 2020, the year publications_since in site.yaml sets: pass --since <year> to read further back.');
   expect(run.output).toContain('Skipped 1 work that is not a paper (data-set).');
   expect(run.output).not.toContain('Before the Lab');
 });

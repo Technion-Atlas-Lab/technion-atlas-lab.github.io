@@ -54,6 +54,7 @@ Plain YAML, one `field: value` per line.
 | `address` | yes | The Lab's postal address, building first. Write it as a YAML block (see the example below): the Contact and About pages show each line on a line of its own. |
 | `map` | yes | A link to a map that shows the Lab's building, a web address starting with `https://`. The "Open the map" link on the Contact page leads to it. A plain link: the site embeds nothing. |
 | `positions` | yes | The Positions text: the standing message to prospective students that opens the Positions page, one paragraph. Quote it when it holds a colon and a space. |
+| `publications_since` | yes | The first year `npm run update-publications` reads new works from: `2020`. A work in a Member's ORCID record from before it is skipped, unless the Lab lists it. The site does not show it. |
 
 ```yaml
 name: ATLAS Lab
@@ -70,6 +71,7 @@ address: |-
   Technion City, Haifa 3200003, Israel
 map: https://example.org/map
 positions: We are always glad to hear from strong students.
+publications_since: 2020
 ```
 
 ---

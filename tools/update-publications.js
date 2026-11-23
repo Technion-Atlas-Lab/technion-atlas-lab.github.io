@@ -25,7 +25,7 @@ function describe(report) {
   return [
     read.length ? `Read the ORCID record${read.length === 1 ? '' : 's'} of ${count(read.length, 'Member')}: ${read.map((m) => m.name).join(', ')}.`
       : 'Read no ORCID record: no current Member\'s file in members/ has an orcid that ORCID holds.',
-    ...(older ? [`Skipped ${count(older, 'work')} from before ${since}${sinceIsDefault ? ', the year of the Lab\'s oldest Publication: pass --since <year> to read further back' : ''}.`] : []),
+    ...(older ? [`Skipped ${count(older, 'work')} from before ${since}${sinceIsDefault ? ', the year publications_since in site.yaml sets: pass --since <year> to read further back' : ''}.`] : []),
     ...(skippedOther ? [`Skipped ${count(skippedOther, 'work')} that ${skippedOther === 1 ? 'is not a paper' : 'are not papers'} (${kinds.map(([kind, n]) => n === 1 ? kind : `${kind}: ${n}`).join(', ')}).`] : []),
     '',
     `New: ${report.found.length}. Not on the site yet; each needs its Research Area from the Maintainer.`,
