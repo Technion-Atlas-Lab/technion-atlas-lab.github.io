@@ -56,6 +56,15 @@ test('the page shows names and logos only', async ({ page }) => {
   await expect(main.getByRole('heading')).toHaveText(['Collaborating with']);
 });
 
+test('a linked logo holds its place before the picture has arrived, so keyboard focus has something to ring', async ({ page }) => {
+  // On a slow connection: the logos never arrive during this test.
+  await page.route('**/logos/**', () => {});
+  await page.goto('/collaborating-with/', { waitUntil: 'domcontentloaded' });
+  const { width, height } = await partners(page).nth(2).getByRole('link').boundingBox();
+  expect(width).toBeGreaterThanOrEqual(44);
+  expect(height).toBeGreaterThanOrEqual(44);
+});
+
 test('the logo in the test content set does carry camera metadata', async () => {
   // Without this, the check below would pass on a logo that had nothing to strip.
   const { exif, width, height } = await sharp(fs.readFileSync('tests/content/partners/example-foundation.png')).metadata();
