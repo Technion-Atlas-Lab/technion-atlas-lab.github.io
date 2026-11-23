@@ -2,5 +2,19 @@
 title: Contact
 description: "How to reach and visit ATLAS Lab."
 permalink: /contact/
-layout: layouts/stub.njk
+layout: layouts/page.njk
 ---
+{#- How to write to the Lab and where to find it, all from the site settings.
+    The map is a plain link: the site embeds nothing (CODING_STANDARDS.md). #}
+<div class="page wrap text-page">
+  <section aria-labelledby="email">
+    <h2 id="email">Email</h2>
+    <p>Write to the Lab mailbox, <a href="mailto:{{ site.mailbox }}">{{ site.mailbox }}</a>.</p>
+  </section>
+
+  <section aria-labelledby="address">
+    <h2 id="address">Address</h2>
+    <address class="postal-address">{{ site.address }}</address>
+    <p><a href="{{ site.map }}">Open the map</a></p>
+  </section>
+</div>

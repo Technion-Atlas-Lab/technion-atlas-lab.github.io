@@ -1,4 +1,4 @@
-// The Lab's people, as the People page and the Profile pages show them.
+// The Lab's people, as the People page, the Profile pages and About show them.
 // Members and Alumni live in <content set>/members/; this loads and groups them.
 import { ALUMNUS_ROLE, MEMBER_ROLES, loadMembers, withoutTitle } from '../../lib/content.js';
 import { photoSources } from '../../lib/photos.js';
@@ -34,6 +34,8 @@ export default () => {
   return {
     // Current Members: each gets a card and a Profile page.
     members,
+    // The Lab Director, who signs the introduction on About; nothing when the content names none.
+    director: members.find((member) => member.role === LAB_DIRECTOR),
     // One group per role somebody holds, in the roles' fixed order.
     groups: MEMBER_ROLES
       .map((role) => ({

@@ -2,7 +2,7 @@
 // skip link, the footer, and the page a visitor gets for an unknown address.
 import { test, expect } from '@playwright/test';
 
-const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'Funding', 'Contact'];
+const MENU = ['About', 'People', 'Research', 'News', 'Projects', 'Positions', 'Collaborating with', 'Contact'];
 
 const menu = (page) => page.getByRole('navigation', { name: 'Main' });
 
@@ -97,3 +97,14 @@ for (const label of MENU) {
     await expect(menu(page).locator('[aria-current="page"]')).toHaveText([label]);
   });
 }
+
+test('at tablet width the menu fits on one row', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 900 });
+  // The current page's item is bold, and so wider: the longest label is the hardest case.
+  await page.goto('/collaborating-with/');
+  const links = menu(page).getByRole('link');
+  await expect(links).toHaveCount(MENU.length);
+  // Every item starts at the same height: none is pushed onto a second row.
+  const tops = await links.evaluateAll((items) => items.map((item) => Math.round(item.getBoundingClientRect().top)));
+  expect(new Set(tops).size).toBe(1);
+});

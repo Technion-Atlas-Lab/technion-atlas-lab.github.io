@@ -6,3 +6,9 @@ mission: Test mission line for the slice tests.
 mailbox: test-mailbox@example.org
 url: https://test-site.example.org
 student_project_course: https://example.org/courses/project-course
+# Two lines, so the tests can tell that the line break is kept.
+address: |-
+  Test Building, Room 404
+  1 Example Road, Testville 1234567
+map: https://example.org/maps/test-building
+positions: We are always glad to hear from strong students, in the test content set too.

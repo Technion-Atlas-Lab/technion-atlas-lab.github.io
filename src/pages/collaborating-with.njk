@@ -1,0 +1,33 @@
+---
+title: Collaborating with
+description: "The organizations ATLAS Lab collaborates with."
+permalink: /collaborating-with/
+layout: layouts/page.njk
+---
+{#- Every Partner, in name order: names and logos only. A Partner is shown by
+    its logo, whose alt text is its name, or by its name where it has no logo;
+    either one links to the Partner's site when the Partner has a link. #}
+{%- macro logoOrName(partner) -%}
+{%- if partner.logo -%}
+<img src="{{ partner.logo.src }}" srcset="{{ partner.logo.srcset }}" sizes="12rem" alt="{{ partner.name }}" width="{{ partner.logo.width }}" height="{{ partner.logo.height }}" loading="lazy">
+{%- else -%}
+{{ partner.name }}
+{%- endif -%}
+{%- endmacro -%}
+<div class="page wrap">
+  {%- if partners.length %}
+  <ul class="partner-list">
+    {%- for partner in partners %}
+    <li class="partner">
+      {%- if partner.link -%}
+      <a href="{{ partner.link }}">{{ logoOrName(partner) }}</a>
+      {%- else -%}
+      {{ logoOrName(partner) }}
+      {%- endif -%}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p>No Partners are listed yet.</p>
+  {%- endif %}
+</div>
