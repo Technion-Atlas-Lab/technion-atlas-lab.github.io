@@ -48,7 +48,7 @@ Plain YAML, one `field: value` per line.
 | `mission` | yes | The Lab's mission, as written. Write it as a YAML block (see the example below) to keep its line breaks. Also Home's description for search engines and link previews, on one line. |
 | `mailbox` | yes | The Lab mailbox, an email address. |
 | `url` | yes | The site's address: `https://` and the host, with nothing after it. Used for canonical addresses, link previews and the sitemap. Change it at Go-live. |
-| `project_course` | yes | A link to the page of the Technion course through which a Student Project is taken, a web address starting with `https://`. The "How to take a project" box on the Projects page leads to it. |
+| `student_project_course` | yes | A link to the page of the Technion course through which a Student Project is taken, a web address starting with `https://`. The "How to take a project" box on the Projects page leads to it. |
 
 ```yaml
 name: ATLAS Lab
@@ -59,7 +59,7 @@ mission: |-
   AI Trust, Learning, Architecture, and Security
 mailbox: atlaslab.at.technion@gmail.com
 url: https://technion-atlas-lab.github.io
-project_course: https://example.org/student-project-course
+student_project_course: https://example.org/student-project-course
 ```
 
 ---

@@ -208,7 +208,7 @@ test('the failure names a News item file that names a related Member twice', () 
 });
 
 test('the failure names a course link in the site settings that is not an https address', () => {
-  expect(build.output).toMatch(new RegExp(`${namesField('project_course').source}.*\\bhttps\\b`));
+  expect(build.output).toMatch(new RegExp(`${namesField('student_project_course').source}.*\\bhttps\\b`));
 });
 
 const namesProjectField = namesFieldIn('student-projects/bad-project.md');
@@ -220,6 +220,12 @@ test('the failure names a Student Project file and its missing title', () => {
 
 test('the failure names a Student Project file and a status that is not one, and lists the statuses', () => {
   expect(build.output).toMatch(new RegExp(`${namesProjectField('status').source}.*\\boffered, completed\\b`));
+});
+
+test('a Student Project file whose status is not one gets no message about its year', () => {
+  // "year is only for a Completed Student Project" would send the Maintainer to the wrong field.
+  expect(build.output).toMatch(namesProjectField('status'));
+  expect(build.output).not.toMatch(namesProjectField('year'));
 });
 
 test('the failure names a Student Project file and a Research Area that does not exist', () => {

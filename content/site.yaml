@@ -11,4 +11,4 @@ mailbox: atlaslab.at.technion@gmail.com
 url: https://technion-atlas-lab.github.io
 # The page of the Technion course through which a Student Project is taken.
 # Design-phase placeholder, not the real course page. Replace in the Content phase.
-project_course: https://example.org/student-project-course
+student_project_course: https://example.org/student-project-course
