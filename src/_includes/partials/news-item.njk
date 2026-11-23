@@ -1,8 +1,8 @@
-{#- A News item, shared by the News page and the Profile pages. #}
+{#- A News item, shared by the News page, Home and the Profile pages. #}
 {%- from "partials/person.njk" import names -%}
 
-{#- `level` is the item's heading level: 2 on News, and 3 on a Profile, where
-    the items sit under a "News" heading. `onProfile` is the slug of the Member
+{#- `level` is the item's heading level: 2 on News, and 3 on a Profile and on
+    Home, where the items sit under a heading of their own. `onProfile` is the slug of the Member
     whose Profile shows the item: there the Member is named without a link to
     the page the visitor is already on. #}
 {%- macro newsItem(item, level=2, onProfile=null) -%}

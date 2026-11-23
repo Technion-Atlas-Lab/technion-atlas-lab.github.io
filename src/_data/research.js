@@ -1,4 +1,4 @@
-// The Lab's research, as the Research page and the Profile pages show it.
+// The Lab's research, as the Research page, Home and the Profile pages show it.
 // Research Areas live in <content set>/research-areas/ and Publications in
 // <content set>/publications/; this loads them and joins them to the people.
 import { PREPRINT_STATUS, itemsByMember, loadMembersBySlug, namedPerson, loadPublications, loadResearchAreas } from '../../lib/content.js';
@@ -44,6 +44,8 @@ export default async () => {
       ...area,
       publications: publications.filter((publication) => publication.area === area),
     })),
+    // The featured Publications, newest first, for Home.
+    featured: publications.filter((publication) => publication.featured),
     // Member's slug -> that Member's Publications, for their Profile.
     byMember: itemsByMember(people, publications, (publication, slug) => publication.authors.some((a) => a.profile === slug)),
   };

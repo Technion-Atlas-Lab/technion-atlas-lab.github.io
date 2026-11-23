@@ -35,4 +35,9 @@ export default defineConfig([
     // Callbacks passed to page.evaluate() run in the browser.
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
+  // So do those in the helpers the tests share.
+  {
+    files: ['tests/support/background.js'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
+  },
 ]);

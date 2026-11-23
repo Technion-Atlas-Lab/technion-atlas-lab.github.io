@@ -11,10 +11,10 @@ The Alumnus fields and their formats are in the `members/<name>.md` section of `
 
 Find the file in `content/members/` whose `name` the Maintainer means (`grep -H '^name:' content/members/*.md`). With no match or several, ask the Maintainer which.
 
-List every item that names it, where `<file-name>` is the file's name without `.md`; a Member credited nowhere gives no output:
+List every item that names it, where `<file-name>` is the file's name without `.md`; a Member credited nowhere gives no output. A line naming a longer file name that contains it (`dan-cohen-levi` for `dan-cohen`) is another person's: leave it out.
 
 ```bash
-grep -rnE --exclude-dir=members " <file-name> *$" content
+grep -rnw --exclude-dir=members "<file-name>" content
 ```
 
 Done when: exactly one file is chosen, its `role` is any but `Alumnus`, and the items are listed for step 4.

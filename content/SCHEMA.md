@@ -47,13 +47,13 @@ Plain YAML, one `field: value` per line.
 |---|---|---|
 | `name` | yes | The Lab's short name, shown as the Home heading: `ATLAS Lab`. |
 | `full_name` | yes | The Lab's full name: `ATLAS Research Laboratory — AI Trust, Learning, Architecture, and Security`. |
-| `mission` | yes | The Lab's mission, as written. Write it as a YAML block (see the example below) to keep its line breaks. Also Home's description for search engines and link previews, on one line. |
+| `mission` | yes | The Lab's mission, as written, shown on Home's banner under the Lab's name. Write it as a YAML block (see the example below) to keep its line breaks. Also Home's description for search engines and link previews, on one line. |
 | `mailbox` | yes | The Lab mailbox, an email address. |
 | `url` | yes | The site's address: `https://` and the host, with nothing after it. Used for canonical addresses, link previews and the sitemap. Change it at Go-live. |
 | `student_project_course` | yes | A link to the page of the Technion course through which a Student Project is taken, a web address starting with `https://`. The "How to take a project" box on the Projects page leads to it. |
 | `address` | yes | The Lab's postal address, building first. Write it as a YAML block (see the example below): the Contact and About pages show each line on a line of its own. |
 | `map` | yes | A link to a map that shows the Lab's building, a web address starting with `https://`. The "Open the map" link on the Contact page leads to it. A plain link: the site embeds nothing. |
-| `positions` | yes | The Positions text: the standing message to prospective students that opens the Positions page, one paragraph. Quote it when it holds a colon and a space. |
+| `positions` | yes | The Positions text: the standing message to prospective students that opens the Positions page and fills Home's "Join the Lab" band, one paragraph. Quote it when it holds a colon and a space. |
 | `publications_since` | yes | The first year `npm run update-publications` reads new works from: `2020`. A work in a Member's ORCID record from before it is skipped, unless the Lab lists it. The site does not show it. |
 
 ```yaml
@@ -182,7 +182,7 @@ Member.
 | `video` | no | A link to a video. A plain link: the site embeds nothing. |
 | `figure` | no | The file name of a figure kept beside this file: `publication-name.png` (`.jpg`, `.jpeg`, `.png` or `.webp`; lowercase letters, digits and hyphens). The build publishes it resized, in its own shape and with all embedded metadata removed, never as committed. |
 | `figure_alt` | with `figure`, yes | What the figure shows, for a visitor who cannot see it. |
-| `featured` | no | `true` marks a featured Publication, one of the few that Home is to highlight. Nothing shows it until Home's own slice is built. |
+| `featured` | no | `true` marks a featured Publication, one of the few that Home highlights under "Featured Publications", newest first. |
 
 Every link is a web address starting with `https://`.
 

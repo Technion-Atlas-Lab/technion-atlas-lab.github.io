@@ -1,13 +1,14 @@
-{#- A Publication's card, shared by the Research page and the Profile pages. #}
+{#- A Publication's card, shared by the Research page, Home and the Profile pages. #}
 {%- from "partials/person.njk" import names -%}
 
 {#- `onProfile` is the slug of the Member whose Profile shows the card: there
-    the Member is named without a link to the page the visitor is already on,
-    and the card links to its Research Area, which Research shows as a heading. #}
-{%- macro publicationCard(publication, onProfile=null) -%}
+    the Member is named without a link to the page the visitor is already on.
+    `withArea` makes the card link to its Research Area: a Profile and Home
+    need the link, as only Research shows the area as a heading above the card. #}
+{%- macro publicationCard(publication, onProfile=null, withArea=false) -%}
 <article class="publication">
   <div class="publication__text">
-    {%- if onProfile %}
+    {%- if withArea %}
     <p class="publication__area"><a href="/research/#{{ publication.area.slug }}">{{ publication.area.title }}</a></p>
     {%- endif %}
     <h3 class="publication__title">{{ publication.title }}</h3>

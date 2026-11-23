@@ -5,7 +5,7 @@ description: Adds a person to the Lab's site. Use when the Maintainer asks to ad
 
 # Add a person
 
-The fields, their formats and the roles are in the `members/<name>.md` section of `content/SCHEMA.md`. Two branches have their own home: a photo ([`photo.md`](photo.md)) and an Alumnus (the last section here).
+The fields, their formats and the roles are in the `members/<name>.md` section of `content/SCHEMA.md`. An Alumnus has its own section, the last here.
 
 ## 1. Sort what the Maintainer gave
 
@@ -27,8 +27,9 @@ Ask, in one round, only what the request left open:
 - **Order**: print the role group as it stands (`grep -l '^role: <role>' content/members/*.md | xargs grep -H -E '^(name|order):'`), propose the place after the last (the highest `order` plus one, or 1 in an empty group), and ask whether that is right.
 - **Consent**, for each field under "Consent unstated", named in plain words: "Did <name> give Consent to publish their GitHub link and bio?" A field the Maintainer cannot confirm is dropped.
 - **File name**: the person's name without a title, in lowercase ASCII letters with hyphens (`Dr. Ada Lovelace` becomes `ada-lovelace`). Publications, News items and Student Projects name the person by it, so it is chosen once, for good. It needs a question in two cases: a name written in another script (ask for its Latin spelling), or a file that already exists (ask for another name).
+- **Placeholder or real**: when `grep -l 'Design-phase placeholder' content/members/*.md` prints a file, the site is in the Design phase: read `docs/agents/design-phase.md` and ask its question.
 
-Done when: the role, the order and the file name are settled, and every field is under "With Consent" or dropped.
+Done when: the role, the order and the file name are settled, every field is under "With Consent" or dropped, and in the Design phase the Maintainer has said placeholder or real.
 
 ## 3. Write the file
 
@@ -36,9 +37,9 @@ Create `content/members/<file-name>.md` holding `name` (with its title), `role`,
 
 When the person takes a place before the last in their role group, raise the `order` of each Member after them, so no two share a number. A gap in the numbers is fine.
 
-When a photo is under "With Consent", follow [`photo.md`](photo.md).
+When a photo is under "With Consent", copy it beside the file as `content/members/<file-name>.<extension>` (the extension in lowercase) and name that file in the `photo` field.
 
-Done when: `npm run validate` passes, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", and the text under the front matter is empty or a bio with Consent.
+Done when: `npm run validate` passes, the file's fields are exactly `name`, `role`, `order` and those under "With Consent", a placeholder meets `docs/agents/design-phase.md`, and the text under the front matter is empty or a bio with Consent.
 
 ## 4. Open the pull request
 
