@@ -206,3 +206,54 @@ test('the failure names a News item file with no body', () => {
 test('the failure names a News item file that names a related Member twice', () => {
   expect(build.output).toMatch(new RegExp(`${namesFieldIn('news/bad-members.md')('members').source}.*\\bbad-member\\b.*\\bmore than once\\b`));
 });
+
+test('the failure names a course link in the site settings that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesField('project_course').source}.*\\bhttps\\b`));
+});
+
+const namesProjectField = namesFieldIn('student-projects/bad-project.md');
+const namesCompletedField = namesFieldIn('student-projects/bad-completed.md');
+
+test('the failure names a Student Project file and its missing title', () => {
+  expect(build.output).toMatch(namesProjectField('title'));
+});
+
+test('the failure names a Student Project file and a status that is not one, and lists the statuses', () => {
+  expect(build.output).toMatch(new RegExp(`${namesProjectField('status').source}.*\\boffered, completed\\b`));
+});
+
+test('the failure names a Student Project file and a Research Area that does not exist', () => {
+  expect(build.output).toMatch(new RegExp(`${namesProjectField('research_area').source}.*\\bno-such-area\\b`));
+});
+
+test('the failure names a Student Project file and a supervisor who is not a Member or an Alumnus', () => {
+  expect(build.output).toMatch(new RegExp(`${namesProjectField('supervisors').source}.*\\bno-such-member\\b`));
+});
+
+test('the failure names a Student Project file and a link that is not an https address', () => {
+  expect(build.output).toMatch(new RegExp(`${namesProjectField('report').source}.*\\bhttps\\b`));
+});
+
+test('the failure names a Student Project file and an unknown field', () => {
+  expect(build.output).toMatch(namesProjectField('grade'));
+});
+
+test('the failure names a Student Project file with no description', () => {
+  expect(build.output).toMatch(namesProjectField('description'));
+});
+
+test('the failure names a Completed Student Project file with no year', () => {
+  expect(build.output).toMatch(new RegExp(`${namesCompletedField('year').source}.*\\bCompleted\\b`));
+});
+
+test('the failure names a Student Project file whose supervisors are not a list', () => {
+  expect(build.output).toMatch(new RegExp(`${namesCompletedField('supervisors').source}.*\\blist\\b`));
+});
+
+test('the failure names a Student Project file whose students are not a list', () => {
+  expect(build.output).toMatch(new RegExp(`${namesCompletedField('students').source}.*\\blist\\b`));
+});
+
+test('the failure names a Student Project file that has a year but is not Completed', () => {
+  expect(build.output).toMatch(new RegExp(`${namesFieldIn('student-projects/bad-offered.md')('year').source}.*\\bCompleted\\b`));
+});

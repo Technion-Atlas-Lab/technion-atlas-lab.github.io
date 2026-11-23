@@ -25,7 +25,7 @@ The one picture a Publication may show on its card, with alt text saying what it
 A Publication the Maintainer marked for Home to highlight.
 
 **Student Project**:
-A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**.
+A student project supervised by the Lab, either **Offered** (open for new students to take) or **Completed**. Its **supervisors** are the Members who supervise it; it also appears on the Profile of each of them who is a current Member. A student's name appears only with that student's Consent.
 
 **News item**:
 A dated announcement on the News page, such as a talk, a visit or an accepted Publication. A **talk** is a News item that links to its recording. The Members an item involves are its **related Members**; it also appears on the Profile of each of them who is a current Member.
@@ -54,7 +54,7 @@ A person outside the Lab who works with it; credited on that work, never a Membe
 The public information about one Member or Alumnus. Beyond name and role, each field appears only if that person gave Consent for it.
 
 **Consent**:
-A person's agreement to publish specific Profile fields, obtained by the Maintainer in any form before the data enters the repository.
+A person's agreement to publish specific Profile fields, or a student's agreement to be named on a Student Project, obtained by the Maintainer in any form before the data enters the repository.
 
 ### Running the site
 
@@ -62,7 +62,7 @@ A person's agreement to publish specific Profile fields, obtained by the Maintai
 The Member responsible for the website.
 
 **Site settings**:
-The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address), kept in one file.
+The Lab-wide facts the whole site uses (Lab name, full name, mission, Lab mailbox, the site's address, the Student Project course link), kept in one file.
 
 **Test content set**:
 Fixed content, kept apart from the real content, that the slice tests build the site from, so real content can change without breaking them.

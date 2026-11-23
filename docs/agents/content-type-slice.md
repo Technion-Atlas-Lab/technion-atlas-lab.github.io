@@ -1,6 +1,6 @@
 # A content type's slice
 
-The places a slice touches when it adds a content type (a new folder of items under `content/`, such as `news/`), in the order to build them. News is the latest worked example: `gh pr diff 89 --name-only`.
+The places a slice touches when it adds a content type (a new folder of items under `content/`, such as `news/`), in the order to build them. News is a worked example: `gh pr diff 89 --name-only`.
 
 1. **Test content set**: `tests/content/<folder>/`, one file per case the tests need. Each file opens with a comment saying which case it is.
 2. **Slice tests**: `tests/<page>.spec.js` for the page, and `tests/profile.spec.js` when Profiles list the items.
@@ -30,6 +30,8 @@ Reuse these before writing a new one:
 | A written date as a day, or nothing when it is no day | `calendarDay` |
 | A field that names a Member's file | `missingPerson`, inside a `CHECKS` function |
 | A field that names a Research Area's file | the `research-area` kind |
+| A field that lists Members' files, each once | the `members` kind |
+| A setting the whole site uses, such as a link | a field of `site` in `SCHEMA`, read in a template as `site.<field>` |
 | A picture beside the item, published resized and stripped | `pictureBeside`, and `lib/photos.js` |
 
 ## What the existing tests hold fixed
