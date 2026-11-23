@@ -23,7 +23,7 @@ the same checks and publishes; if any check fails, nothing is published.
 | A News item's title, date, type (news or talk), body, related Members or, for a talk, recording link | That item's file in `content/news/` (add a News item: add a file) |
 | A Student Project's title, description, status (Offered or Completed), Research Area, supervisors, year, students' names or links to its report, code and video | That project's file in `content/student-projects/` (add a Student Project: add a file; a student's name goes in only with their Consent) |
 | The text of the "How to take a project" box | `src/pages/projects.njk` |
-| The accessibility statement: its text, the date of the last check with the browsers and screen reader used, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
+| The accessibility statement: its text, the Technion accessibility coordinator's details | `src/pages/accessibility.njk`, with its "last updated" date at the bottom; `tests/accessibility.spec.js` expects the same details and date |
 | The Privacy page: its text, the Technion data protection officer's address | `src/pages/privacy.njk`, with its "last updated" date at the bottom; `tests/privacy.spec.js` expects the same address and date |
 | The colours, fonts and layout | `src/assets/site.css` (every colour is in `:root` at the top) |
 | The logo | `src/assets/logo.avif` |

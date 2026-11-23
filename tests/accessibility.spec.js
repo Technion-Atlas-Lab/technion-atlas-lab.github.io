@@ -1,6 +1,6 @@
 // The Accessibility page: the site's accessibility statement. It names the
-// standard, the features, the known limitations, the last check, whom to tell
-// about a problem, and where the Technion's own accessibility information is.
+// standard, the features, the known limitations, whom to tell about a problem,
+// and where the Technion's own accessibility information is.
 import { test, expect } from '@playwright/test';
 
 // A section of the page, found by its heading.
@@ -22,22 +22,24 @@ test('Accessibility lists the accessibility features, each built into the pages'
   }
 });
 
-test('Accessibility says what is known not to be accessible', async ({ page }) => {
-  await expect(section(page, 'Known limitations').getByRole('listitem').filter({ hasText: 'captions' })).toHaveCount(1);
+test('Accessibility has five sections, in order', async ({ page }) => {
+  await expect(page.getByRole('main').getByRole('heading', { level: 2 }))
+    .toHaveText(['Standard', 'Accessibility features', 'Known limitations', 'Report a problem', 'Accessibility at the Technion']);
 });
 
-test('Accessibility gives the last check: its date, the browsers and the screen reader', async ({ page }) => {
-  const check = section(page, 'Last check');
-  // An automatic test finds only part of what the standard asks, and the page says so.
-  await expect(check).toContainText('Every page is tested automatically for WCAG 2.2 level AA problems whenever the site changes. Automatic tests find only some problems');
-  // Placeholders until the accessibility check of the finished site (ticket #56).
-  await expect(check.getByRole('term')).toHaveText(['Date of the last check', 'Browsers', 'Screen reader']);
-  await expect(check.getByRole('definition')).toHaveText(['Not yet checked', 'To be confirmed', 'To be confirmed']);
+test('Accessibility says what is known not to be accessible, as plain text with no bullet', async ({ page }) => {
+  const limitations = section(page, 'Known limitations');
+  await expect(limitations).toHaveText('Known limitations Papers, recordings and other pages that this site links to are published by others, and may not be accessible. A recording of a talk may have no captions.');
+  await expect(limitations.getByRole('listitem')).toHaveCount(0);
 });
 
 test('Accessibility sends reports of a problem to the Lab mailbox', async ({ page }) => {
   await expect(section(page, 'Report a problem').getByRole('link', { name: 'test-mailbox@example.org', exact: true }))
     .toHaveAttribute('href', 'mailto:test-mailbox@example.org');
+});
+
+test('Accessibility promises to try to help with a reported problem, not a result', async ({ page }) => {
+  await expect(section(page, 'Report a problem')).toContainText('Tell us the page and what went wrong, and we will do our best to help.');
 });
 
 test('Accessibility names the Technion accessibility coordinator, with a phone number and an email address', async ({ page }) => {
@@ -49,7 +51,7 @@ test('Accessibility names the Technion accessibility coordinator, with a phone n
     .toHaveAttribute('href', 'mailto:adminlogistic@technion.ac.il');
 });
 
-test('Accessibility links to the Technion statements in English and Hebrew, and to campus accessibility', async ({ page }) => {
+test('Accessibility links to the Technion statements in English and Hebrew, and to nothing else', async ({ page }) => {
   const technion = section(page, 'Accessibility at the Technion');
   // What the Technion's statement holds, as read on 22 November 2026: its websites, and a pointer to the campus site.
   await expect(technion).toContainText("The Technion's own statement covers its websites, and points to its campus accessibility site for buildings and access routes.");
@@ -57,12 +59,11 @@ test('Accessibility links to the Technion statements in English and Hebrew, and 
     .toHaveAttribute('href', 'https://www.technion.ac.il/en/accessaility-statement/');
   await expect(technion.getByRole('link', { name: "The Technion's accessibility statement, in Hebrew", exact: true }))
     .toHaveAttribute('href', 'https://www.technion.ac.il/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa/');
-  await expect(technion.getByRole('link', { name: 'Accessibility on the Technion campus, in Hebrew', exact: true }))
-    .toHaveAttribute('href', 'https://accessibility.net.technion.ac.il/');
+  await expect(technion.getByRole('link')).toHaveCount(2);
 });
 
 test('Accessibility says when the statement was last updated', async ({ page }) => {
-  await expect(page.getByRole('main').getByText('This statement was last updated on 22 November 2026.')).toBeVisible();
+  await expect(page.getByRole('main').getByText('This statement was last updated on 23 November 2026.')).toBeVisible();
 });
 
 test('Accessibility has no accessibility toolbar or overlay', async ({ page }) => {
