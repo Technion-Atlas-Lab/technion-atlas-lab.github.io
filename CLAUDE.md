@@ -29,7 +29,7 @@ A slice is built red → green → refactor (`CODING_STANDARDS.md`, Tests).
 
 ## Rules
 
-`CODING_STANDARDS.md` is the one home of the rules, with their reasons; read it before the first edit of a session. Four of them decide what may enter the repository at all: no third-party requests, Consent, photo metadata, GLOSSARY terms.
+`CODING_STANDARDS.md` is the one home of the rules, with their reasons; read it before the first edit of a session. Three of them decide what may enter the repository at all: no third-party requests, Consent, GLOSSARY terms.
 
 ## Content types
 
